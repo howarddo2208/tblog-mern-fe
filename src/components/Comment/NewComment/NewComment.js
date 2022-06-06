@@ -1,26 +1,33 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../context/auth';
-import { SocketContext } from '../../../context/socket';
-import useHttpClient from '../../../hooks/useHttpClient';
-import ErrorModal from '../../Modal/ErrorModal';
-import CommentForm from './CommentForm';
-import { CommentContext } from '../Comments';
+import React, { useContext } from 'react'
+import { AuthContext } from '../../../context/auth'
+import { SocketContext } from '../../../context/socket'
+import useHttpClient from '../../../hooks/useHttpClient'
+import ErrorModal from '../../Modal/ErrorModal'
+import CommentForm from './CommentForm'
+import { CommentContext } from '../Comments'
+import { classifyToxicity } from '../../../utils/toxicClassify'
+import { toast } from 'react-toastify'
 
 export const NewComment = ({ replyId }) => {
   const { setActiveComment, setComments, postId, postAuthor } =
-    useContext(CommentContext);
-  const { currentUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
-  const { sendReq, error, clearError } = useHttpClient();
-  const currentUserId = currentUser && currentUser.userId;
+    useContext(CommentContext)
+  const { currentUser } = useContext(AuthContext)
+  const { socket } = useContext(SocketContext)
+  const { sendReq, error, clearError } = useHttpClient()
+  const currentUserId = currentUser && currentUser.userId
   const createComment = async (text, parentId = null) => {
+    const predictions = await classifyToxicity(text)
+    if (predictions[6].results[0].match) {
+      toast.error('Your comment is toxic!')
+      return
+    }
     const reqData = {
       parentPost: postId,
       body: text,
       author: currentUserId,
       parentId,
       userId: currentUserId,
-    };
+    }
     try {
       const newComment = await sendReq(
         `${process.env.REACT_APP_BASE_URL}/comments`,
@@ -30,8 +37,8 @@ export const NewComment = ({ replyId }) => {
           Authorization: `Bearer ${currentUser.token}`,
           'Content-Type': 'application/json',
         }
-      );
-      setComments((comments = []) => [newComment.comment, ...comments]);
+      )
+      setComments((comments = []) => [newComment.comment, ...comments])
 
       // setComments((comments) => [newComment.comment, ...comments]);
       if (socket.current) {
@@ -39,11 +46,11 @@ export const NewComment = ({ replyId }) => {
           sender: currentUser,
           postId,
           receiver: postAuthor,
-        });
+        })
       }
     } catch (err) {}
-    setActiveComment(null);
-  };
+    setActiveComment(null)
+  }
   return (
     <>
       <ErrorModal error={error} onClose={clearError} />
@@ -54,5 +61,6 @@ export const NewComment = ({ replyId }) => {
         handleCancel={() => setActiveComment(null)}
       />
     </>
-  );
-};
+  )
+}
+
