@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useHttpClient } from '../../hooks/useHttpClient';
-import { AuthContext } from '../../context/auth';
-import Notification from '../../components/Notification/Notification';
-import './Notifications.css';
-import ErrorModal from '../../components/Modal/ErrorModal';
-import SkeletonPostList from '../../components/Skeleton/SkeletonPostList';
+import React, { useState, useEffect, useContext } from 'react'
+import { useHttpClient } from '../../hooks/useHttpClient'
+import { AuthContext } from '../../context/auth'
+import Notification from '../../components/Notification/Notification'
+import './Notifications.css'
+import ErrorModal from '../../components/Modal/ErrorModal'
+import SkeletonPostList from '../../components/Skeleton/SkeletonPostList'
+import Layout from '../../components/Layout'
 
 const Notifications = ({ user, userFollowStats }) => {
-  const { currentUser } = useContext(AuthContext);
-  const [notifications, setNotifications] = useState([]);
-  const { isLoading, sendReq, error, clearError } = useHttpClient();
+  const { currentUser } = useContext(AuthContext)
+  const [notifications, setNotifications] = useState([])
+  const { isLoading, sendReq, error, clearError } = useHttpClient()
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -21,12 +22,12 @@ const Notifications = ({ user, userFollowStats }) => {
           {
             Authorization: `Bearer ${currentUser.token}`,
           }
-        );
-        setNotifications(responseData.notifications);
+        )
+        setNotifications(responseData.notifications)
       } catch (err) {}
-    };
-    fetchNotifications();
-  }, [sendReq, currentUser.userId, currentUser]);
+    }
+    fetchNotifications()
+  }, [sendReq, currentUser.userId, currentUser])
 
   // useEffect(() => {
   //   if (currentUser && currentUser.userId !== userId) {
@@ -35,15 +36,15 @@ const Notifications = ({ user, userFollowStats }) => {
   // }, [history, currentUser, userId]);
 
   return (
-    <>
+    <Layout>
       <ErrorModal error={error} onClose={clearError} />
-      <div className='container container-notif-page'>
+      <div className="container container-notif-page">
         {isLoading ? (
-          <SkeletonPostList type='mini' />
+          <SkeletonPostList type="mini" />
         ) : (
           <>
-            <h3 className='notif__heading'>Notifications</h3>
-            <div className='notifications'>
+            <h3 className="notif__heading">Notifications</h3>
+            <div className="notifications">
               {notifications && notifications.length > 0 ? (
                 notifications.map((notification) => (
                   <Notification
@@ -59,8 +60,9 @@ const Notifications = ({ user, userFollowStats }) => {
           </>
         )}
       </div>
-    </>
-  );
-};
+    </Layout>
+  )
+}
 
-export default Notifications;
+export default Notifications
+

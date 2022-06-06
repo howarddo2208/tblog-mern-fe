@@ -1,34 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { FaDev } from '@react-icons/all-files/fa/FaDev';
-import NavLinks from '../NavLinks/NavLinks';
-import './Nav.css';
-import { SocketContext } from '../../../context/socket';
-import SideDrawer from '../SideDrawer/SideDrawer';
-import { AuthContext } from '../../../context/auth';
-import { useHttpClient } from '../../../hooks/useHttpClient';
-import { NavLink } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import { FaDev } from '@react-icons/all-files/fa/FaDev'
+import NavLinks from '../NavLinks/NavLinks'
+import './Nav.css'
+import { SocketContext } from '../../../context/socket'
+import SideDrawer from '../SideDrawer/SideDrawer'
+import { AuthContext } from '../../../context/auth'
+import { useHttpClient } from '../../../hooks/useHttpClient'
+import { NavLink } from 'react-router-dom'
 
 const Nav = ({ children, onSearchIconClick }) => {
-  const { currentUser } = useContext(AuthContext);
-  const { current } = useContext(SocketContext).socket;
+  const { currentUser } = useContext(AuthContext)
+  const { current } = useContext(SocketContext).socket
 
-  let userId;
+  let userId
   if (currentUser) {
-    ({ userId } = currentUser);
+    ;({ userId } = currentUser)
   }
 
-  const { sendReq } = useHttpClient();
-  const [unreadNotifications, setUnreadNotifications] = useState([]);
+  const { sendReq } = useHttpClient()
+  const [unreadNotifications, setUnreadNotifications] = useState([])
 
-  const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false)
 
   const openDrawerHandler = () => {
-    setDrawerIsOpen(true);
-  };
+    setDrawerIsOpen(true)
+  }
 
   const closeDrawerHandler = () => {
-    setDrawerIsOpen(false);
-  };
+    setDrawerIsOpen(false)
+  }
 
   useEffect(() => {
     if (userId) {
@@ -41,37 +41,36 @@ const Nav = ({ children, onSearchIconClick }) => {
             {
               Authorization: `Bearer ${currentUser.token}`,
             }
-          );
-          setUnreadNotifications(responseData.notifications);
+          )
+          setUnreadNotifications(responseData.notifications)
         } catch (err) {}
-      };
-      fetchUnreadNotifications();
+      }
+      fetchUnreadNotifications()
     }
-  }, [sendReq, userId, currentUser]);
+  }, [sendReq, userId, currentUser])
 
   useEffect(() => {
     current?.on('notificationReceived', (data) => {
       setUnreadNotifications((unreadNotifications) => {
-        return [...unreadNotifications, data];
-      });
-    });
-  }, [current]);
-
+        return [...unreadNotifications, data]
+      })
+    })
+  }, [current])
 
   return (
-    <div className='container container-nav'>
+    <div className="container container-nav">
       {drawerIsOpen && (
         <SideDrawer onClose={closeDrawerHandler} onClick={closeDrawerHandler} />
       )}
 
-      <div className='header__hamburger-menu' onClick={openDrawerHandler}></div>
-      <div className='header__logo-search'>
-        <NavLink to='/' className='header__logo'>
-          <FaDev size='4.125rem' />
+      <div className="header__hamburger-menu" onClick={openDrawerHandler}></div>
+      <div className="header__logo-search">
+        <NavLink to="/" className="header__logo">
+          <FaDev size="4.125rem" />
         </NavLink>
         {children}
       </div>
-      <nav className='nav'>
+      <nav className="nav">
         <NavLinks
           unreadNotifications={unreadNotifications}
           setUnreadNotifications={setUnreadNotifications}
@@ -79,7 +78,8 @@ const Nav = ({ children, onSearchIconClick }) => {
         />
       </nav>
     </div>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav
+
