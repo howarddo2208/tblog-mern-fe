@@ -40,7 +40,6 @@ export const NewComment = ({ replyId }) => {
       )
       setComments((comments = []) => [newComment.comment, ...comments])
 
-      // setComments((comments) => [newComment.comment, ...comments]);
       if (socket.current) {
         socket.current.emit('comment', {
           sender: currentUser,
