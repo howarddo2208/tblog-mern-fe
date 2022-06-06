@@ -1,5 +1,4 @@
 import React from 'react'
-import Footer from './Footer/Footer'
 import LeftSideBar from './LeftSideBar/LeftSideBar'
 import MainNavigation from './MainNavigation/MainNavigation'
 import RightSideBar from './RightSideBar/RightSideBar'
@@ -19,7 +18,6 @@ const Layout = ({ children, isAuth, suggestions }) => {
       ) : (
         children
       )}
-      <Footer />
     </>
   )
 }

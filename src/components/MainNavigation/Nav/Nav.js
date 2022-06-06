@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 
 const Nav = ({ children, onSearchIconClick }) => {
   const { currentUser } = useContext(AuthContext)
-  const { current } = useContext(SocketContext).socket
+  const { socket } = useContext(SocketContext)
 
   let userId
   if (currentUser) {
@@ -50,12 +50,14 @@ const Nav = ({ children, onSearchIconClick }) => {
   }, [sendReq, userId, currentUser])
 
   useEffect(() => {
-    current?.on('notificationReceived', (data) => {
+    console.log('socket in nav', socket)
+    socket.current?.on('notificationReceived', (data) => {
+      console.log('there is noti')
       setUnreadNotifications((unreadNotifications) => {
         return [...unreadNotifications, data]
       })
     })
-  }, [current])
+  }, [socket])
 
   return (
     <div className="container container-nav">

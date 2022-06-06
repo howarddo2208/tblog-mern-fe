@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../../context/auth';
-import Avatar from '../../Avatar/Avatar';
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../../../context/auth'
+import Avatar from '../../Avatar/Avatar'
 
 const CommentForm = ({
   handleSubmit,
@@ -10,23 +10,23 @@ const CommentForm = ({
   handleCancel,
   avatar,
 }) => {
-  const { currentUser } = useContext(AuthContext);
-  const [text, setText] = useState(initialText);
-  const isTextAreaDisabled = text.length === 0;
+  const { currentUser } = useContext(AuthContext)
+  const [text, setText] = useState(initialText)
+  const isTextAreaDisabled = text.length === 0
   const DEFAULT_COMMENT_AVATAR =
-    'https://res.cloudinary.com/drkvr9wta/image/upload/v1647701003/undraw_profile_pic_ic5t_ncxyyo.png';
+    'https://res.cloudinary.com/drkvr9wta/image/upload/v1647701003/undraw_profile_pic_ic5t_ncxyyo.png'
   // const commentText = useRef(null);
 
   const inputHandler = (evt) => {
-    evt.persist();
-    setText(evt.target.value);
-  };
+    evt.persist()
+    setText(evt.target.value)
+  }
 
   const commentSubmitHandle = async (evt) => {
-    evt.preventDefault();
-    handleSubmit(text);
-    setText('');
-  };
+    evt.preventDefault()
+    handleSubmit(text)
+    setText('')
+  }
 
   return (
     <div className={`comment-form ${submitLabel === 'Reply' && 'reply-form'}`}>
@@ -41,23 +41,22 @@ const CommentForm = ({
       )}
       <form onSubmit={commentSubmitHandle}>
         <input
-          type='textarea'
-          placeholder='Add to the discussion'
-          name='comment'
+          type="textarea"
+          placeholder="Add to the discussion"
+          name="comment"
           value={text}
           onChange={inputHandler}
-          // ref={commentText}
         />
-        <div className='comments__btn'>
+        <div className="comments__btn">
           {text && (
-            <button className='btn btn--comment' disabled={isTextAreaDisabled}>
+            <button className="btn btn--comment" disabled={isTextAreaDisabled}>
               {submitLabel}
             </button>
           )}
           {hasCancelButton && (
             <button
-              className='btn btn--dismiss'
-              type='button'
+              className="btn btn--dismiss"
+              type="button"
               onClick={handleCancel}
             >
               Dismiss
@@ -66,7 +65,8 @@ const CommentForm = ({
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default CommentForm;
+export default CommentForm
+

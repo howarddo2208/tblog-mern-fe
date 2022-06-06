@@ -4,10 +4,7 @@ import useHttpClient from '../../../hooks/useHttpClient'
 import ErrorModal from '../../Modal/ErrorModal'
 import CommentForm from '../NewComment/CommentForm'
 import { CommentContext } from '../Comments'
-import {
-  classifyToxicAndWarn,
-  classifyToxicity,
-} from '../../../utils/toxicClassify'
+import { classifyToxicity } from '../../../utils/toxicClassify'
 import { toast } from 'react-toastify'
 
 export const EditComment = ({ commentId, commentBody, setShowModal }) => {
@@ -16,7 +13,7 @@ export const EditComment = ({ commentId, commentBody, setShowModal }) => {
   const { sendReq, error, clearError } = useHttpClient()
 
   const updateComment = async (body, commentId) => {
-    const predictions = classifyToxicAndWarn(body)
+    const predictions = classifyToxicity(body)
     if (predictions[6].results[0].match) {
       toast.error('Your comment is toxic!')
       return
