@@ -9,7 +9,6 @@ import Layout from '../../components/Layout'
 const Home = () => {
   const [tags, setTags] = useState([])
   const { sendReq, isLoading } = useHttpClient()
-  const { login } = useContext(AuthContext)
 
   useEffect(() => {
     const fetchPosts = async () => {

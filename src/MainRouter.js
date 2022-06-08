@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import NewPost from './pages/NewPost/NewPost'
 import EditPost from './pages/EditPost/EditPost'
@@ -17,12 +17,13 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import Chat from './pages/Chat/Chat'
 
 const MainRouter = ({ token }) => {
-  let routes
-  const { isLoggedIn } = useContext(AuthContext)
-  if (isLoggedIn) {
-    console.log('is logged in')
-    routes = (
-      <>
+  const authContext = useContext(AuthContext)
+  useEffect(() => {
+    console.log('authContext', authContext)
+  }, [authContext])
+  return (
+    <Router>
+      {authContext.isLoggedIn ? (
         <Switch>
           <Route path="/" exact>
             <Home />
@@ -60,14 +61,8 @@ const MainRouter = ({ token }) => {
           <Route path="/chat" exact>
             <Chat />
           </Route>
-          <Redirect to="/" />
         </Switch>
-      </>
-    )
-  } else {
-    console.log('is not logged in')
-    routes = (
-      <>
+      ) : (
         <Switch>
           <Route path="/" exact>
             <Home />
@@ -93,13 +88,10 @@ const MainRouter = ({ token }) => {
           <Route path="/posts/:titleURL/:postId" exact>
             <Post />
           </Route>
-          <Redirect to="/auth" />
         </Switch>
-      </>
-    )
-  }
-
-  return <Router>{routes}</Router>
+      )}
+    </Router>
+  )
 }
 
 export default MainRouter

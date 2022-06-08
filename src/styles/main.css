@@ -123,6 +123,7 @@ img {
 @media (min-width: 768px) {
   .container-layout {
     padding: 0 2rem;
+    padding-top: 65px;
   }
 }
 
