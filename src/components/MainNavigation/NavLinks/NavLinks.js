@@ -1,19 +1,19 @@
-import { FiSearch } from "@react-icons/all-files/fi/FiSearch";
-import React, { useContext } from "react";
-import { GuestNavLinks } from "./GuestNavLinks";
-import { LoggedInNavLinks } from "./LoggedInNavLinks";
-import { AuthContext } from "../../../context/auth";
+import { FiSearch } from '@react-icons/all-files/fi/FiSearch'
+import React, { useContext } from 'react'
+import { useAuth } from '../../../stateManagements'
+import { GuestNavLinks } from './GuestNavLinks'
+import { LoggedInNavLinks } from './LoggedInNavLinks'
 
 const NavLinks = ({
   onSearchIconClick,
   unreadNotifications,
   setUnreadNotifications,
 }) => {
-  const { isLoggedIn, currentUser, logout } = useContext(AuthContext);
+  const { isLoggedIn, currentUser, logout } = useAuth()
 
   const handleSearchClick = () => {
-    onSearchIconClick();
-  };
+    onSearchIconClick()
+  }
 
   return (
     <ul className="nav__list">
@@ -34,7 +34,8 @@ const NavLinks = ({
         <GuestNavLinks loginFirst={true} />
       )}
     </ul>
-  );
-};
+  )
+}
 
-export default NavLinks;
+export default NavLinks
+

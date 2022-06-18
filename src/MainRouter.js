@@ -1,29 +1,26 @@
-import React, { useContext, useEffect } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
-import Tags from "./components/Tags/Tags";
-import { AuthContext } from "./context/auth";
-import Auth from "./pages/Auth/Auth";
-import Chat from "./pages/Chat/Chat";
-import EditPost from "./pages/EditPost/EditPost";
-import EditUserProfile from "./pages/EditUserProfile/EditUserProfile";
-import Home from "./pages/Home/Home";
-import NewPost from "./pages/NewPost/NewPost";
-import Notifications from "./pages/Notifications/Notifications";
-import Post from "./pages/Post/Post";
-import ReadingList from "./pages/ReadingList/ReadingList";
-import SearchResults from "./pages/SearchResults/SearchResults";
-import Tag from "./pages/Tag/Tag";
-import UserProfile from "./pages/UserProfile/UserProfile";
+import React, { useContext, useEffect } from 'react'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Tags from './components/Tags/Tags'
+import Chat from './pages/Chat/Chat'
+import EditPost from './pages/EditPost/EditPost'
+import EditUserProfile from './pages/EditUserProfile/EditUserProfile'
+import Home from './pages/Home/Home'
+import NewPost from './pages/NewPost/NewPost'
+import Notifications from './pages/Notifications/Notifications'
+import Post from './pages/Post/Post'
+import ReadingList from './pages/ReadingList/ReadingList'
+import SearchResults from './pages/SearchResults/SearchResults'
+import Tag from './pages/Tag/Tag'
+import UserProfile from './pages/UserProfile/UserProfile'
+import { useAuth } from './stateManagements'
+import Auth from './pages/Auth/Auth'
 
 const MainRouter = ({ token }) => {
-  const authContext = useContext(AuthContext);
-  useEffect(() => {
-    console.log("authContext", authContext);
-  }, [authContext]);
+  const { isLoggedIn } = useAuth()
   return (
     <Router>
-      {authContext.isLoggedIn ? (
+      {isLoggedIn ? (
         <Switch>
           <Route path="/" exact>
             <Home />
@@ -91,7 +88,8 @@ const MainRouter = ({ token }) => {
         </Switch>
       )}
     </Router>
-  );
-};
+  )
+}
 
-export default MainRouter;
+export default MainRouter
+

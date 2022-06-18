@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/auth";
-import { SocketContext } from "../../context/socket";
-import useHttpClient from "../../hooks/useHttpClient";
-import { checkInArray } from "../../utils";
-import "./FollowUser.css";
+import React, { useContext, useEffect, useState } from 'react'
+import { SocketContext } from '../../context/socket'
+import useHttpClient from '../../hooks/useHttpClient'
+import { useAuth } from '../../stateManagements'
+import { checkInArray } from '../../utils'
+import './FollowUser.css'
 
 export const FollowUser = ({
   followId,
@@ -11,50 +11,50 @@ export const FollowUser = ({
   followers,
   userToFollow,
 }) => {
-  const { currentUser } = useContext(AuthContext);
-  const { current } = useContext(SocketContext).socket;
-  const currentUserId = currentUser && currentUser.userId;
-  const { sendReq } = useHttpClient();
+  const { current } = useContext(SocketContext).socket
+  const { userId, currentUser } = useAuth()
+  const { sendReq } = useHttpClient()
 
-  const [following, setFollowing] = useState(false);
+  const [following, setFollowing] = useState(false)
 
   useEffect(() => {
-    setFollowing(checkInArray(followers, currentUserId));
-  }, [followers, currentUserId]);
+    setFollowing(checkInArray(followers, userId))
+  }, [followers, userId])
 
   const handleFollow = () => {
-    !currentUserId ? setShowModal(true) : followUser(followId);
-  };
+    !userId ? setShowModal(true) : followUser(followId)
+  }
 
   const followUser = async (followId) => {
-    let action = following ? "unfollow" : "follow";
-    setFollowing((following) => !following);
-    if (action === "follow") {
-      current.emit("follow", {
+    let action = following ? 'unfollow' : 'follow'
+    setFollowing((following) => !following)
+    if (action === 'follow') {
+      current.emit('follow', {
         sender: currentUser,
         receiver: userToFollow,
-      });
+      })
     }
-    const reqData = { userId: currentUserId, followId };
+    const reqData = { userId: userId, followId }
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/users/${action}`,
-        "PUT",
+        'PUT',
         JSON.stringify(reqData),
         {
           Authorization: `Bearer ${currentUser.token}`,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         }
-      );
+      )
       //redirect user to the landing page
     } catch (err) {}
-  };
+  }
   return (
     <button
-      className={`btn--profile-cta ${following ? "btn-following" : ""}`}
+      className={`btn--profile-cta ${following ? 'btn-following' : ''}`}
       onClick={handleFollow}
     >
-      {following ? "Following" : "Follow"}
+      {following ? 'Following' : 'Follow'}
     </button>
-  );
-};
+  )
+}
+

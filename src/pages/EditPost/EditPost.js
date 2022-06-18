@@ -1,62 +1,62 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import Layout from "../../components/Layout";
-import ErrorModal from "../../components/Modal/ErrorModal";
-import SkeletonForm from "../../components/Skeleton/SkeletonForm";
-import { AuthContext } from "../../context/auth";
-import useForm from "../../hooks/useForm";
-import { useHttpClient } from "../../hooks/useHttpClient";
-import { appendData } from "../../utils";
-import { editPostForm, prefillEditPostForm } from "../../utils/formConfig";
+import React, { useContext, useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
+import Layout from '../../components/Layout'
+import ErrorModal from '../../components/Modal/ErrorModal'
+import SkeletonForm from '../../components/Skeleton/SkeletonForm'
+import useForm from '../../hooks/useForm'
+import { useHttpClient } from '../../hooks/useHttpClient'
+import { useAuth } from '../../stateManagements'
+import { appendData } from '../../utils'
+import { editPostForm, prefillEditPostForm } from '../../utils/formConfig'
 
 const EditPost = () => {
-  const { sendReq, isLoading, error, clearError } = useHttpClient();
-  const { currentUser } = useContext(AuthContext);
-  const [loadedPost, setLoadedPost] = useState({});
-  const { postId, titleURL } = useParams();
-  const history = useHistory();
+  const { sendReq, isLoading, error, clearError } = useHttpClient()
+  const { currentUser } = useAuth()
+  const [loadedPost, setLoadedPost] = useState({})
+  const { postId, titleURL } = useParams()
+  const history = useHistory()
   const {
     viewFormInputs: viewFormInputs,
     viewFormValues: viewFormValues,
     setForm,
     isFormValid,
-  } = useForm(editPostForm);
-  let formValues = viewFormValues();
-  let formInputs = viewFormInputs();
+  } = useForm(editPostForm)
+  let formValues = viewFormValues()
+  let formInputs = viewFormInputs()
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const responseData = await sendReq(
           `${process.env.REACT_APP_BASE_URL}/posts/${titleURL}/${postId}`
-        );
-        prefillEditPostForm(responseData.post);
+        )
+        prefillEditPostForm(responseData.post)
         if (currentUser.userId !== responseData.post.author.id) {
-          history.push("/");
+          history.push('/')
         }
-        setLoadedPost(responseData.post);
-        await setForm(editPostForm);
+        setLoadedPost(responseData.post)
+        await setForm(editPostForm)
       } catch (err) {}
-    };
-    fetchPost();
-  }, [sendReq, postId, titleURL, setForm, currentUser, history]);
+    }
+    fetchPost()
+  }, [sendReq, postId, titleURL, setForm, currentUser, history])
 
   const postSubmitHandle = async (evt) => {
-    evt.preventDefault();
-    const formData = appendData(formValues);
-    formData.append("author", currentUser.userId);
+    evt.preventDefault()
+    const formData = appendData(formValues)
+    formData.append('author', currentUser.userId)
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/posts/${titleURL}/${postId}`,
-        "PATCH",
+        'PATCH',
         formData,
         {
           Authorization: `Bearer ${currentUser.token}`,
         }
-      );
-      history.push(`/posts/${titleURL}/${postId}`);
+      )
+      history.push(`/posts/${titleURL}/${postId}`)
     } catch (err) {}
-  };
+  }
 
   return (
     <>
@@ -81,7 +81,8 @@ const EditPost = () => {
         )}
       </Layout>
     </>
-  );
-};
+  )
+}
 
-export default EditPost;
+export default EditPost
+

@@ -1,36 +1,35 @@
-import React, { useContext } from "react";
-import { DeleteCommentButton } from "./DeleteCommentButton";
-import { AuthContext } from "../../../context/auth";
-import useHttpClient from "../../../hooks/useHttpClient";
-import ErrorModal from "../../Modal/ErrorModal";
-import { CommentContext } from "../Comments";
+import React, { useContext } from 'react'
+import { DeleteCommentButton } from './DeleteCommentButton'
+import useHttpClient from '../../../hooks/useHttpClient'
+import ErrorModal from '../../Modal/ErrorModal'
+import { CommentContext } from '../Comments'
+import { useAuth } from '../../../stateManagements'
 
 export const DeleteComment = ({ commentId, authorId }) => {
-  const { setActiveComment, comments, setComments } =
-    useContext(CommentContext);
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
-  const { sendReq, error, clearError } = useHttpClient();
+  const { currentUser } = useAuth()
+  const { setActiveComment, comments, setComments } = useContext(CommentContext)
+  const currentUserId = currentUser && currentUser.userId
+  const { sendReq, error, clearError } = useHttpClient()
 
   const deleteComment = async (commentId) => {
     const updatedComments = comments.filter(
       (comment) => comment.id !== commentId
-    );
+    )
 
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/comments/${commentId}`,
-        "DELETE",
+        'DELETE',
         JSON.stringify({ author: currentUserId }),
         {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${currentUser.token}`,
         }
-      );
+      )
     } catch (err) {}
-    setComments(updatedComments);
-    setActiveComment(null);
-  };
+    setComments(updatedComments)
+    setActiveComment(null)
+  }
 
   return (
     <>
@@ -42,5 +41,6 @@ export const DeleteComment = ({ commentId, authorId }) => {
         deleteComment={deleteComment}
       />
     </>
-  );
-};
+  )
+}
+

@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../../context/auth";
-import { AuthorInfo } from "../../AuthorInfo/AuthorInfo";
-import Avatar from "../../Avatar/Avatar";
-import { FollowUser } from "../../FollowUser/FollowUser";
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../../stateManagements'
+import { AuthorInfo } from '../../AuthorInfo/AuthorInfo'
+import Avatar from '../../Avatar/Avatar'
+import { FollowUser } from '../../FollowUser/FollowUser'
 
 const PostAuthor = ({ setShowModal, author }) => {
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.userId
   return (
     <div className="author flow-content">
       <div className="author__content">
@@ -33,7 +33,8 @@ const PostAuthor = ({ setShowModal, author }) => {
       )}
       <AuthorInfo author={author} />
     </div>
-  );
-};
+  )
+}
 
-export default PostAuthor;
+export default PostAuthor
+
