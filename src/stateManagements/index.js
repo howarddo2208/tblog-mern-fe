@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
 
@@ -48,5 +49,10 @@ const useAuth = create(
   )
 )
 
-export { useAuth as useAuth }
+const useSocket = create((set, get) => ({
+  socket: null,
+  setSocket: (socket) => set({ socket }),
+}))
+
+export { useAuth, useSocket }
 

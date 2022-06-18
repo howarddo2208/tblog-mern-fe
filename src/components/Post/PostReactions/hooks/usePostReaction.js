@@ -1,13 +1,12 @@
 import { useContext, useState } from 'react'
-import { SocketContext } from '../../../../context/socket'
 import useHttpClient from '../../../../hooks/useHttpClient'
-import { useAuth } from '../../../../stateManagements'
+import { useAuth, useSocket } from '../../../../stateManagements'
 import { checkInArray } from '../../../../utils'
 
 const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
   const { currentUser } = useAuth()
   const currentUserId = currentUser && currentUser.userId
-  const { current } = useContext(SocketContext).socket
+  const socket = useSocket((state) => state.socket)
 
   const { sendReq } = useHttpClient()
 
@@ -41,8 +40,8 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
 
   const handleReaction = async (action, effect, arr, stateKey) => {
     updateReactionArr(arr, effect)
-    if (action === 'like' && current) {
-      current.emit('like', {
+    if (action === 'like' && socket) {
+      socket.emit('like', {
         like: true,
         sender: currentUser,
         postId: id,
