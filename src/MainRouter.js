@@ -13,8 +13,8 @@ import Notifications from "./pages/Notifications/Notifications";
 import Post from "./pages/Post/Post";
 import ReadingList from "./pages/ReadingList/ReadingList";
 import SearchResults from "./pages/SearchResults/SearchResults";
-import Tag from "./pages/Tag/Tag"
-import UserProfile from './pages/UserProfile/UserProfile'
+import Tag from "./pages/Tag/Tag";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 const MainRouter = ({ token }) => {
   const authContext = useContext(AuthContext);
@@ -23,7 +23,7 @@ const MainRouter = ({ token }) => {
   }, [authContext]);
   return (
     <Router>
-      { authContext.isLoggedIn ? (
+      {authContext.isLoggedIn ? (
         <Switch>
           <Route path="/" exact>
             <Home />
@@ -68,10 +68,10 @@ const MainRouter = ({ token }) => {
             <Home />
           </Route>
           <Route path="/auth/new-user" exact>
-            <Auth newUser={ true } />
+            <Auth newUser={true} />
           </Route>
           <Route path="/auth" exact>
-            <Auth newUser={ false } />
+            <Auth newUser={false} />
           </Route>
           <Route path="/tags" exact>
             <Tags />
@@ -89,10 +89,9 @@ const MainRouter = ({ token }) => {
             <Post />
           </Route>
         </Switch>
-      ) }
+      )}
     </Router>
   );
 };
 
 export default MainRouter;
-

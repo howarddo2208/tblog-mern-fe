@@ -24,10 +24,9 @@ const Home = () => {
 
   return (
     <Layout>
-      <Posts cover={ true } />
+      <Posts cover={true} />
     </Layout>
   );
 };
 
 export default Home;
-

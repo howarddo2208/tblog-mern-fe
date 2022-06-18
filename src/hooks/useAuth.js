@@ -31,7 +31,7 @@ const useAuth = () => {
         email: user.email,
         name: user.name,
         tags: user.tags,
-        expiration: tokenExpirationDate.toISOString()
+        expiration: tokenExpirationDate.toISOString(),
       })
     );
   }, []);
@@ -46,7 +46,8 @@ const useAuth = () => {
 
   useEffect(() => {
     if (token && tokenExpirationDate) {
-      const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
+      const remainingTime =
+        tokenExpirationDate.getTime() - new Date().getTime();
       logoutTimer = setTimeout(logout, remainingTime);
     } else {
       clearTimeout(logoutTimer);
@@ -68,4 +69,3 @@ const useAuth = () => {
 };
 
 export default useAuth;
-

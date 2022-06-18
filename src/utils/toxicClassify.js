@@ -14,4 +14,3 @@ export const classifyToxicAndWarn = async (texts) => {
     toast("This post contains toxic content!");
   }
 };
-

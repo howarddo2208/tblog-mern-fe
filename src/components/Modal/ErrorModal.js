@@ -6,10 +6,10 @@ const ErrorModal = (props) => {
   return (
     <Modal
       title="An Error Occurred!"
-      show={ !!props.error }
-      onClose={ props.onClose }
+      show={!!props.error}
+      onClose={props.onClose}
     >
-      <p>{ props.error }</p>
+      <p>{props.error}</p>
     </Modal>
   );
 };

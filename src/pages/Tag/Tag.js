@@ -23,14 +23,13 @@ const Tag = () => {
   }, [sendReq, tagId, tagName]);
   return (
     <Layout>
-      <ErrorModal error={ error } onClose={ clearError } />
+      <ErrorModal error={error} onClose={clearError} />
       <div className="container-posts tag-page">
-        <h2 className="tag-page__heading">Posts tagged with #{ tagName }</h2>
-        <PostList cover={ false } items={ loadedPosts } isLoading={ isLoading } />
+        <h2 className="tag-page__heading">Posts tagged with #{tagName}</h2>
+        <PostList cover={false} items={loadedPosts} isLoading={isLoading} />
       </div>
     </Layout>
   );
 };
 
 export default Tag;
-

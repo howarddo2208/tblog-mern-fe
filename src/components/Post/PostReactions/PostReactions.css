@@ -23,7 +23,7 @@
   transition: all 0.4s;
 }
 .reactions__like:hover::after {
-  content: '';
+  content: "";
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,7 +62,7 @@
   transition: all 0.2s;
 }
 .reactions__unicorn:hover::after {
-  content: '';
+  content: "";
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,7 +92,7 @@
   transition: all 0.2s;
 }
 .reactions__save:hover::after {
-  content: '';
+  content: "";
   display: flex;
   justify-content: center;
   align-items: center;

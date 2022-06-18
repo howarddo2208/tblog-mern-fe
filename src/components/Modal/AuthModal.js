@@ -4,10 +4,9 @@ import { NavLink } from "react-router-dom";
 import Modal from "./Modal";
 import { GuestNavLinks } from "../MainNavigation/NavLinks/GuestNavLinks";
 
-
 const AuthModal = (props) => {
   return (
-    <Modal title="Log in to continue" show={ props.show } onClose={ props.onClose }>
+    <Modal title="Log in to continue" show={props.show} onClose={props.onClose}>
       <div className="modal__container">
         <NavLink to="/" className="header__logo nav__logo--modal">
           <FaDev size="6.125rem" />
@@ -17,7 +16,7 @@ const AuthModal = (props) => {
           careers.
         </p>
         <ul className="nav__list nav__list--modal">
-          <GuestNavLinks loginFirst={ false } />
+          <GuestNavLinks loginFirst={false} />
         </ul>
       </div>
     </Modal>

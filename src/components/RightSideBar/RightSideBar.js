@@ -10,17 +10,17 @@ const RightSideBar = ({ tags, isLoading }) => {
 
   return (
     <div className="sidebar sidebar--right">
-      { isLoading ? (
+      {isLoading ? (
         <SkeletonPostList type="mini" />
       ) : (
         <>
-          { newsTag && <MiniPostList tag="news" posts={ newsTag.posts } /> }
-          { discussTag && (
-            <MiniPostList tag="discuss" posts={ discussTag.posts } />
-          ) }
-          { webdevTag && <MiniPostList tag="webdev" posts={ webdevTag.posts } /> }
+          {newsTag && <MiniPostList tag="news" posts={newsTag.posts} />}
+          {discussTag && (
+            <MiniPostList tag="discuss" posts={discussTag.posts} />
+          )}
+          {webdevTag && <MiniPostList tag="webdev" posts={webdevTag.posts} />}
         </>
-      ) }
+      )}
     </div>
   );
 };

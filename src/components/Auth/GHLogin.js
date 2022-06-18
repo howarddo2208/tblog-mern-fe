@@ -24,10 +24,10 @@ const GHLogin = (props) => {
   return (
     <LoginGithub
       className="btn btn__social btn--gh"
-      buttonText={ buttonText }
-      clientId={ process.env.REACT_APP_GITHUB_CLIENT_ID }
-      onSuccess={ onSuccess }
-      onFailure={ onFailure }
+      buttonText={buttonText}
+      clientId={process.env.REACT_APP_GITHUB_CLIENT_ID}
+      onSuccess={onSuccess}
+      onFailure={onFailure}
     />
   );
 };

@@ -20,70 +20,70 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
       <div className="container-comment">
         <Avatar
           className="author__image--comment"
-          src={ `${comment.author.avatar}` }
-          link={ `/users/${comment.author.id}` }
+          src={`${comment.author.avatar}`}
+          link={`/users/${comment.author.id}`}
         />
         <div className="comment">
           <div className="comment__content">
             <div className="comment__meta">
-              <div className="comment__author">{ comment.author.name }</div>
-              <span>{ createdAt }</span>
+              <div className="comment__author">{comment.author.name}</div>
+              <span>{createdAt}</span>
             </div>
 
-            { !isEditing(activeComment, comment.id) ? (
-              <div className="comment__body">{ comment.body }</div>
+            {!isEditing(activeComment, comment.id) ? (
+              <div className="comment__body">{comment.body}</div>
             ) : (
               <EditComment
-                commentId={ comment.id }
-                commentBody={ comment.body }
-                setShowModal={ setShowModal }
+                commentId={comment.id}
+                commentBody={comment.body}
+                setShowModal={setShowModal}
               />
-            ) }
+            )}
           </div>
-          <AuthModal onClose={ () => setShowModal(false) } show={ showModal } />
+          <AuthModal onClose={() => setShowModal(false)} show={showModal} />
           <div className="preview__reactions">
             <div className="preview__reactions--left">
               <LikeComment
-                likes={ comment.likes }
-                commentId={ comment.id }
-                setShowModal={ setShowModal }
+                likes={comment.likes}
+                commentId={comment.id}
+                setShowModal={setShowModal}
               />
               <ReplyButton
-                currentUserId={ currentUserId }
-                comment={ comment }
-                setShowModal={ setShowModal }
+                currentUserId={currentUserId}
+                comment={comment}
+                setShowModal={setShowModal}
               />
             </div>
 
             <div className="preview__reactions--right">
               <EditCommentButton
-                currentUserId={ currentUserId }
-                commentId={ comment.id }
-                authorId={ comment.author.id }
+                currentUserId={currentUserId}
+                commentId={comment.id}
+                authorId={comment.author.id}
               />
               <DeleteComment
-                commentId={ comment.id }
-                authorId={ comment.author.id }
+                commentId={comment.id}
+                authorId={comment.author.id}
               />
             </div>
           </div>
         </div>
       </div>
 
-      { isReplying(activeComment, comment.id) && (
-        <NewComment replyId={ parentId ? parentId : comment.id } />
-      ) }
-      <div className="replies" style={ { marginLeft: "5rem" } }>
-        { replies.length > 0 &&
+      {isReplying(activeComment, comment.id) && (
+        <NewComment replyId={parentId ? parentId : comment.id} />
+      )}
+      <div className="replies" style={{ marginLeft: "5rem" }}>
+        {replies.length > 0 &&
           replies.map((reply) => (
             <Comment
-              comment={ reply }
-              key={ reply._id }
-              replies={ [] }
-              parentId={ comment.id }
-              currentUserId={ currentUserId }
+              comment={reply}
+              key={reply._id}
+              replies={[]}
+              parentId={comment.id}
+              currentUserId={currentUserId}
             />
-          )) }
+          ))}
       </div>
     </>
   );

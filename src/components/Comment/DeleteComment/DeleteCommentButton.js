@@ -5,18 +5,18 @@ export const DeleteCommentButton = ({
   currentUserId,
   commentId,
   authorId,
-  deleteComment
+  deleteComment,
 }) => {
   return (
     <>
-      { canModifyComment(currentUserId, authorId) && (
+      {canModifyComment(currentUserId, authorId) && (
         <button
           className="btn auth__delete comment__auth"
-          onClick={ () => deleteComment(commentId) }
+          onClick={() => deleteComment(commentId)}
         >
           Delete
         </button>
-      ) }
+      )}
     </>
   );
 };

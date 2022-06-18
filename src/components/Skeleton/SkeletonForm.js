@@ -7,11 +7,11 @@ import "./SkeletonElement.css";
 const SkeletonForm = ({ type }) => {
   return (
     <>
-      { renderAlternateSkeletons(
+      {renderAlternateSkeletons(
         <SkeletonElement type="span" />,
         <SkeletonElement type="text" />,
         20
-      ) }
+      )}
       <Shimmer />
     </>
   );

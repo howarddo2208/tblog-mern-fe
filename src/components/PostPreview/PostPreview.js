@@ -18,27 +18,27 @@ const PostPreview = (props) => {
 
   return (
     <div className="preview flow-content">
-      { cover && (
+      {cover && (
         <PostImage
-          link={ `/posts/${titleURL}/${id}` }
-          src={ image }
-          alt={ `Cover image for ${title}` }
+          link={`/posts/${titleURL}/${id}`}
+          src={image}
+          alt={`Cover image for ${title}`}
         />
-      ) }
+      )}
       <div className="preview__author">
-        <Avatar link={ `/users/${author.id}` } src={ author.avatar } />
-        <AuthorInfo status="preview" author={ author } date={ createdAt } />
+        <Avatar link={`/users/${author.id}`} src={author.avatar} />
+        <AuthorInfo status="preview" author={author} date={createdAt} />
       </div>
       <div className="preview__details flow-content">
-        <Link to={ `/posts/${titleURL}/${id}` } className="title-link">
-          <h2>{ title }</h2>
+        <Link to={`/posts/${titleURL}/${id}`} className="title-link">
+          <h2>{title}</h2>
         </Link>
-        <PostTags tags={ tags } />
+        <PostTags tags={tags} />
         <PreviewReactions
-          userId={ userId }
-          post={ props }
-          showModal={ showModal }
-          setShowModal={ setShowModal }
+          userId={userId}
+          post={props}
+          showModal={showModal}
+          setShowModal={setShowModal}
         />
       </div>
     </div>
@@ -46,4 +46,3 @@ const PostPreview = (props) => {
 };
 
 export default PostPreview;
-

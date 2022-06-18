@@ -9,12 +9,12 @@ const SkeletonArticle = ({ type, firstEl }) => {
   return (
     <div className="skeleton-wrapper">
       <div className="skeleton-article">
-        { miniArticle ? (
+        {miniArticle ? (
           <SkeletonElement type="title" />
         ) : (
           <SkeletonElement type="thumbnail" />
-        ) }
-        { renderRepeatedSkeletons(<SkeletonElement type="text" />, 3) }
+        )}
+        {renderRepeatedSkeletons(<SkeletonElement type="text" />, 3)}
       </div>
       <Shimmer />
     </div>

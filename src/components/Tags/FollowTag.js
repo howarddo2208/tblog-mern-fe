@@ -30,7 +30,7 @@ export const FollowTag = ({ followers, tagId, setShowModal }) => {
         JSON.stringify(reqData),
         {
           Authorization: `Bearer ${currentUser.token}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         }
       );
       const { followedTags } = responseData.user;
@@ -40,10 +40,10 @@ export const FollowTag = ({ followers, tagId, setShowModal }) => {
   };
   return (
     <button
-      className={ `btn btn-tag-follow ${following ? "btn-following" : ""}` }
-      onClick={ handleFollow }
+      className={`btn btn-tag-follow ${following ? "btn-following" : ""}`}
+      onClick={handleFollow}
     >
-      { following ? "Following" : "Follow" }
+      {following ? "Following" : "Follow"}
     </button>
   );
 };

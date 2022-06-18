@@ -1,57 +1,57 @@
-import React, { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import { toast } from 'react-toastify'
-import Layout from '../../components/Layout'
-import ErrorModal from '../../components/Modal/ErrorModal'
-import SkeletonElement from '../../components/Skeleton/SkeletonElement'
-import { AuthContext } from '../../context/auth'
-import useForm from '../../hooks/useForm'
-import { useHttpClient } from '../../hooks/useHttpClient'
-import { appendData, renderRepeatedSkeletons } from '../../utils'
-import { newPostForm } from '../../utils/formConfig'
-import { classifyToxicity } from '../../utils/toxicClassify'
+import React, { useContext, useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { toast } from "react-toastify";
+import Layout from "../../components/Layout";
+import ErrorModal from "../../components/Modal/ErrorModal";
+import SkeletonElement from "../../components/Skeleton/SkeletonElement";
+import { AuthContext } from "../../context/auth";
+import useForm from "../../hooks/useForm";
+import { useHttpClient } from "../../hooks/useHttpClient";
+import { appendData, renderRepeatedSkeletons } from "../../utils";
+import { newPostForm } from "../../utils/formConfig";
+import { classifyToxicity } from "../../utils/toxicClassify";
 
 const NewPost = () => {
-  const auth = useContext(AuthContext)
-  const history = useHistory()
-  const { currentUser } = auth
-  const { isLoading, sendReq, error, clearError } = useHttpClient()
+  const auth = useContext(AuthContext);
+  const history = useHistory();
+  const { currentUser } = auth;
+  const { isLoading, sendReq, error, clearError } = useHttpClient();
   const {
     viewFormInputs: renderFormInputs,
     viewFormValues: renderFormValues,
     isFormValid,
-  } = useForm(newPostForm)
-  const formValues = renderFormValues()
-  const formInputs = renderFormInputs()
-  const [submitting, setSubmitting] = useState(false)
+  } = useForm(newPostForm);
+  const formValues = renderFormValues();
+  const formInputs = renderFormInputs();
+  const [submitting, setSubmitting] = useState(false);
 
   const postSubmitHandle = async (evt) => {
-    setSubmitting(true)
-    evt.preventDefault() //otherwise, there will be a reload
-    const formData = appendData(formValues)
-    const body = formData.get('body')
-    const title = formData.get('title')
+    setSubmitting(true);
+    evt.preventDefault(); //otherwise, there will be a reload
+    const formData = appendData(formValues);
+    const body = formData.get("body");
+    const title = formData.get("title");
 
-    const predictions = await classifyToxicity(`${title} ${body}`)
+    const predictions = await classifyToxicity(`${title} ${body}`);
     if (predictions[6].results[0].match) {
-      toast.error('This post contains toxic content!')
-      setSubmitting(false)
-      return
+      toast.error("This post contains toxic content!");
+      setSubmitting(false);
+      return;
     }
 
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/posts`,
-        'POST',
+        "POST",
         formData,
         {
           Authorization: `Bearer ${currentUser.token}`,
         }
-      )
-      history.push('/')
-      setSubmitting(false)
+      );
+      history.push("/");
+      setSubmitting(false);
     } catch (err) {}
-  }
+  };
 
   return (
     <Layout>
@@ -71,11 +71,11 @@ const NewPost = () => {
               <button
                 onClick={postSubmitHandle}
                 style={{
-                  backgroundColor: isFormValid() ? '#4caf50' : '#e0e0e0',
-                  height: '40px',
-                  borderRadius: '5px',
-                  width: '100%',
-                  border: 'none',
+                  backgroundColor: isFormValid() ? "#4caf50" : "#e0e0e0",
+                  height: "40px",
+                  borderRadius: "5px",
+                  width: "100%",
+                  border: "none",
                 }}
                 disabled={!isFormValid()}
               >
@@ -86,8 +86,7 @@ const NewPost = () => {
         </>
       )}
     </Layout>
-  )
-}
+  );
+};
 
-export default NewPost
-
+export default NewPost;

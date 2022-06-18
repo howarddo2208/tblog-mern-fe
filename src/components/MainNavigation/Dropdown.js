@@ -1,13 +1,13 @@
-import React, { useCallback } from 'react'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import React, { useCallback } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export const Dropdown = ({ showMenu, currentUser, handleLogout }) => {
-  const history = useHistory()
-  const handleRedirect = useCallback((url) => history.push(url), [history])
-  const currentUserEmail = currentUser && currentUser.email
+  const history = useHistory();
+  const handleRedirect = useCallback((url) => history.push(url), [history]);
+  const currentUserEmail = currentUser && currentUser.email;
 
   return (
-    <div className={showMenu ? 'dropdown' : 'dropdown--close'}>
+    <div className={showMenu ? "dropdown" : "dropdown--close"}>
       <ul className="dropdown__list">
         <li className="list__item hvr-bg-lt">
           <button
@@ -19,14 +19,14 @@ export const Dropdown = ({ showMenu, currentUser, handleLogout }) => {
           >
             <div>{currentUser && currentUser.name}</div>
             <small className="u-name-id">
-              {currentUserEmail && currentUserEmail.split('.')[0]}
+              {currentUserEmail && currentUserEmail.split(".")[0]}
             </small>
           </button>
         </li>
         <li className="list__item hvr-bg-lt">
           <button
             className="btn dropdown__btn"
-            onMouseDown={() => handleRedirect('/posts/new')}
+            onMouseDown={() => handleRedirect("/posts/new")}
           >
             Create Post
           </button>
@@ -60,6 +60,5 @@ export const Dropdown = ({ showMenu, currentUser, handleLogout }) => {
         </li>
       </ul>
     </div>
-  )
-}
-
+  );
+};

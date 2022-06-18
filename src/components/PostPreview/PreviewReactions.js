@@ -36,29 +36,29 @@ const PreviewReactions = ({ userId, post, showModal, setShowModal }) => {
   return (
     <div className="preview__reactions">
       <div className="preview__reactions--left">
-        <Link to={ `/posts/${titleURL}/${id}` } className="reactions__total">
+        <Link to={`/posts/${titleURL}/${id}`} className="reactions__total">
           <i>
             <LikeIcon size="2rem" />
           </i>
           <span>
-            { reactions } <span className="reactions__text">Reactions</span>
+            {reactions} <span className="reactions__text">Reactions</span>
           </span>
         </Link>
-        <Link to={ `/posts/${titleURL}/${id}` } className="comments__total">
+        <Link to={`/posts/${titleURL}/${id}`} className="comments__total">
           <i>
             <FaRegComment size="2rem" />
           </i>
           <span>
-            { comments.length } <span className="reactions__text">Comments</span>
+            {comments.length} <span className="reactions__text">Comments</span>
           </span>
         </Link>
-        <AuthModal onClose={ () => setShowModal(false) } show={ showModal } />
+        <AuthModal onClose={() => setShowModal(false)} show={showModal} />
       </div>
       <div className="preview__reactions--right">
-        <span className="read-time" ref={ postLengthRef } />
+        <span className="read-time" ref={postLengthRef} />
 
-        <button className="btn btn--save btn--hover" onClick={ handleClick }>
-          { isBookmarked ? "Saved" : "Save" }
+        <button className="btn btn--save btn--hover" onClick={handleClick}>
+          {isBookmarked ? "Saved" : "Save"}
         </button>
       </div>
     </div>
