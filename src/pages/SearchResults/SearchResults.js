@@ -1,14 +1,13 @@
-import React, { useContext } from "react";
-import Layout from "../../components/Layout";
-import PostList from "../../components/PostList/PostList";
-import { SearchContext } from "../../context/search";
-import useHttpClient from "../../hooks/useHttpClient";
+import React, { useContext } from 'react'
+import Layout from '../../components/Layout'
+import PostList from '../../components/PostList/PostList'
+import useHttpClient from '../../hooks/useHttpClient'
+import { useSearch } from '../../stateManagements'
 
 const SearchResults = (props) => {
-  const searchContext = useContext(SearchContext);
-  const { searchResults, searchValue } = searchContext;
-  const { sendReq } = useHttpClient();
-  const { isLoading } = sendReq;
+  const { searchResults, searchValue } = useSearch()
+  const { sendReq } = useHttpClient()
+  const { isLoading } = sendReq
 
   return (
     <Layout>
@@ -17,7 +16,8 @@ const SearchResults = (props) => {
         <PostList cover={false} items={searchResults} isLoading={isLoading} />
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default SearchResults;
+export default SearchResults
+

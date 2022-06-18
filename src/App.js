@@ -1,10 +1,9 @@
 import React from 'react'
 import './styles/main.css'
-import AppProviders from './components/AppProviders/AppProviders'
 import MainRouter from './MainRouter'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { useAuth, useFish, useSocket } from './stateManagements'
+import { useAuth, useFish, useSearch, useSocket } from './stateManagements'
 import { useEffect } from 'react'
 import { io } from 'socket.io-client'
 
@@ -26,10 +25,10 @@ const App = () => {
   }, [socket, userId])
 
   return (
-    <AppProviders>
+    <>
       <MainRouter />
       <ToastContainer />
-    </AppProviders>
+    </>
   )
 }
 

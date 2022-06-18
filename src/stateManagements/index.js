@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
+import queryString from 'query-string'
 
 const useFish = create(
   persist(
@@ -54,5 +55,28 @@ const useSocket = create((set, get) => ({
   setSocket: (socket) => set({ socket }),
 }))
 
-export { useAuth, useSocket }
+const useSearch = create((set, get) => ({
+  searchValue: '',
+  searchResults: [],
+  search: async (value, history) => {
+    if (value) {
+      set({ searchValue: value })
+      try {
+        const query = queryString.stringify({ search: value })
+        const data = await fetch(
+          `${process.env.REACT_APP_BASE_URL}/posts/search?${query}`
+        )
+        const { posts } = await data.json()
+        set({ searchResults: posts })
+        history.push(`/search/?query=${value}`)
+      } catch (err) {
+        console.log(err)
+      }
+    } else {
+      set({ searchResults: [] })
+    }
+  },
+}))
+
+export { useAuth, useSocket, useSearch }
 
