@@ -1,20 +1,20 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/auth";
-import { formatDate } from "../../utils";
-import { AuthorInfo } from "../AuthorInfo/AuthorInfo";
-import Avatar from "../Avatar/Avatar";
-import { PostImage } from "../PostImage/PostImage";
-import PreviewReactions from "../PostPreview/PreviewReactions";
-import { PostTags } from "../PostTags/PostTags";
+import React, { useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../stateManagements'
+import { formatDate } from '../../utils'
+import { AuthorInfo } from '../AuthorInfo/AuthorInfo'
+import Avatar from '../Avatar/Avatar'
+import { PostImage } from '../PostImage/PostImage'
+import PreviewReactions from '../PostPreview/PreviewReactions'
+import { PostTags } from '../PostTags/PostTags'
 
 const PostPreview = (props) => {
-  const [showModal, setShowModal] = useState(false);
-  const { currentUser } = useContext(AuthContext);
-  const userId = currentUser && currentUser.userId;
+  const [showModal, setShowModal] = useState(false)
+  const { currentUser } = useAuth()
+  const userId = currentUser && currentUser.userId
 
-  const { title, id, image, author, date, titleURL, tags, cover } = props;
-  const createdAt = formatDate(date);
+  const { title, id, image, author, date, titleURL, tags, cover } = props
+  const createdAt = formatDate(date)
 
   return (
     <div className="preview flow-content">
@@ -42,7 +42,8 @@ const PostPreview = (props) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PostPreview;
+export default PostPreview
+

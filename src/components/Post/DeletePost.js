@@ -1,47 +1,47 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from 'react'
 import {
   useHistory,
   useParams,
-} from "react-router-dom/cjs/react-router-dom.min";
-import { AuthContext } from "../../context/auth";
-import useHttpClient from "../../hooks/useHttpClient";
-import DeletionModal from "../Modal/DeletionModal";
-import ErrorModal from "../Modal/ErrorModal";
+} from 'react-router-dom/cjs/react-router-dom.min'
+import useHttpClient from '../../hooks/useHttpClient'
+import { useAuth } from '../../stateManagements'
+import DeletionModal from '../Modal/DeletionModal'
+import ErrorModal from '../Modal/ErrorModal'
 
 export const DeletePost = ({ authorId }) => {
-  const { sendReq, error, clearError } = useHttpClient();
-  const history = useHistory();
-  const { titleURL, postId } = useParams();
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const { sendReq, error, clearError } = useHttpClient()
+  const history = useHistory()
+  const { titleURL, postId } = useParams()
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.userId
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   const showDeleteWarningHandler = () => {
-    setShowConfirmModal(true);
-  };
+    setShowConfirmModal(true)
+  }
 
   const cancelDeleteWarningHandler = () => {
-    setShowConfirmModal(false);
-  };
+    setShowConfirmModal(false)
+  }
 
   const confirmDeleteWarningHandler = () => {
-    handleDelete();
-  };
+    handleDelete()
+  }
 
   const handleDelete = async () => {
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/posts/${titleURL}/${postId}`,
-        "DELETE",
+        'DELETE',
         JSON.stringify({ author: currentUserId }),
         {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${currentUser.token}`,
         }
-      );
-      history.push("/");
+      )
+      history.push('/')
     } catch (err) {}
-  };
+  }
   return (
     <>
       <ErrorModal error={error} onClose={clearError} />
@@ -58,5 +58,6 @@ export const DeletePost = ({ authorId }) => {
         </button>
       )}
     </>
-  );
-};
+  )
+}
+

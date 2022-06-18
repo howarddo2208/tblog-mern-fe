@@ -1,17 +1,52 @@
-// const useStore = create(
-//   devtools((set) => ({
-//     bears: 0,
-//     increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-//     removeAllBears: () => set({ bears: 0 })
-//   }))
-// );
+import create from 'zustand'
+import { persist } from 'zustand/middleware'
 
-// function BearCounter() {
-//   const bears = useStore((state) => state.bears);
-//   return <h1>{ bears } around here ...</h1>;
-// }
+const useFish = create(
+  persist(
+    (set, get) => ({
+      fishes: 0,
+      addAFish: () => set({ fishes: get().fishes + 1 }),
+    }),
+    {
+      name: 'food-storage',
+      getStorage: () => sessionStorage,
+    }
+  )
+)
 
-// function Controls() {
-//   const increasePopulation = useStore((state) => state.increasePopulation);
-//   return <button onClick={ increasePopulation }>one up</button>;
-// }
+const useAuth = create(
+  persist(
+    (set, get) => ({
+      isLoggedIn: false,
+      token: null,
+      user: null,
+      currentUser: null,
+      userId: null,
+      login: (user) => {
+        set({
+          isLoggedIn: true,
+          token: user.token,
+          user,
+          userId: user.userId,
+          currentUser: user,
+        })
+      },
+      logout: () =>
+        set({
+          isLoggedIn: false,
+          token: null,
+          user: null,
+          userId: null,
+          currentUser: null,
+        }),
+      setUser: (user) => set(user, true),
+    }),
+    {
+      name: 'auth-state',
+      getStorage: () => localStorage,
+    }
+  )
+)
+
+export { useAuth as useAuth }
+

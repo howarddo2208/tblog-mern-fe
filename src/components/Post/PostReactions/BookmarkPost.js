@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../../context/auth";
-import { BookmarkIcon } from "../../Icons/Icons";
+import React, { useContext } from 'react'
+import { useAuth } from '../../../stateManagements'
+import { BookmarkIcon } from '../../Icons/Icons'
 
 export const BookmarkPost = ({
   bookmarks,
@@ -10,31 +10,31 @@ export const BookmarkPost = ({
   id,
   children,
 }) => {
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
-  const action = isBookmarked ? "unbookmark" : "bookmark";
-  const effect = isBookmarked ? "negative" : "positive";
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.userId
+  const action = isBookmarked ? 'unbookmark' : 'bookmark'
+  const effect = isBookmarked ? 'negative' : 'positive'
 
   const handleClick = () => {
     !currentUserId
       ? setShowModal(true)
-      : handleReaction(action, effect, bookmarks, "isBookmarked");
-  };
+      : handleReaction(action, effect, bookmarks, 'isBookmarked')
+  }
   return (
     <>
       <div
         className={`${
           isBookmarked
-            ? "reactions__block clicked--bookmark"
-            : "reactions__block "
+            ? 'reactions__block clicked--bookmark'
+            : 'reactions__block '
         }`}
       >
         <i
           onClick={handleClick}
           className={`${
             isBookmarked
-              ? "reactions__save reactions__saved"
-              : "reactions__save"
+              ? 'reactions__save reactions__saved'
+              : 'reactions__save'
           }`}
         >
           <BookmarkIcon state={isBookmarked} size="2.5rem" />
@@ -42,5 +42,6 @@ export const BookmarkPost = ({
         <span>{bookmarks && bookmarks.length}</span>
       </div>
     </>
-  );
-};
+  )
+}
+

@@ -1,21 +1,21 @@
-import React, { useContext } from "react";
-import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../../context/auth";
-import { formatDate } from "../../../utils";
-import Avatar from "../../Avatar/Avatar";
-import Comments from "../../Comment/Comments";
-import { PostImage } from "../../PostImage/PostImage";
-import { PostTags } from "../../PostTags/PostTags";
-import SyntaxHighlight from "../../SyntaxHighlight/SyntaxHighlight";
-import { DeletePost } from "../DeletePost";
-import "./PostContent.css";
+import React, { useContext } from 'react'
+import ReactMarkdown from 'react-markdown'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../../stateManagements'
+import { formatDate } from '../../../utils'
+import Avatar from '../../Avatar/Avatar'
+import Comments from '../../Comment/Comments'
+import { PostImage } from '../../PostImage/PostImage'
+import { PostTags } from '../../PostTags/PostTags'
+import SyntaxHighlight from '../../SyntaxHighlight/SyntaxHighlight'
+import { DeletePost } from '../DeletePost'
+import './PostContent.css'
 
 const PostContent = ({ post, handleDelete }) => {
-  const { image, author, titleURL, date, title, tags, body, id } = post;
-  const createdAt = formatDate(date);
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
+  const { image, author, titleURL, date, title, tags, body, id } = post
+  const createdAt = formatDate(date)
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.userId
 
   return (
     <div className="post">
@@ -48,7 +48,8 @@ const PostContent = ({ post, handleDelete }) => {
       </div>
       {post.comments && <Comments postId={id} postAuthor={author} />}
     </div>
-  );
-};
+  )
+}
 
-export default PostContent;
+export default PostContent
+

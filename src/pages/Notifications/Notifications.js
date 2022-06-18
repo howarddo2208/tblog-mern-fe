@@ -1,33 +1,33 @@
-import React, { useContext, useEffect, useState } from "react";
-import Notification from "../../components/Notification/Notification";
-import { AuthContext } from "../../context/auth";
-import { useHttpClient } from "../../hooks/useHttpClient";
-import "./Notifications.css";
-import ErrorModal from "../../components/Modal/ErrorModal";
-import SkeletonPostList from "../../components/Skeleton/SkeletonPostList";
-import Layout from "../../components/Layout";
+import React, { useContext, useEffect, useState } from 'react'
+import Notification from '../../components/Notification/Notification'
+import { useHttpClient } from '../../hooks/useHttpClient'
+import './Notifications.css'
+import ErrorModal from '../../components/Modal/ErrorModal'
+import SkeletonPostList from '../../components/Skeleton/SkeletonPostList'
+import Layout from '../../components/Layout'
+import { useAuth } from '../../stateManagements'
 
 const Notifications = ({ user, userFollowStats }) => {
-  const { currentUser } = useContext(AuthContext);
-  const [notifications, setNotifications] = useState([]);
-  const { isLoading, sendReq, error, clearError } = useHttpClient();
+  const { currentUser } = useAuth()
+  const [notifications, setNotifications] = useState([])
+  const { isLoading, sendReq, error, clearError } = useHttpClient()
 
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const responseData = await sendReq(
           `${process.env.REACT_APP_BASE_URL}/users/${currentUser.userId}/notifications`,
-          "GET",
+          'GET',
           null,
           {
             Authorization: `Bearer ${currentUser.token}`,
           }
-        );
-        setNotifications(responseData.notifications);
+        )
+        setNotifications(responseData.notifications)
       } catch (err) {}
-    };
-    fetchNotifications();
-  }, [sendReq, currentUser.userId, currentUser]);
+    }
+    fetchNotifications()
+  }, [sendReq, currentUser.userId, currentUser])
 
   // useEffect(() => {
   //   if (currentUser && currentUser.userId !== userId) {
@@ -61,7 +61,8 @@ const Notifications = ({ user, userFollowStats }) => {
         )}
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Notifications;
+export default Notifications
+

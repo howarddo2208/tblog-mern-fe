@@ -1,15 +1,15 @@
-import { FaTags } from "@react-icons/all-files/fa/FaTags";
-import { FcHome } from "@react-icons/all-files/fc/FcHome";
-import { FcReading } from "@react-icons/all-files/fc/FcReading";
-import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { AuthContext } from "../../context/auth";
-import "./LeftSideBar.css";
+import { FaTags } from '@react-icons/all-files/fa/FaTags'
+import { FcHome } from '@react-icons/all-files/fc/FcHome'
+import { FcReading } from '@react-icons/all-files/fc/FcReading'
+import React, { useContext } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import { useAuth } from '../../stateManagements'
+import './LeftSideBar.css'
 
 const LeftSideBar = () => {
-  const auth = useContext(AuthContext);
-  const { currentUser } = auth;
-  const currentUserId = currentUser && currentUser.userId;
+  const auth = useAuth()
+  const { currentUser } = auth
+  const currentUserId = currentUser && currentUser.userId
 
   return (
     <>
@@ -68,7 +68,8 @@ const LeftSideBar = () => {
         </React.Fragment>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default LeftSideBar;
+export default LeftSideBar
+

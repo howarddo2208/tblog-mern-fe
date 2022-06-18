@@ -1,42 +1,42 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import Avatar from "../../components/Avatar/Avatar";
-import { FollowUser } from "../../components/FollowUser/FollowUser";
-import Layout from "../../components/Layout";
-import AuthModal from "../../components/Modal/AuthModal";
-import ErrorModal from "../../components/Modal/ErrorModal";
-import PostList from "../../components/PostList/PostList";
-import Shimmer from "../../components/Skeleton/Shimmer";
-import SkeletonElement from "../../components/Skeleton/SkeletonElement";
-import { UserInfo } from "../../components/User/UserInfo/UserInfo";
-import { UserSideBar } from "../../components/User/UserSideBar/UserSideBar";
-import { AuthContext } from "../../context/auth";
-import { useHttpClient } from "../../hooks/useHttpClient";
-import { renderRepeatedSkeletons } from "../../utils";
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import Avatar from '../../components/Avatar/Avatar'
+import { FollowUser } from '../../components/FollowUser/FollowUser'
+import Layout from '../../components/Layout'
+import AuthModal from '../../components/Modal/AuthModal'
+import ErrorModal from '../../components/Modal/ErrorModal'
+import PostList from '../../components/PostList/PostList'
+import Shimmer from '../../components/Skeleton/Shimmer'
+import SkeletonElement from '../../components/Skeleton/SkeletonElement'
+import { UserInfo } from '../../components/User/UserInfo/UserInfo'
+import { UserSideBar } from '../../components/User/UserSideBar/UserSideBar'
+import { useHttpClient } from '../../hooks/useHttpClient'
+import { useAuth } from '../../stateManagements'
+import { renderRepeatedSkeletons } from '../../utils'
 
 const UserProfile = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({})
   // const [posts, setPosts] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const { isLoading, sendReq, error, clearError } = useHttpClient();
-  const { userId } = useParams();
-  const { currentUser } = useContext(AuthContext);
-  const currentUserId = currentUser && currentUser.userId;
+  const [showModal, setShowModal] = useState(false)
+  const { isLoading, sendReq, error, clearError } = useHttpClient()
+  const { userId } = useParams()
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser && currentUser.userId
 
-  const { posts } = user;
+  const { posts } = user
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const responseData = await sendReq(
           `${process.env.REACT_APP_BASE_URL}/users/${userId}`
-        );
-        setUser(responseData.user);
+        )
+        setUser(responseData.user)
         // setPosts(responseData.posts);
       } catch (err) {}
-    };
-    fetchUser();
-  }, [sendReq, userId]);
+    }
+    fetchUser()
+  }, [sendReq, userId])
 
   return (
     <Layout>
@@ -85,7 +85,8 @@ const UserProfile = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default UserProfile;
+export default UserProfile
+

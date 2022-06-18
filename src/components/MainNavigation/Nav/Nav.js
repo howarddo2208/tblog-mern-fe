@@ -1,34 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
-import { FaDev } from "@react-icons/all-files/fa/FaDev";
-import NavLinks from "../NavLinks/NavLinks";
-import "./Nav.css";
-import { SocketContext } from "../../../context/socket";
-import SideDrawer from "../SideDrawer/SideDrawer";
-import { AuthContext } from "../../../context/auth";
-import { useHttpClient } from "../../../hooks/useHttpClient";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react'
+import { FaDev } from '@react-icons/all-files/fa/FaDev'
+import NavLinks from '../NavLinks/NavLinks'
+import './Nav.css'
+import { SocketContext } from '../../../context/socket'
+import SideDrawer from '../SideDrawer/SideDrawer'
+import { useHttpClient } from '../../../hooks/useHttpClient'
+import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../../stateManagements'
 
 const Nav = ({ children, onSearchIconClick }) => {
-  const { currentUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
+  const { currentUser } = useAuth()
+  const { socket } = useContext(SocketContext)
 
-  let userId;
+  let userId
   if (currentUser) {
-    userId = currentUser.userId;
+    userId = currentUser.userId
   }
 
-  const { sendReq } = useHttpClient();
-  const [unreadNotifications, setUnreadNotifications] = useState([]);
+  const { sendReq } = useHttpClient()
+  const [unreadNotifications, setUnreadNotifications] = useState([])
 
-  const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+  const [drawerIsOpen, setDrawerIsOpen] = useState(false)
 
   const openDrawerHandler = () => {
-    setDrawerIsOpen(true);
-  };
+    setDrawerIsOpen(true)
+  }
 
   const closeDrawerHandler = () => {
-    setDrawerIsOpen(false);
-  };
+    setDrawerIsOpen(false)
+  }
 
   useEffect(() => {
     if (userId) {
@@ -36,29 +36,29 @@ const Nav = ({ children, onSearchIconClick }) => {
         try {
           const responseData = await sendReq(
             `${process.env.REACT_APP_BASE_URL}/users/${userId}/notifications/unread`,
-            "GET",
+            'GET',
             null,
             {
               Authorization: `Bearer ${currentUser.token}`,
             }
-          );
-          setUnreadNotifications(responseData.notifications);
+          )
+          setUnreadNotifications(responseData.notifications)
         } catch (err) {}
-      };
-      fetchUnreadNotifications();
+      }
+      fetchUnreadNotifications()
     }
-  }, [sendReq, userId, currentUser]);
+  }, [sendReq, userId, currentUser])
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on("notificationReceived", (data) => {
-        console.log("there is noti");
+      socket.current.on('notificationReceived', (data) => {
+        console.log('there is noti')
         setUnreadNotifications((unreadNotifications) => {
-          return [...unreadNotifications, data];
-        });
-      });
+          return [...unreadNotifications, data]
+        })
+      })
     }
-  }, [socket]);
+  }, [socket])
 
   return (
     <div className="container container-nav">
@@ -81,7 +81,8 @@ const Nav = ({ children, onSearchIconClick }) => {
         />
       </nav>
     </div>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav
+
