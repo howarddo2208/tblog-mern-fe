@@ -2,15 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { FaDev } from '@react-icons/all-files/fa/FaDev'
 import NavLinks from '../NavLinks/NavLinks'
 import './Nav.css'
-import { SocketContext } from '../../../context/socket'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import { useHttpClient } from '../../../hooks/useHttpClient'
 import { NavLink } from 'react-router-dom'
-import { useAuth } from '../../../stateManagements'
+import { useAuth, useSocket } from '../../../stateManagements'
 
 const Nav = ({ children, onSearchIconClick }) => {
   const { currentUser } = useAuth()
-  const { socket } = useContext(SocketContext)
+  const { socket } = useSocket()
 
   let userId
   if (currentUser) {
@@ -50,8 +49,8 @@ const Nav = ({ children, onSearchIconClick }) => {
   }, [sendReq, userId, currentUser])
 
   useEffect(() => {
-    if (socket.current) {
-      socket.current.on('notificationReceived', (data) => {
+    if (socket) {
+      socket.on('notificationReceived', (data) => {
         console.log('there is noti')
         setUnreadNotifications((unreadNotifications) => {
           return [...unreadNotifications, data]

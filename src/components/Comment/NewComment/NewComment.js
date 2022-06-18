@@ -1,18 +1,17 @@
 import React, { useContext } from 'react'
 import { toast } from 'react-toastify'
 import CommentForm from './CommentForm'
-import { SocketContext } from '../../../context/socket'
 import useHttpClient from '../../../hooks/useHttpClient'
 import { classifyToxicity } from '../../../utils/toxicClassify'
 import ErrorModal from '../../Modal/ErrorModal'
 import { CommentContext } from '../Comments'
-import { useAuth } from '../../../stateManagements'
+import { useAuth, useSocket } from '../../../stateManagements'
 
 export const NewComment = ({ replyId }) => {
   const { setActiveComment, setComments, postId, postAuthor } =
     useContext(CommentContext)
   const { currentUser } = useAuth()
-  const { socket } = useContext(SocketContext)
+  const { socket } = useSocket()
   const { sendReq, error, clearError } = useHttpClient()
   const currentUserId = currentUser && currentUser.userId
   const createComment = async (text, parentId = null) => {
@@ -40,8 +39,8 @@ export const NewComment = ({ replyId }) => {
       )
       setComments((comments = []) => [newComment.comment, ...comments])
 
-      if (socket.current) {
-        socket.current.emit('comment', {
+      if (socket) {
+        socket.emit('comment', {
           sender: currentUser,
           postId,
           receiver: postAuthor,
