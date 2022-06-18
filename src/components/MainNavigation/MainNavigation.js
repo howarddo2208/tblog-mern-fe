@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import SearchBar from '../../components/SearchBar/SearchBar';
+import React, { useState } from "react";
 
-import MainHeader from './MainHeader';
-import Nav from './Nav/Nav';
+import MainHeader from "./MainHeader";
+import Nav from "./Nav/Nav";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const MainNavigation = (props) => {
   const [showSearchOnMobile, setShowSearchOnMobile] = useState(false);
@@ -13,11 +13,11 @@ const MainNavigation = (props) => {
   return (
     <>
       <MainHeader>
-        <Nav onSearchIconClick={onSearchIconClick}>
-          <SearchBar showSearchOnMobile={false} />
+        <Nav onSearchIconClick={ onSearchIconClick }>
+          <SearchBar showSearchOnMobile={ false } />
         </Nav>
-        <div className='search-mobile-container'>
-          <SearchBar showSearchOnMobile={showSearchOnMobile} />
+        <div className="search-mobile-container">
+          <SearchBar showSearchOnMobile={ showSearchOnMobile } />
         </div>
       </MainHeader>
     </>

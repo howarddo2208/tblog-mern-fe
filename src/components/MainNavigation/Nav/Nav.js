@@ -14,7 +14,7 @@ const Nav = ({ children, onSearchIconClick }) => {
 
   let userId
   if (currentUser) {
-    ;({ userId } = currentUser)
+    userId = currentUser.userId
   }
 
   const { sendReq } = useHttpClient()
@@ -50,13 +50,14 @@ const Nav = ({ children, onSearchIconClick }) => {
   }, [sendReq, userId, currentUser])
 
   useEffect(() => {
-    console.log('socket in nav', socket)
-    socket.current?.on('notificationReceived', (data) => {
-      console.log('there is noti')
-      setUnreadNotifications((unreadNotifications) => {
-        return [...unreadNotifications, data]
+    if (socket.current) {
+      socket.current.on('notificationReceived', (data) => {
+        console.log('there is noti')
+        setUnreadNotifications((unreadNotifications) => {
+          return [...unreadNotifications, data]
+        })
       })
-    })
+    }
   }, [socket])
 
   return (

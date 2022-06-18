@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../../context/auth';
-import useHttpClient from '../../../hooks/useHttpClient';
-import { checkInArray } from '../../../utils';
-import ErrorModal from '../../Modal/ErrorModal';
-import { LikeCommentButton } from './LikeCommentButton';
+import React, { useContext, useState } from "react";
+import { LikeCommentButton } from "./LikeCommentButton";
+import { AuthContext } from "../../../context/auth";
+import useHttpClient from "../../../hooks/useHttpClient";
+import { checkInArray } from "../../../utils";
+import ErrorModal from "../../Modal/ErrorModal";
 
 export const LikeComment = ({ likes, commentId, setShowModal }) => {
   const { currentUser } = useContext(AuthContext);
@@ -16,8 +16,8 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
       setShowModal(true);
       return;
     }
-    let action = checkInArray(likes, currentUserId) ? 'unlike' : 'like';
-    if (action === 'unlike') {
+    let action = checkInArray(likes, currentUserId) ? "unlike" : "like";
+    if (action === "unlike") {
       likes.splice(likes.indexOf(currentUserId), 1);
     } else {
       likes.push(currentUserId);
@@ -26,11 +26,11 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/comments/${commentId}/${action}`,
-        'PUT',
+        "PUT",
         JSON.stringify({ userId: currentUser.userId, commentId /* action */ }),
         {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentUser.token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.token}`
         }
       );
     } catch (err) {}
@@ -38,12 +38,12 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
 
   return (
     <>
-      <ErrorModal error={error} onClose={clearError} />
+      <ErrorModal error={ error } onClose={ clearError } />
 
       <LikeCommentButton
-        handleLike={handleLike}
-        isLiked={isLiked}
-        likes={likes}
+        handleLike={ handleLike }
+        isLiked={ isLiked }
+        likes={ likes }
       />
     </>
   );

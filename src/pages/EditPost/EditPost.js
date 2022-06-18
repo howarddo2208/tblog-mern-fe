@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
-import { useHttpClient } from '../../hooks/useHttpClient'
-import { AuthContext } from '../../context/auth'
-import useForm from '../../hooks/useForm'
-import { editPostForm, prefillEditPostForm } from '../../utils/formConfig'
-import { appendData } from '../../utils'
+import React, { useContext, useEffect, useState } from 'react'
+import { useHistory, useParams } from 'react-router-dom'
+import Layout from '../../components/Layout'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import SkeletonForm from '../../components/Skeleton/SkeletonForm'
-import Layout from '../../components/Layout'
+import { AuthContext } from '../../context/auth'
+import useForm from '../../hooks/useForm'
+import { useHttpClient } from '../../hooks/useHttpClient'
+import { appendData } from '../../utils'
+import { editPostForm, prefillEditPostForm } from '../../utils/formConfig'
 
 const EditPost = () => {
   const { sendReq, isLoading, error, clearError } = useHttpClient()
@@ -15,10 +15,14 @@ const EditPost = () => {
   const [loadedPost, setLoadedPost] = useState({})
   const { postId, titleURL } = useParams()
   const history = useHistory()
-  const { renderFormInputs, renderFormValues, setForm, isFormValid } =
-    useForm(editPostForm)
-  let formValues = renderFormValues()
-  let formInputs = renderFormInputs()
+  const {
+    viewFormInputs: viewFormInputs,
+    viewFormValues: viewFormValues,
+    setForm,
+    isFormValid,
+  } = useForm(editPostForm)
+  let formValues = viewFormValues()
+  let formInputs = viewFormInputs()
 
   useEffect(() => {
     const fetchPost = async () => {

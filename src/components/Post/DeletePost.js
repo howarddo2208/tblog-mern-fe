@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from "react";
 import {
   useHistory,
-  useParams,
-} from 'react-router-dom/cjs/react-router-dom.min';
-import { AuthContext } from '../../context/auth';
-import useHttpClient from '../../hooks/useHttpClient';
-import DeletionModal from '../Modal/DeletionModal';
-import ErrorModal from '../Modal/ErrorModal';
+  useParams
+} from "react-router-dom/cjs/react-router-dom.min";
+import { AuthContext } from "../../context/auth";
+import useHttpClient from "../../hooks/useHttpClient";
+import DeletionModal from "../Modal/DeletionModal";
+import ErrorModal from "../Modal/ErrorModal";
 
 export const DeletePost = ({ authorId }) => {
   const { sendReq, error, clearError } = useHttpClient();
@@ -32,31 +32,31 @@ export const DeletePost = ({ authorId }) => {
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/posts/${titleURL}/${postId}`,
-        'DELETE',
+        "DELETE",
         JSON.stringify({ author: currentUserId }),
         {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentUser.token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.token}`
         }
       );
-      history.push('/');
+      history.push("/");
     } catch (err) {}
   };
   return (
     <>
-      <ErrorModal error={error} onClose={clearError} />
+      <ErrorModal error={ error } onClose={ clearError } />
 
       <DeletionModal
-        onClose={() => setShowConfirmModal(false)}
-        show={showConfirmModal}
-        cancelDeleteHandler={cancelDeleteWarningHandler}
-        confirmDeleteHandler={confirmDeleteWarningHandler}
+        onClose={ () => setShowConfirmModal(false) }
+        show={ showConfirmModal }
+        cancelDeleteHandler={ cancelDeleteWarningHandler }
+        confirmDeleteHandler={ confirmDeleteWarningHandler }
       />
-      {currentUserId === authorId && (
-        <button className='btn auth__delete' onClick={showDeleteWarningHandler}>
+      { currentUserId === authorId && (
+        <button className="btn auth__delete" onClick={ showDeleteWarningHandler }>
           Delete Post
         </button>
-      )}
+      ) }
     </>
   );
 };

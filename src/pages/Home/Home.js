@@ -1,33 +1,33 @@
-import React, { useState, useEffect, useContext } from 'react'
-import Posts from '../../components/Post/Posts'
-import RightSideBar from '../../components/RightSideBar/RightSideBar'
-import LeftSideBar from '../../components/LeftSideBar/LeftSideBar'
-import useHttpClient from '../../hooks/useHttpClient'
-import { AuthContext } from '../../context/auth'
-import Layout from '../../components/Layout'
+import React, { useContext, useEffect, useState } from "react";
+import Layout from "../../components/Layout";
+import LeftSideBar from "../../components/LeftSideBar/LeftSideBar";
+import Posts from "../../components/Post/Posts";
+import RightSideBar from "../../components/RightSideBar/RightSideBar";
+import { AuthContext } from "../../context/auth";
+import useHttpClient from "../../hooks/useHttpClient";
 
 const Home = () => {
-  const [tags, setTags] = useState([])
-  const { sendReq, isLoading } = useHttpClient()
+  const [tags, setTags] = useState([]);
+  const { sendReq, isLoading } = useHttpClient();
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const responseData = await sendReq(
           `${process.env.REACT_APP_BASE_URL}/tags/home`
-        )
-        setTags(responseData.tags)
+        );
+        setTags(responseData.tags);
       } catch (err) {}
-    }
-    fetchPosts()
-  }, [sendReq])
+    };
+    fetchPosts();
+  }, [sendReq]);
 
   return (
     <Layout>
-      <Posts cover={true} />
+      <Posts cover={ true } />
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 

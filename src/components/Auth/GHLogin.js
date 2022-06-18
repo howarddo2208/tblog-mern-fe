@@ -1,6 +1,6 @@
-import React from 'react';
-import LoginGithub from 'react-login-github';
-import { AiFillGithub } from '@react-icons/all-files/ai/AiFillGithub';
+import { AiFillGithub } from "@react-icons/all-files/ai/AiFillGithub";
+import React from "react";
+import LoginGithub from "react-login-github";
 
 const GHLogin = (props) => {
   const onSuccess = (res) => {
@@ -23,11 +23,11 @@ const GHLogin = (props) => {
 
   return (
     <LoginGithub
-      className='btn btn__social btn--gh'
-      buttonText={buttonText}
-      clientId={process.env.REACT_APP_GITHUB_CLIENT_ID}
-      onSuccess={onSuccess}
-      onFailure={onFailure}
+      className="btn btn__social btn--gh"
+      buttonText={ buttonText }
+      clientId={ process.env.REACT_APP_GITHUB_CLIENT_ID }
+      onSuccess={ onSuccess }
+      onFailure={ onFailure }
     />
   );
 };

@@ -1,5 +1,5 @@
-import React from 'react';
-import './Input.css';
+import React from "react";
+import "./Input.css";
 
 const Input = (props) => {
   const {
@@ -14,45 +14,45 @@ const Input = (props) => {
     errorMessage,
     isValid,
     value,
-    touched,
+    touched
   } = props;
 
   const element =
-    elementType === 'input' ? (
+    elementType === "input" ? (
       <>
         <input
-          className='form__input'
-          type={type}
-          name={name}
-          id={id}
-          key={label}
-          onChange={handleChange}
+          className="form__input"
+          type={ type }
+          name={ name }
+          id={ id }
+          key={ label }
+          onChange={ handleChange }
           // onBlur={handleBlur}
-          value={value}
+          value={ value }
         />
       </>
     ) : (
       <textarea
-        label={label}
-        id={id}
-        type={type}
-        name={name}
-        className='form__textarea'
-        rows={rows || 3}
-        onChange={handleChange}
+        label={ label }
+        id={ id }
+        type={ type }
+        name={ name }
+        className="form__textarea"
+        rows={ rows || 3 }
+        onChange={ handleChange }
         // onBlur={handleBlur}
-        value={value}
+        value={ value }
       />
     );
   return (
-    <div className='form__group'>
-      <label htmlFor={name} className='form__label'>
-        {label}
+    <div className="form__group">
+      <label htmlFor={ name } className="form__label">
+        { label }
       </label>
-      {element}
-      {!touched && errorMessage && !isValid && (
-        <span className='input__error'>{errorMessage}</span>
-      )}
+      { element }
+      { !touched && errorMessage && !isValid && (
+        <span className="input__error">{ errorMessage }</span>
+      ) }
     </div>
   );
 };

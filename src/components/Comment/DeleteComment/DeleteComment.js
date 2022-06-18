@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../context/auth';
-import useHttpClient from '../../../hooks/useHttpClient';
-import ErrorModal from '../../Modal/ErrorModal';
-import { CommentContext } from '../Comments';
-import { DeleteCommentButton } from './DeleteCommentButton';
+import React, { useContext } from "react";
+import { DeleteCommentButton } from "./DeleteCommentButton";
+import { AuthContext } from "../../../context/auth";
+import useHttpClient from "../../../hooks/useHttpClient";
+import ErrorModal from "../../Modal/ErrorModal";
+import { CommentContext } from "../Comments";
 
 export const DeleteComment = ({ commentId, authorId }) => {
   const { setActiveComment, comments, setComments } =
@@ -20,11 +20,11 @@ export const DeleteComment = ({ commentId, authorId }) => {
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/comments/${commentId}`,
-        'DELETE',
+        "DELETE",
         JSON.stringify({ author: currentUserId }),
         {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentUser.token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.token}`
         }
       );
     } catch (err) {}
@@ -34,12 +34,12 @@ export const DeleteComment = ({ commentId, authorId }) => {
 
   return (
     <>
-      <ErrorModal error={error} onClose={clearError} />
+      <ErrorModal error={ error } onClose={ clearError } />
       <DeleteCommentButton
-        currentUserId={currentUserId}
-        commentId={commentId}
-        authorId={authorId}
-        deleteComment={deleteComment}
+        currentUserId={ currentUserId }
+        commentId={ commentId }
+        authorId={ authorId }
+        deleteComment={ deleteComment }
       />
     </>
   );

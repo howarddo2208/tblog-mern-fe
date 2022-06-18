@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import SimpleMDE from 'react-simplemde-editor';
-import 'easymde/dist/easymde.min.css';
+import React, { useEffect, useRef, useState } from "react";
+import SimpleMDE from "react-simplemde-editor";
+import "easymde/dist/easymde.min.css";
 
 export const BodyInput = (props) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [isValid, setIsValid] = useState(false);
 
   const valueRef = useRef();
@@ -15,13 +15,13 @@ export const BodyInput = (props) => {
 
   const onChange = (value) => {
     setValue(value);
-    if (valueRef.current.value !== '') {
+    if (valueRef.current.value !== "") {
       setIsValid(true);
     } else {
       setIsValid(false);
     }
-    props.onChange('body', value, valueRef.current.isValid);
+    props.onChange("body", value, valueRef.current.isValid);
   };
 
-  return <SimpleMDE value={value} onChange={onChange} />;
+  return <SimpleMDE value={ value } onChange={ onChange } />;
 };

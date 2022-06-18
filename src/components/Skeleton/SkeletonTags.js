@@ -1,17 +1,17 @@
-import React from 'react';
-import { renderRepeatedSkeletons } from '../../utils';
-import SkeletonElement from './SkeletonElement';
-import Shimmer from './Shimmer';
+import React from "react";
+import Shimmer from "./Shimmer";
+import SkeletonElement from "./SkeletonElement";
+import { renderRepeatedSkeletons } from "../../utils";
 
 export const SkeletonTags = () => {
   return (
     <>
-      {renderRepeatedSkeletons(
-        <div className='skeleton__tag-item'>
-          {renderRepeatedSkeletons(<SkeletonElement type='text' />, 4)}
+      { renderRepeatedSkeletons(
+        <div className="skeleton__tag-item">
+          { renderRepeatedSkeletons(<SkeletonElement type="text" />, 4) }
         </div>,
         10
-      )}
+      ) }
       <Shimmer />
     </>
   );
