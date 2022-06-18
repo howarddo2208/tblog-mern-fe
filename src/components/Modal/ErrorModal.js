@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import Modal from './Modal';
+import Modal from "./Modal";
 
 const ErrorModal = (props) => {
   return (
     <Modal
-      title='An Error Occurred!'
-      show={!!props.error}
-      onClose={props.onClose}
+      title="An Error Occurred!"
+      show={ !!props.error }
+      onClose={ props.onClose }
     >
-      <p>{props.error}</p>
+      <p>{ props.error }</p>
     </Modal>
   );
 };

@@ -1,33 +1,33 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { useHttpClient } from '../../hooks/useHttpClient'
-import { AuthContext } from '../../context/auth'
-import Notification from '../../components/Notification/Notification'
-import './Notifications.css'
-import ErrorModal from '../../components/Modal/ErrorModal'
-import SkeletonPostList from '../../components/Skeleton/SkeletonPostList'
-import Layout from '../../components/Layout'
+import React, { useContext, useEffect, useState } from "react";
+import Notification from "../../components/Notification/Notification";
+import { AuthContext } from "../../context/auth";
+import { useHttpClient } from "../../hooks/useHttpClient";
+import "./Notifications.css";
+import ErrorModal from "../../components/Modal/ErrorModal";
+import SkeletonPostList from "../../components/Skeleton/SkeletonPostList";
+import Layout from "../../components/Layout";
 
 const Notifications = ({ user, userFollowStats }) => {
-  const { currentUser } = useContext(AuthContext)
-  const [notifications, setNotifications] = useState([])
-  const { isLoading, sendReq, error, clearError } = useHttpClient()
+  const { currentUser } = useContext(AuthContext);
+  const [notifications, setNotifications] = useState([]);
+  const { isLoading, sendReq, error, clearError } = useHttpClient();
 
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const responseData = await sendReq(
           `${process.env.REACT_APP_BASE_URL}/users/${currentUser.userId}/notifications`,
-          'GET',
+          "GET",
           null,
           {
-            Authorization: `Bearer ${currentUser.token}`,
+            Authorization: `Bearer ${currentUser.token}`
           }
-        )
-        setNotifications(responseData.notifications)
+        );
+        setNotifications(responseData.notifications);
       } catch (err) {}
-    }
-    fetchNotifications()
-  }, [sendReq, currentUser.userId, currentUser])
+    };
+    fetchNotifications();
+  }, [sendReq, currentUser.userId, currentUser]);
 
   // useEffect(() => {
   //   if (currentUser && currentUser.userId !== userId) {
@@ -37,32 +37,32 @@ const Notifications = ({ user, userFollowStats }) => {
 
   return (
     <Layout>
-      <ErrorModal error={error} onClose={clearError} />
+      <ErrorModal error={ error } onClose={ clearError } />
       <div className="container container-notif-page">
-        {isLoading ? (
+        { isLoading ? (
           <SkeletonPostList type="mini" />
         ) : (
           <>
             <h3 className="notif__heading">Notifications</h3>
             <div className="notifications">
-              {notifications && notifications.length > 0 ? (
+              { notifications && notifications.length > 0 ? (
                 notifications.map((notification) => (
                   <Notification
-                    key={notification.id}
-                    user={user}
-                    notification={notification}
+                    key={ notification.id }
+                    user={ user }
+                    notification={ notification }
                   />
                 ))
               ) : (
                 <p>No notifications found!</p>
-              )}
+              ) }
             </div>
           </>
-        )}
+        ) }
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Notifications
+export default Notifications;
 

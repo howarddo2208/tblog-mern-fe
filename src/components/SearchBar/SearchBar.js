@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import useSearch from '../../hooks/useSearch.js';
+import React, { useState } from "react";
+import useSearch from "../../hooks/useSearch.js";
 
 const SearchBar = (props) => {
   const { search } = useSearch();
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
 
   //handle input change for search bar
   const onInputChange = (evt) => {
@@ -15,20 +15,20 @@ const SearchBar = (props) => {
     if (evt.keyCode === 13) {
       evt.preventDefault();
       search(value);
-      setValue('');
+      setValue("");
     }
   };
 
   return (
     <input
       className={
-        props.showSearchOnMobile ? 'search-bar--mobile ' : 'search-bar '
+        props.showSearchOnMobile ? "search-bar--mobile " : "search-bar "
       }
-      key='random1'
-      value={value}
-      placeholder={'Search...'}
-      onChange={onInputChange}
-      onKeyDown={onEnterKey}
+      key="random1"
+      value={ value }
+      placeholder={ "Search..." }
+      onChange={ onInputChange }
+      onKeyDown={ onEnterKey }
     />
   );
 };

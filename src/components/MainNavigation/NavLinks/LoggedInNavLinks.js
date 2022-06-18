@@ -1,9 +1,9 @@
-import { RiNotificationLine } from '@react-icons/all-files/ri/RiNotificationLine';
-import React, { useState, useCallback } from 'react';
-import { NavLink } from 'react-router-dom';
-import Avatar from '../../Avatar/Avatar';
-import { Dropdown } from '../Dropdown';
-import { useHistory } from 'react-router-dom';
+import { RiNotificationLine } from '@react-icons/all-files/ri/RiNotificationLine'
+import React, { useCallback, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import Avatar from '../../Avatar/Avatar'
+import { Dropdown } from '../Dropdown'
 
 export const LoggedInNavLinks = ({
   unreadNotifications,
@@ -11,43 +11,43 @@ export const LoggedInNavLinks = ({
   currentUser,
   logout,
 }) => {
-  const history = useHistory();
-  const handleRedirect = useCallback((url) => history.push(url), [history]);
-  const [showMenu, setShowMenu] = useState(false);
+  const history = useHistory()
+  const handleRedirect = useCallback((url) => history.push(url), [history])
+  const [showMenu, setShowMenu] = useState(false)
 
   const handleClick = () => {
-    setUnreadNotifications([]);
-    handleRedirect(`/users/${currentUser && currentUser.userId}/notifications`);
-  };
+    setUnreadNotifications([])
+    handleRedirect(`/users/${currentUser && currentUser.userId}/notifications`)
+  }
 
   const handleDropdown = () => {
-    setShowMenu((showMenu) => !showMenu);
-  };
+    setShowMenu((showMenu) => !showMenu)
+  }
 
   const handleLogout = () => {
-    setShowMenu(false);
-    logout();
-  };
+    setShowMenu(false)
+    logout()
+  }
   return (
     <React.Fragment>
-      <li className='list__item list__item--mobile item--create'>
-        <NavLink className='create-link' to='/posts/new' exact>
+      <li className="list__item list__item--mobile item--create">
+        <NavLink className="create-link" to="/posts/new" exact>
           Create Post
         </NavLink>
       </li>
       <li
-        className='list__item list__item--notifs hvr-bg-lt'
+        className="list__item list__item--notifs hvr-bg-lt"
         onClick={handleClick}
       >
         <NavLink
-          className='link'
+          className="link"
           to={`/users/${currentUser && currentUser.userId}/notifications`}
           exact
         >
-          <div className='link--notifs-icon'>
-            <RiNotificationLine size='2.5rem' />
+          <div className="link--notifs-icon">
+            <RiNotificationLine size="2.5rem" />
             {unreadNotifications && unreadNotifications.length > 0 && (
-              <div className='notif__counter'>{unreadNotifications.length}</div>
+              <div className="notif__counter">{unreadNotifications.length}</div>
             )}
           </div>
         </NavLink>
@@ -55,7 +55,7 @@ export const LoggedInNavLinks = ({
 
       <li>
         <button
-          className='btn nav__btn'
+          className="btn nav__btn"
           onClick={handleDropdown}
           onBlur={() => setShowMenu(false)}
         >
@@ -70,5 +70,6 @@ export const LoggedInNavLinks = ({
         currentUser={currentUser}
       />
     </React.Fragment>
-  );
-};
+  )
+}
+

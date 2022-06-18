@@ -1,18 +1,18 @@
-import React from 'react';
-import Avatar from '../Avatar/Avatar';
-import NotificationBody from './NotificationBody';
+import React from "react";
+import NotificationBody from "./NotificationBody";
+import Avatar from "../Avatar/Avatar";
 
 const Notification = ({ notification, type, children }) => {
   return (
-    <div className='notif'>
+    <div className="notif">
       <Avatar
-        src={notification.sender && notification.sender.avatar}
-        link={`/users/${notification.sender.id}`}
+        src={ notification.sender && notification.sender.avatar }
+        link={ `/users/${notification.sender.id}` }
       />
-      <div className='notif__details'>
+      <div className="notif__details">
         <NotificationBody
-          type={notification.notificationType}
-          notification={notification}
+          type={ notification.notificationType }
+          notification={ notification }
         />
       </div>
     </div>

@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect, createContext } from 'react';
-import { useHttpClient } from '../../hooks/useHttpClient';
-import Comment from './Comment';
-import { AuthContext } from '../../context/auth';
-import { getReplies } from '../../utils';
-import ErrorModal from '../Modal/ErrorModal';
-import { NewComment } from './NewComment/NewComment';
-import './Comments.css';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import Comment from "./Comment";
+import { NewComment } from "./NewComment/NewComment";
+import { AuthContext } from "../../context/auth";
+import { useHttpClient } from "../../hooks/useHttpClient";
+import { getReplies } from "../../utils";
+import ErrorModal from "../Modal/ErrorModal";
+import "./Comments.css";
 
 export const CommentContext = createContext();
 
@@ -31,31 +31,31 @@ const Comments = ({ postAuthor, postId }) => {
 
   return (
     <CommentContext.Provider
-      value={{
+      value={ {
         comments,
         setComments,
         postId,
         postAuthor,
         activeComment,
-        setActiveComment,
-      }}
+        setActiveComment
+      } }
     >
-      <ErrorModal error={error} onClose={clearError} />
-      <div className='comments'>
-        <h2>{`Discussion (${
+      <ErrorModal error={ error } onClose={ clearError } />
+      <div className="comments">
+        <h2>{ `Discussion (${
           comments ? `${comments.length} comments` : 0
-        })`}</h2>
+        })` }</h2>
         <NewComment />
-        {rootComments &&
+        { rootComments &&
           rootComments.map((comment) => (
             <Comment
-              key={comment._id}
-              comment={comment}
-              replies={getReplies(comments, comment._id)}
-              parentId={comment.parentId}
-              currentUserId={currentUserId}
+              key={ comment._id }
+              comment={ comment }
+              replies={ getReplies(comments, comment._id) }
+              parentId={ comment.parentId }
+              currentUserId={ currentUserId }
             />
-          ))}
+          )) }
       </div>
     </CommentContext.Provider>
   );

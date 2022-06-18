@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import queryString from 'query-string';
-import { useHttpClient } from './useHttpClient';
-import { SearchContext } from '../context/search';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import queryString from "query-string";
+import { useContext } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHttpClient } from "./useHttpClient";
+import { SearchContext } from "../context/search";
 
 const useSearch = () => {
   const { setSearchValue, setSearchResults } = useContext(SearchContext);

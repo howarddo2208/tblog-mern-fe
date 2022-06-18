@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { useHttpClient } from '../../hooks/useHttpClient'
-import { AuthContext } from '../../context/auth'
-import useForm from '../../hooks/useForm'
+import Layout from '../../components/Layout'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import SkeletonForm from '../../components/Skeleton/SkeletonForm'
+import { AuthContext } from '../../context/auth'
+import useForm from '../../hooks/useForm'
+import { useHttpClient } from '../../hooks/useHttpClient'
 
-import { editProfileForm, prefillEditProfileForm } from '../../utils/formConfig'
 import { appendData } from '../../utils'
-import Layout from '../../components/Layout'
+import { editProfileForm, prefillEditProfileForm } from '../../utils/formConfig'
 
 const EditUserProfile = () => {
   const [user, setUser] = useState({})
-  const { renderFormInputs, renderFormValues, setForm } =
-    useForm(editProfileForm)
+  const {
+    viewFormInputs: renderFormInputs,
+    viewFormValues: renderFormValues,
+    setForm,
+  } = useForm(editProfileForm)
   const history = useHistory()
   const { sendReq, isLoading, error, clearError } = useHttpClient()
   const { userId } = useParams()

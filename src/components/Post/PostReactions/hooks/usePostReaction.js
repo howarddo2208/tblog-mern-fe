@@ -1,8 +1,8 @@
-import { useContext, useState } from 'react';
-import { AuthContext } from '../../../../context/auth';
-import { SocketContext } from '../../../../context/socket';
-import { checkInArray } from '../../../../utils';
-import useHttpClient from '../../../../hooks/useHttpClient';
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../../context/auth";
+import { SocketContext } from "../../../../context/socket";
+import useHttpClient from "../../../../hooks/useHttpClient";
+import { checkInArray } from "../../../../utils";
 
 const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
   const { currentUser } = useContext(AuthContext);
@@ -14,25 +14,25 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
   const [state, setState] = useState({
     isLiked: checkInArray(likes, currentUserId),
     isUnicorned: checkInArray(unicorns, currentUserId),
-    isBookmarked: checkInArray(bookmarks, currentUserId),
+    isBookmarked: checkInArray(bookmarks, currentUserId)
   });
 
   const reactOnPost = async (action, postId) => {
     try {
       await sendReq(
         `${process.env.REACT_APP_BASE_URL}/posts/${postId}/${action}`,
-        'PUT',
+        "PUT",
         JSON.stringify({ userId: currentUser.userId, postId }),
         {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${currentUser.token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${currentUser.token}`
         }
       );
     } catch (err) {}
   };
 
   const updateReactionArr = (arr, effect) => {
-    if (effect === 'negative') {
+    if (effect === "negative") {
       arr.splice(arr.indexOf(currentUser.userId), 1);
     } else {
       arr.push(currentUser.userId);
@@ -41,12 +41,12 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
 
   const handleReaction = async (action, effect, arr, stateKey) => {
     updateReactionArr(arr, effect);
-    if (action === 'like' && current) {
-      current.emit('like', {
+    if (action === "like" && current) {
+      current.emit("like", {
         like: true,
         sender: currentUser,
         postId: id,
-        receiver: author,
+        receiver: author
       });
     }
     setState((state) => ({ ...state, [stateKey]: !state[stateKey] }));
@@ -55,7 +55,7 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
 
   return {
     state,
-    handleReaction,
+    handleReaction
   };
 };
 

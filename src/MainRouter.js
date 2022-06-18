@@ -1,29 +1,29 @@
-import React, { useContext, useEffect } from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
-import NewPost from './pages/NewPost/NewPost'
-import EditPost from './pages/EditPost/EditPost'
-import Auth from './pages/Auth/Auth'
-import Home from './pages/Home/Home'
+import React, { useContext, useEffect } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import Tags from "./components/Tags/Tags";
+import { AuthContext } from "./context/auth";
+import Auth from "./pages/Auth/Auth";
+import Chat from "./pages/Chat/Chat";
+import EditPost from "./pages/EditPost/EditPost";
+import EditUserProfile from "./pages/EditUserProfile/EditUserProfile";
+import Home from "./pages/Home/Home";
+import NewPost from "./pages/NewPost/NewPost";
+import Notifications from "./pages/Notifications/Notifications";
+import Post from "./pages/Post/Post";
+import ReadingList from "./pages/ReadingList/ReadingList";
+import SearchResults from "./pages/SearchResults/SearchResults";
+import Tag from "./pages/Tag/Tag"
 import UserProfile from './pages/UserProfile/UserProfile'
-import EditUserProfile from './pages/EditUserProfile/EditUserProfile'
-import Notifications from './pages/Notifications/Notifications'
-import Tags from './components/Tags/Tags'
-import Tag from './pages/Tag/Tag'
-import Post from './pages/Post/Post'
-import SearchResults from './pages/SearchResults/SearchResults'
-import ReadingList from './pages/ReadingList/ReadingList'
-import { AuthContext } from './context/auth'
-import { BrowserRouter as Router } from 'react-router-dom'
-import Chat from './pages/Chat/Chat'
 
 const MainRouter = ({ token }) => {
-  const authContext = useContext(AuthContext)
+  const authContext = useContext(AuthContext);
   useEffect(() => {
-    console.log('authContext', authContext)
-  }, [authContext])
+    console.log("authContext", authContext);
+  }, [authContext]);
   return (
     <Router>
-      {authContext.isLoggedIn ? (
+      { authContext.isLoggedIn ? (
         <Switch>
           <Route path="/" exact>
             <Home />
@@ -68,10 +68,10 @@ const MainRouter = ({ token }) => {
             <Home />
           </Route>
           <Route path="/auth/new-user" exact>
-            <Auth newUser={true} />
+            <Auth newUser={ true } />
           </Route>
           <Route path="/auth" exact>
-            <Auth newUser={false} />
+            <Auth newUser={ false } />
           </Route>
           <Route path="/tags" exact>
             <Tags />
@@ -89,10 +89,10 @@ const MainRouter = ({ token }) => {
             <Post />
           </Route>
         </Switch>
-      )}
+      ) }
     </Router>
-  )
-}
+  );
+};
 
-export default MainRouter
+export default MainRouter;
 

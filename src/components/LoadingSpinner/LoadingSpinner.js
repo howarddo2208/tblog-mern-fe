@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import './LoadingSpinner.css';
+import "./LoadingSpinner.css";
 
 const LoadingSpinner = (props) => {
   return (
-    <div className={`${props.asOverlay && 'spinner--overlay'}`}>
-      <div className='spinner'></div>
+    <div className={ `${props.asOverlay && "spinner--overlay"}` }>
+      <div className="spinner"></div>
     </div>
   );
 };

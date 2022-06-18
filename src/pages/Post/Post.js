@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import { useHttpClient } from '../../hooks/useHttpClient'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import PostReactions from '../../components/Post/PostReactions/PostReactions'
-import PostContent from '../../components/Post/PostContent/PostContent'
-import PostAuthor from '../../components/Post/PostAuthor/PostAuthor'
-import ErrorModal from '../../components/Modal/ErrorModal'
-import AuthModal from '../../components/Modal/AuthModal'
-import { SkeletonPage } from '../../components/Skeleton/SkeletonPage'
 import Layout from '../../components/Layout'
+import AuthModal from '../../components/Modal/AuthModal'
+import ErrorModal from '../../components/Modal/ErrorModal'
+import PostAuthor from '../../components/Post/PostAuthor/PostAuthor'
+import PostContent from '../../components/Post/PostContent/PostContent'
+import PostReactions from '../../components/Post/PostReactions/PostReactions'
+import { SkeletonPage } from '../../components/Skeleton/SkeletonPage'
+import { useHttpClient } from '../../hooks/useHttpClient'
 
 const Post = (props) => {
   const [post, setPost] = useState({})

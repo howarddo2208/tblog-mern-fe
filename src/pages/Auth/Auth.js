@@ -1,18 +1,22 @@
 import React, { useContext, useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
-import { AuthContext } from '../../context/auth'
-import { useHttpClient } from '../../hooks/useHttpClient'
-import useForm from '../../hooks/useForm'
-import { loginForm, signupForm } from '../../utils/formConfig'
-import { appendData } from '../../utils'
+import { Link, useHistory } from 'react-router-dom'
 import Welcome from '../../components/Auth/Welcome'
-import './Auth.css'
-import ErrorModal from '../../components/Modal/ErrorModal'
 import Layout from '../../components/Layout'
+import ErrorModal from '../../components/Modal/ErrorModal'
+import { AuthContext } from '../../context/auth'
+import useForm from '../../hooks/useForm'
+import { useHttpClient } from '../../hooks/useHttpClient'
+import { appendData } from '../../utils'
+import { loginForm, signupForm } from '../../utils/formConfig'
+import './Auth.css'
 
 const Auth = ({ newUser }) => {
-  const { renderFormInputs, renderFormValues, isFormValid, setForm } =
-    useForm(signupForm)
+  const {
+    viewFormInputs: ViewFormInputs,
+    viewFormValues: ViewFormValues,
+    isFormValid,
+    setForm,
+  } = useForm(signupForm)
 
   useEffect(() => {
     if (!newUser) {
@@ -22,8 +26,8 @@ const Auth = ({ newUser }) => {
     }
   }, [newUser, setForm])
 
-  const formValues = renderFormValues()
-  const formInputs = renderFormInputs()
+  const formValues = ViewFormValues()
+  const formInputs = ViewFormInputs()
 
   const { login } = useContext(AuthContext)
   const history = useHistory()
