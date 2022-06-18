@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { useSearch } from '../../stateManagements'
 
 const SearchBar = (props) => {
-  const { search, searchValue } = useSearch()
+  const search = useSearch((state) => state.search)
   const [value, setValue] = useState('')
   const history = useHistory()
   //handle input change for search bar

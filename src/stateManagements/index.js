@@ -3,20 +3,7 @@ import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import queryString from 'query-string'
 
-const useFish = create(
-  persist(
-    (set, get) => ({
-      fishes: 0,
-      addAFish: () => set({ fishes: get().fishes + 1 }),
-    }),
-    {
-      name: 'food-storage',
-      getStorage: () => sessionStorage,
-    }
-  )
-)
-
-const useAuth = create(
+export const useAuth = create(
   persist(
     (set, get) => ({
       isLoggedIn: false,
@@ -50,33 +37,39 @@ const useAuth = create(
   )
 )
 
-const useSocket = create((set, get) => ({
+export const useSocket = create((set, get) => ({
   socket: null,
   setSocket: (socket) => set({ socket }),
 }))
 
-const useSearch = create((set, get) => ({
-  searchValue: '',
-  searchResults: [],
-  search: async (value, history) => {
-    if (value) {
-      set({ searchValue: value })
-      try {
-        const query = queryString.stringify({ search: value })
-        const data = await fetch(
-          `${process.env.REACT_APP_BASE_URL}/posts/search?${query}`
-        )
-        const { posts } = await data.json()
-        set({ searchResults: posts })
-        history.push(`/search/?query=${value}`)
-      } catch (err) {
-        console.log(err)
-      }
-    } else {
-      set({ searchResults: [] })
+export const useSearch = create(
+  persist(
+    (set, get) => ({
+      searchValue: '',
+      searchResults: [],
+      search: async (value, history) => {
+        if (value) {
+          set({ searchValue: value })
+          try {
+            const query = queryString.stringify({ search: value })
+            const data = await fetch(
+              `${process.env.REACT_APP_BASE_URL}/posts/search?${query}`
+            )
+            const { posts } = await data.json()
+            set({ searchResults: posts })
+            history.push(`/search/?query=${value}`)
+          } catch (err) {
+            console.log(err)
+          }
+        } else {
+          set({ searchResults: [] })
+        }
+      },
+    }),
+    {
+      name: 'search-state',
+      getStorage: () => sessionStorage,
     }
-  },
-}))
-
-export { useAuth, useSocket, useSearch }
+  )
+)
 
