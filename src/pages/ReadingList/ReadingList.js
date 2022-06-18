@@ -19,7 +19,7 @@ const ReadingList = () => {
           "GET",
           null,
           {
-            Authorization: `Bearer ${currentUser.token}`
+            Authorization: `Bearer ${currentUser.token}`,
           }
         );
         setLoadedPosts(responseData.posts);
@@ -29,21 +29,20 @@ const ReadingList = () => {
   }, [sendReq, userId, currentUser]);
   return (
     <Layout>
-      <ErrorModal error={ error } onClose={ clearError } />
+      <ErrorModal error={error} onClose={clearError} />
       <div className="container-posts reading-list">
         <h2 className="reading-list__heading">
-          { currentUser && `${currentUser.name}'s Reading list` }
+          {currentUser && `${currentUser.name}'s Reading list`}
         </h2>
 
-        { loadedPosts ? (
-          <PostList cover={ false } items={ loadedPosts } isLoading={ isLoading } />
+        {loadedPosts ? (
+          <PostList cover={false} items={loadedPosts} isLoading={isLoading} />
         ) : (
           <p>Your reading list is empty!</p>
-        ) }
+        )}
       </div>
     </Layout>
   );
 };
 
 export default ReadingList;
-

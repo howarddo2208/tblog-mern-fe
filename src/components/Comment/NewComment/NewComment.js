@@ -26,7 +26,7 @@ export const NewComment = ({ replyId }) => {
       body: text,
       author: currentUserId,
       parentId,
-      userId: currentUserId
+      userId: currentUserId,
     };
     try {
       const newComment = await sendReq(
@@ -35,7 +35,7 @@ export const NewComment = ({ replyId }) => {
         JSON.stringify(reqData),
         {
           Authorization: `Bearer ${currentUser.token}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         }
       );
       setComments((comments = []) => [newComment.comment, ...comments]);
@@ -44,7 +44,7 @@ export const NewComment = ({ replyId }) => {
         socket.current.emit("comment", {
           sender: currentUser,
           postId,
-          receiver: postAuthor
+          receiver: postAuthor,
         });
       }
     } catch (err) {}
@@ -52,14 +52,13 @@ export const NewComment = ({ replyId }) => {
   };
   return (
     <>
-      <ErrorModal error={ error } onClose={ clearError } />
+      <ErrorModal error={error} onClose={clearError} />
       <CommentForm
-        avatar={ replyId ? false : true }
-        handleSubmit={ (text) => createComment(text, replyId && replyId) }
-        submitLabel={ replyId ? "Reply" : "Submit" }
-        handleCancel={ () => setActiveComment(null) }
+        avatar={replyId ? false : true}
+        handleSubmit={(text) => createComment(text, replyId && replyId)}
+        submitLabel={replyId ? "Reply" : "Submit"}
+        handleCancel={() => setActiveComment(null)}
       />
     </>
   );
 };
-

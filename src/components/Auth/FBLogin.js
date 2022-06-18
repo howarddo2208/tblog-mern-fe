@@ -1,11 +1,11 @@
-import { AiFillFacebook } from '@react-icons/all-files/ai/AiFillFacebook'
-import React from 'react'
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { AiFillFacebook } from "@react-icons/all-files/ai/AiFillFacebook";
+import React from "react";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 const FBLogin = (props) => {
   const responseFacebook = async (response) => {
-    props.onLogin(response)
-  }
+    props.onLogin(response);
+  };
 
   return (
     <FacebookLogin
@@ -24,8 +24,7 @@ const FBLogin = (props) => {
         </button>
       )}
     />
-  )
-}
+  );
+};
 
-export default FBLogin
-
+export default FBLogin;

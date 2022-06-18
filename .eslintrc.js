@@ -9,7 +9,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jest/recommended',
     'plugin:testing-library/react',
@@ -26,11 +25,8 @@ module.exports = {
   ],
   root: true, // For configuration cascading.
   rules: {
-    'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'testing-library/render-result-naming-convention': 'off',
     'react/no-unescaped-entities': 'off',
-    'jsx-a11y/no-static-element-interactions': 'off',
-    'jsx-a11y/click-events-have-key-events': 'off',
     'react/prop-types': 'off',
     'no-empty': 'off',
     'react/react-in-jsx-scope': 'off',

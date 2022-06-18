@@ -18,22 +18,22 @@ const PostReactions = ({ post, setShowModal, handleInteraction }) => {
   return (
     <div className="post__reactions">
       <LikePost
-        likes={ likes }
-        isLiked={ isLiked }
-        setShowModal={ setShowModal }
-        handleReaction={ handleReaction }
+        likes={likes}
+        isLiked={isLiked}
+        setShowModal={setShowModal}
+        handleReaction={handleReaction}
       />
       <UnicornPost
-        unicorns={ unicorns }
-        isUnicorned={ isUnicorned }
-        setShowModal={ setShowModal }
-        handleReaction={ handleReaction }
+        unicorns={unicorns}
+        isUnicorned={isUnicorned}
+        setShowModal={setShowModal}
+        handleReaction={handleReaction}
       />
       <BookmarkPost
-        bookmarks={ bookmarks }
-        isBookmarked={ isBookmarked }
-        setShowModal={ setShowModal }
-        handleReaction={ handleReaction }
+        bookmarks={bookmarks}
+        isBookmarked={isBookmarked}
+        setShowModal={setShowModal}
+        handleReaction={handleReaction}
       />
     </div>
   );

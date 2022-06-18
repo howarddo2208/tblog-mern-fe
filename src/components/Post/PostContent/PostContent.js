@@ -19,34 +19,34 @@ const PostContent = ({ post, handleDelete }) => {
 
   return (
     <div className="post">
-      <PostImage src={ image } alt={ `Cover image for ${title}` } />
+      <PostImage src={image} alt={`Cover image for ${title}`} />
       <div className="post__body">
         <div className="post__author">
-          <Avatar link={ `/users/${author.id}` } src={ author.avatar } />
+          <Avatar link={`/users/${author.id}`} src={author.avatar} />
           <div className="author__details">
-            <Link to={ `/users/${author.id}` }>
-              <h4>{ author.name }</h4>
+            <Link to={`/users/${author.id}`}>
+              <h4>{author.name}</h4>
             </Link>
-            <p>{ createdAt }</p>
+            <p>{createdAt}</p>
           </div>
         </div>
-        <h1 className="post__heading">{ title }</h1>
-        <PostTags tags={ tags } />
+        <h1 className="post__heading">{title}</h1>
+        <PostTags tags={tags} />
         <div className="post__text">
-          <ReactMarkdown components={ SyntaxHighlight }>{ body }</ReactMarkdown>
+          <ReactMarkdown components={SyntaxHighlight}>{body}</ReactMarkdown>
         </div>
 
         <div className="post__auth">
-          { currentUserId === author.id && (
-            <Link className="auth__edit" to={ `/posts/${titleURL}/${id}/edit` }>
+          {currentUserId === author.id && (
+            <Link className="auth__edit" to={`/posts/${titleURL}/${id}/edit`}>
               Edit Post
             </Link>
-          ) }
+          )}
 
-          <DeletePost authorId={ author.id } />
+          <DeletePost authorId={author.id} />
         </div>
       </div>
-      { post.comments && <Comments postId={ id } postAuthor={ author } /> }
+      {post.comments && <Comments postId={id} postAuthor={author} />}
     </div>
   );
 };

@@ -24,7 +24,7 @@ export const DeleteComment = ({ commentId, authorId }) => {
         JSON.stringify({ author: currentUserId }),
         {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${currentUser.token}`
+          Authorization: `Bearer ${currentUser.token}`,
         }
       );
     } catch (err) {}
@@ -34,12 +34,12 @@ export const DeleteComment = ({ commentId, authorId }) => {
 
   return (
     <>
-      <ErrorModal error={ error } onClose={ clearError } />
+      <ErrorModal error={error} onClose={clearError} />
       <DeleteCommentButton
-        currentUserId={ currentUserId }
-        commentId={ commentId }
-        authorId={ authorId }
-        deleteComment={ deleteComment }
+        currentUserId={currentUserId}
+        commentId={commentId}
+        authorId={authorId}
+        deleteComment={deleteComment}
       />
     </>
   );

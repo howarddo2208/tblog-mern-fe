@@ -6,18 +6,18 @@ const DeletionModal = (props) => {
   return (
     <Modal
       title="Are you sure?"
-      show={ props.show }
-      onClose={ props.onClose }
+      show={props.show}
+      onClose={props.onClose}
       footer={
         <>
           <button
-            onClick={ props.cancelDeleteHandler }
+            onClick={props.cancelDeleteHandler}
             className="btn btn--cancel"
           >
             Cancel
           </button>
           <button
-            onClick={ props.confirmDeleteHandler }
+            onClick={props.confirmDeleteHandler}
             className="btn btn--delete"
           >
             Delete

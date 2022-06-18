@@ -23,5 +23,5 @@ export const BodyInput = (props) => {
     props.onChange("body", value, valueRef.current.isValid);
   };
 
-  return <SimpleMDE value={ value } onChange={ onChange } />;
+  return <SimpleMDE value={value} onChange={onChange} />;
 };

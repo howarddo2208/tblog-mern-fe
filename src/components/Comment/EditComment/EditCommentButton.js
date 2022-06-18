@@ -6,14 +6,14 @@ export const EditCommentButton = ({ currentUserId, commentId, authorId }) => {
   const { setActiveComment } = useContext(CommentContext);
   return (
     <>
-      { canModifyComment(currentUserId, authorId) && (
+      {canModifyComment(currentUserId, authorId) && (
         <button
           className="btn auth__edit"
-          onClick={ () => setActiveComment({ id: commentId, type: "editing" }) }
+          onClick={() => setActiveComment({ id: commentId, type: "editing" })}
         >
           Edit
         </button>
-      ) }
+      )}
     </>
   );
 };

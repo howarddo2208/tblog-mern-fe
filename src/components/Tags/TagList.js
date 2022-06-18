@@ -9,15 +9,15 @@ const TagList = (props) => {
 
   return (
     <div className="container tags">
-      { props.isLoading && <SkeletonTags /> }
-      { props.tags.map((tag, index) => (
+      {props.isLoading && <SkeletonTags />}
+      {props.tags.map((tag, index) => (
         <TagItem
-          name={ tag.name }
-          id={ tag.id }
-          key={ tag.id }
-          followers={ tag.followers }
+          name={tag.name}
+          id={tag.id}
+          key={tag.id}
+          followers={tag.followers}
         />
-      )) }
+      ))}
     </div>
   );
 };

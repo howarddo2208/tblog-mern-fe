@@ -30,7 +30,7 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
         JSON.stringify({ userId: currentUser.userId, commentId /* action */ }),
         {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${currentUser.token}`
+          Authorization: `Bearer ${currentUser.token}`,
         }
       );
     } catch (err) {}
@@ -38,12 +38,12 @@ export const LikeComment = ({ likes, commentId, setShowModal }) => {
 
   return (
     <>
-      <ErrorModal error={ error } onClose={ clearError } />
+      <ErrorModal error={error} onClose={clearError} />
 
       <LikeCommentButton
-        handleLike={ handleLike }
-        isLiked={ isLiked }
-        likes={ likes }
+        handleLike={handleLike}
+        isLiked={isLiked}
+        likes={likes}
       />
     </>
   );

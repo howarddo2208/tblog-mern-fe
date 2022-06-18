@@ -14,7 +14,7 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
   const [state, setState] = useState({
     isLiked: checkInArray(likes, currentUserId),
     isUnicorned: checkInArray(unicorns, currentUserId),
-    isBookmarked: checkInArray(bookmarks, currentUserId)
+    isBookmarked: checkInArray(bookmarks, currentUserId),
   });
 
   const reactOnPost = async (action, postId) => {
@@ -25,7 +25,7 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
         JSON.stringify({ userId: currentUser.userId, postId }),
         {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${currentUser.token}`
+          Authorization: `Bearer ${currentUser.token}`,
         }
       );
     } catch (err) {}
@@ -46,7 +46,7 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
         like: true,
         sender: currentUser,
         postId: id,
-        receiver: author
+        receiver: author,
       });
     }
     setState((state) => ({ ...state, [stateKey]: !state[stateKey] }));
@@ -55,7 +55,7 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
 
   return {
     state,
-    handleReaction
+    handleReaction,
   };
 };
 

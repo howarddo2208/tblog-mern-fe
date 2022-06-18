@@ -9,7 +9,7 @@ export const FollowUser = ({
   followId,
   setShowModal,
   followers,
-  userToFollow
+  userToFollow,
 }) => {
   const { currentUser } = useContext(AuthContext);
   const { current } = useContext(SocketContext).socket;
@@ -32,7 +32,7 @@ export const FollowUser = ({
     if (action === "follow") {
       current.emit("follow", {
         sender: currentUser,
-        receiver: userToFollow
+        receiver: userToFollow,
       });
     }
     const reqData = { userId: currentUserId, followId };
@@ -43,7 +43,7 @@ export const FollowUser = ({
         JSON.stringify(reqData),
         {
           Authorization: `Bearer ${currentUser.token}`,
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         }
       );
       //redirect user to the landing page
@@ -51,10 +51,10 @@ export const FollowUser = ({
   };
   return (
     <button
-      className={ `btn--profile-cta ${following ? "btn-following" : ""}` }
-      onClick={ handleFollow }
+      className={`btn--profile-cta ${following ? "btn-following" : ""}`}
+      onClick={handleFollow}
     >
-      { following ? "Following" : "Follow" }
+      {following ? "Following" : "Follow"}
     </button>
   );
 };

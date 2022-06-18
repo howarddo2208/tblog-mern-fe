@@ -19,10 +19,10 @@ const Posts = ({ cover }) => {
 
   return (
     <>
-      <ErrorModal error={ error } onClose={ clearError } />
-      { loadedPosts && (
-        <PostList isLoading={ isLoading } items={ loadedPosts } cover={ cover } />
-      ) }
+      <ErrorModal error={error} onClose={clearError} />
+      {loadedPosts && (
+        <PostList isLoading={isLoading} items={loadedPosts} cover={cover} />
+      )}
     </>
   );
 };

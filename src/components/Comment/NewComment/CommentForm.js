@@ -8,7 +8,7 @@ const CommentForm = ({
   hasCancelButton = false,
   initialText = "",
   handleCancel,
-  avatar
+  avatar,
 }) => {
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState(initialText);
@@ -29,8 +29,8 @@ const CommentForm = ({
   };
 
   return (
-    <div className={ `comment-form ${submitLabel === "Reply" && "reply-form"}` }>
-      { avatar && (
+    <div className={`comment-form ${submitLabel === "Reply" && "reply-form"}`}>
+      {avatar && (
         <Avatar
           src={
             currentUser && currentUser.avatar
@@ -38,30 +38,30 @@ const CommentForm = ({
               : DEFAULT_COMMENT_AVATAR
           }
         />
-      ) }
-      <form onSubmit={ commentSubmitHandle }>
+      )}
+      <form onSubmit={commentSubmitHandle}>
         <input
           type="textarea"
           placeholder="Add to the discussion"
           name="comment"
-          value={ text }
-          onChange={ inputHandler }
+          value={text}
+          onChange={inputHandler}
         />
         <div className="comments__btn">
-          { text && (
-            <button className="btn btn--comment" disabled={ isTextAreaDisabled }>
-              { submitLabel }
+          {text && (
+            <button className="btn btn--comment" disabled={isTextAreaDisabled}>
+              {submitLabel}
             </button>
-          ) }
-          { hasCancelButton && (
+          )}
+          {hasCancelButton && (
             <button
               className="btn btn--dismiss"
               type="button"
-              onClick={ handleCancel }
+              onClick={handleCancel}
             >
               Dismiss
             </button>
-          ) }
+          )}
         </div>
       </form>
     </div>
@@ -69,4 +69,3 @@ const CommentForm = ({
 };
 
 export default CommentForm;
-

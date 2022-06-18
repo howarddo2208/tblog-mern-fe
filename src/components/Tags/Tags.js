@@ -22,11 +22,10 @@ const Tags = () => {
   }, [sendReq]);
   return (
     <Layout>
-      <ErrorModal error={ error } onClose={ clearError } />
-      <TagList isLoading={ isLoading } tags={ loadedTags } />
+      <ErrorModal error={error} onClose={clearError} />
+      <TagList isLoading={isLoading} tags={loadedTags} />
     </Layout>
   );
 };
 
 export default Tags;
-

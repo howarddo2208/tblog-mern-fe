@@ -7,16 +7,16 @@ const SyntaxHighlight = {
     const match = /language-(\w+)/.exec(className || "");
     return !inline && match ? (
       <SyntaxHighlighter
-        style={ oneDark }
-        language={ match[1] }
+        style={oneDark}
+        language={match[1]}
         PreTag="div"
         className="codeStyle"
-        { ...props }
+        {...props}
       />
     ) : (
-      <code className={ className } { ...props } />
+      <code className={className} {...props} />
     );
-  }
+  },
 };
 
 export default SyntaxHighlight;

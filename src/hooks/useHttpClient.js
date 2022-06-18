@@ -27,7 +27,7 @@ export const useHttpClient = () => {
           body,
           headers,
           signal: httpAbortCtrl.signal, //assign abortCtrl to a req
-          credentials
+          credentials,
         });
         const responseData = await response.json(); //parse the response body
 

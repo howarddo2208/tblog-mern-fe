@@ -6,12 +6,12 @@ import { renderRepeatedSkeletons } from "../../utils";
 export const SkeletonTags = () => {
   return (
     <>
-      { renderRepeatedSkeletons(
+      {renderRepeatedSkeletons(
         <div className="skeleton__tag-item">
-          { renderRepeatedSkeletons(<SkeletonElement type="text" />, 4) }
+          {renderRepeatedSkeletons(<SkeletonElement type="text" />, 4)}
         </div>,
         10
-      ) }
+      )}
       <Shimmer />
     </>
   );

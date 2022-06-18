@@ -20,31 +20,31 @@ const AppProviders = ({ children }) => {
 
     if (socket.current && userId) {
       socket.current.emit("join", {
-        userId: userId
+        userId: userId,
       });
     }
   }, [socket, userId]);
 
   return (
     <AuthContext.Provider
-      value={ {
+      value={{
         isLoggedIn: !!token,
         login,
         logout,
         currentUser: user,
-        setUser
-      } }
+        setUser,
+      }}
     >
       <SearchContext.Provider
-        value={ {
+        value={{
           searchValue,
           setSearchValue,
           searchResults,
-          setSearchResults
-        } }
+          setSearchResults,
+        }}
       >
-        <SocketContext.Provider value={ { socket } }>
-          { children }
+        <SocketContext.Provider value={{ socket }}>
+          {children}
         </SocketContext.Provider>
       </SearchContext.Provider>
     </AuthContext.Provider>
@@ -52,4 +52,3 @@ const AppProviders = ({ children }) => {
 };
 
 export default AppProviders;
-

@@ -13,11 +13,11 @@ const MainNavigation = (props) => {
   return (
     <>
       <MainHeader>
-        <Nav onSearchIconClick={ onSearchIconClick }>
-          <SearchBar showSearchOnMobile={ false } />
+        <Nav onSearchIconClick={onSearchIconClick}>
+          <SearchBar showSearchOnMobile={false} />
         </Nav>
         <div className="search-mobile-container">
-          <SearchBar showSearchOnMobile={ showSearchOnMobile } />
+          <SearchBar showSearchOnMobile={showSearchOnMobile} />
         </div>
       </MainHeader>
     </>

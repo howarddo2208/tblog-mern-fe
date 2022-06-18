@@ -9,7 +9,7 @@ const TwitterLogin = () => {
     );
   };
   return (
-    <button className="btn btn__social btn--tw" onClick={ handleClick }>
+    <button className="btn btn__social btn--tw" onClick={handleClick}>
       <i>
         <AiOutlineTwitter />
       </i>

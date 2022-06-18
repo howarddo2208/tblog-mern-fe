@@ -31,31 +31,31 @@ const Comments = ({ postAuthor, postId }) => {
 
   return (
     <CommentContext.Provider
-      value={ {
+      value={{
         comments,
         setComments,
         postId,
         postAuthor,
         activeComment,
-        setActiveComment
-      } }
+        setActiveComment,
+      }}
     >
-      <ErrorModal error={ error } onClose={ clearError } />
+      <ErrorModal error={error} onClose={clearError} />
       <div className="comments">
-        <h2>{ `Discussion (${
+        <h2>{`Discussion (${
           comments ? `${comments.length} comments` : 0
-        })` }</h2>
+        })`}</h2>
         <NewComment />
-        { rootComments &&
+        {rootComments &&
           rootComments.map((comment) => (
             <Comment
-              key={ comment._id }
-              comment={ comment }
-              replies={ getReplies(comments, comment._id) }
-              parentId={ comment.parentId }
-              currentUserId={ currentUserId }
+              key={comment._id}
+              comment={comment}
+              replies={getReplies(comments, comment._id)}
+              parentId={comment.parentId}
+              currentUserId={currentUserId}
             />
-          )) }
+          ))}
       </div>
     </CommentContext.Provider>
   );

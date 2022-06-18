@@ -14,7 +14,7 @@ const Input = (props) => {
     errorMessage,
     isValid,
     value,
-    touched
+    touched,
   } = props;
 
   const element =
@@ -22,37 +22,37 @@ const Input = (props) => {
       <>
         <input
           className="form__input"
-          type={ type }
-          name={ name }
-          id={ id }
-          key={ label }
-          onChange={ handleChange }
+          type={type}
+          name={name}
+          id={id}
+          key={label}
+          onChange={handleChange}
           // onBlur={handleBlur}
-          value={ value }
+          value={value}
         />
       </>
     ) : (
       <textarea
-        label={ label }
-        id={ id }
-        type={ type }
-        name={ name }
+        label={label}
+        id={id}
+        type={type}
+        name={name}
         className="form__textarea"
-        rows={ rows || 3 }
-        onChange={ handleChange }
+        rows={rows || 3}
+        onChange={handleChange}
         // onBlur={handleBlur}
-        value={ value }
+        value={value}
       />
     );
   return (
     <div className="form__group">
-      <label htmlFor={ name } className="form__label">
-        { label }
+      <label htmlFor={name} className="form__label">
+        {label}
       </label>
-      { element }
-      { !touched && errorMessage && !isValid && (
-        <span className="input__error">{ errorMessage }</span>
-      ) }
+      {element}
+      {!touched && errorMessage && !isValid && (
+        <span className="input__error">{errorMessage}</span>
+      )}
     </div>
   );
 };

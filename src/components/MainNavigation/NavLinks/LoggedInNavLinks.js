@@ -1,9 +1,9 @@
-import { RiNotificationLine } from '@react-icons/all-files/ri/RiNotificationLine'
-import React, { useCallback, useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
-import Avatar from '../../Avatar/Avatar'
-import { Dropdown } from '../Dropdown'
+import { RiNotificationLine } from "@react-icons/all-files/ri/RiNotificationLine";
+import React, { useCallback, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import Avatar from "../../Avatar/Avatar";
+import { Dropdown } from "../Dropdown";
 
 export const LoggedInNavLinks = ({
   unreadNotifications,
@@ -11,23 +11,23 @@ export const LoggedInNavLinks = ({
   currentUser,
   logout,
 }) => {
-  const history = useHistory()
-  const handleRedirect = useCallback((url) => history.push(url), [history])
-  const [showMenu, setShowMenu] = useState(false)
+  const history = useHistory();
+  const handleRedirect = useCallback((url) => history.push(url), [history]);
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleClick = () => {
-    setUnreadNotifications([])
-    handleRedirect(`/users/${currentUser && currentUser.userId}/notifications`)
-  }
+    setUnreadNotifications([]);
+    handleRedirect(`/users/${currentUser && currentUser.userId}/notifications`);
+  };
 
   const handleDropdown = () => {
-    setShowMenu((showMenu) => !showMenu)
-  }
+    setShowMenu((showMenu) => !showMenu);
+  };
 
   const handleLogout = () => {
-    setShowMenu(false)
-    logout()
-  }
+    setShowMenu(false);
+    logout();
+  };
   return (
     <React.Fragment>
       <li className="list__item list__item--mobile item--create">
@@ -70,6 +70,5 @@ export const LoggedInNavLinks = ({
         currentUser={currentUser}
       />
     </React.Fragment>
-  )
-}
-
+  );
+};

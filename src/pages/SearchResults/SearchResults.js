@@ -13,12 +13,11 @@ const SearchResults = (props) => {
   return (
     <Layout>
       <div className="container-posts container-search-results">
-        <h2 className="results__heading">Search results for "{ searchValue }"</h2>
-        <PostList cover={ false } items={ searchResults } isLoading={ isLoading } />
+        <h2 className="results__heading">Search results for "{searchValue}"</h2>
+        <PostList cover={false} items={searchResults} isLoading={isLoading} />
       </div>
     </Layout>
   );
 };
 
 export default SearchResults;
-

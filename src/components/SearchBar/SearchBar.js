@@ -25,10 +25,10 @@ const SearchBar = (props) => {
         props.showSearchOnMobile ? "search-bar--mobile " : "search-bar "
       }
       key="random1"
-      value={ value }
-      placeholder={ "Search..." }
-      onChange={ onInputChange }
-      onKeyDown={ onEnterKey }
+      value={value}
+      placeholder={"Search..."}
+      onChange={onInputChange}
+      onKeyDown={onEnterKey}
     />
   );
 };

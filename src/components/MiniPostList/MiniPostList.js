@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const MiniPostList = (props) => {
   if (props.posts?.length === 0) {
@@ -13,9 +13,9 @@ const MiniPostList = (props) => {
         <ul>
           {props.posts &&
             props.posts.map((post, i) => (
-              <div className='post__item' key={post.id}>
+              <div className="post__item" key={post.id}>
                 <Link
-                  className='title-link'
+                  className="title-link"
                   to={`/posts/${post.titleURL}/${post.id}`}
                 >
                   {post.title}

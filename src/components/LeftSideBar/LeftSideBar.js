@@ -24,16 +24,16 @@ const LeftSideBar = () => {
                 <span>Home</span>
               </NavLink>
             </li>
-            { currentUserId && (
+            {currentUserId && (
               <li className="list__item hvr-bg-lt">
-                <NavLink to={ `/users/${currentUserId}/readinglist` } exact>
+                <NavLink to={`/users/${currentUserId}/readinglist`} exact>
                   <i>
                     <FcReading />
                   </i>
                   Reading List
                 </NavLink>
               </li>
-            ) }
+            )}
             <li className="list__item hvr-bg-lt">
               <NavLink to="/tags" exact>
                 <i>
@@ -52,18 +52,18 @@ const LeftSideBar = () => {
             </li>
           </ul>
           <div className="sidebar-tags">
-            { currentUser && currentUser.tags && currentUser.tags.length > 0 && (
+            {currentUser && currentUser.tags && currentUser.tags.length > 0 && (
               <>
                 <h3>My Tags</h3>
                 <ul className="sidebar-tags-list">
-                  { currentUser.tags.map((tag, i) => (
-                    <li key={ i } className="list__item hvr-bg-lt">
-                      <Link to={ `/tags/${tag.name}` }>#{ tag.name }</Link>
+                  {currentUser.tags.map((tag, i) => (
+                    <li key={i} className="list__item hvr-bg-lt">
+                      <Link to={`/tags/${tag.name}`}>#{tag.name}</Link>
                     </li>
-                  )) }
+                  ))}
                 </ul>
               </>
-            ) }
+            )}
           </div>
         </React.Fragment>
       </div>
@@ -72,4 +72,3 @@ const LeftSideBar = () => {
 };
 
 export default LeftSideBar;
-

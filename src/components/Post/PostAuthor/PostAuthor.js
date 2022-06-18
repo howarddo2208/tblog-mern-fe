@@ -11,27 +11,27 @@ const PostAuthor = ({ setShowModal, author }) => {
   return (
     <div className="author flow-content">
       <div className="author__content">
-        <Avatar link={ `/users/${author.id}` } src={ author.avatar } />
+        <Avatar link={`/users/${author.id}`} src={author.avatar} />
         <div className="author__details">
-          <h3>{ author.name }</h3>
+          <h3>{author.name}</h3>
         </div>
       </div>
-      { currentUserId === author.id ? (
+      {currentUserId === author.id ? (
         <Link
           className="btn btn--profile-cta btn--profile-edit"
-          to={ `/users/${author.id}/edit` }
+          to={`/users/${author.id}/edit`}
         >
           Edit Profile
         </Link>
       ) : (
         <FollowUser
-          followId={ author.id }
-          setShowModal={ setShowModal }
-          followers={ author.followers }
-          userToFollow={ author }
+          followId={author.id}
+          setShowModal={setShowModal}
+          followers={author.followers}
+          userToFollow={author}
         />
-      ) }
-      <AuthorInfo author={ author } />
+      )}
+      <AuthorInfo author={author} />
     </div>
   );
 };

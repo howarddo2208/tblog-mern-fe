@@ -7,20 +7,19 @@ const Layout = ({ children, isAuth, suggestions }) => {
   return (
     <>
       <MainNavigation />
-      { !isAuth ? (
+      {!isAuth ? (
         <div className="container-layout">
           <div className="container-sidebar">
             <LeftSideBar />
           </div>
-          { children }
-          { suggestions && <RightSideBar tags={ [] } isLoading={ false } /> }
+          {children}
+          {suggestions && <RightSideBar tags={[]} isLoading={false} />}
         </div>
       ) : (
         children
-      ) }
+      )}
     </>
   );
 };
 
 export default Layout;
-
