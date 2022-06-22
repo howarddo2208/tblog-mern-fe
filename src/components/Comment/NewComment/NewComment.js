@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { toast } from 'react-toastify'
 import CommentForm from './CommentForm'
 import useHttpClient from '../../../hooks/useHttpClient'
-import { classifyToxicity } from '../../../utils/toxicClassify'
 import ErrorModal from '../../Modal/ErrorModal'
 import { CommentContext } from '../Comments'
 import { useAuth, useSocket } from '../../../stateManagements'
@@ -15,11 +14,6 @@ export const NewComment = ({ replyId }) => {
   const { sendReq, error, clearError } = useHttpClient()
   const currentUserId = currentUser && currentUser.userId
   const createComment = async (text, parentId = null) => {
-    const predictions = await classifyToxicity(text)
-    if (predictions[6].results[0].match) {
-      toast.error('Your comment is toxic!')
-      return
-    }
     const reqData = {
       parentPost: postId,
       body: text,

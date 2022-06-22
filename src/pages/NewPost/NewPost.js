@@ -9,7 +9,6 @@ import { useHttpClient } from '../../hooks/useHttpClient'
 import { useAuth } from '../../stateManagements'
 import { appendData, renderRepeatedSkeletons } from '../../utils'
 import { newPostForm } from '../../utils/formConfig'
-import { classifyToxicity } from '../../utils/toxicClassify'
 
 const NewPost = () => {
   const auth = useAuth()
@@ -31,13 +30,6 @@ const NewPost = () => {
     const formData = appendData(formValues)
     const body = formData.get('body')
     const title = formData.get('title')
-
-    const predictions = await classifyToxicity(`${title} ${body}`)
-    if (predictions[6].results[0].match) {
-      toast.error('This post contains toxic content!')
-      setSubmitting(false)
-      return
-    }
 
     try {
       await sendReq(
@@ -61,7 +53,7 @@ const NewPost = () => {
       ) : (
         <>
           <form className="form form__create">
-            <h2>Create a new post</h2>
+            <h1>Create a new post</h1>
             {formInputs}
             {submitting ? (
               <button className="btn btn--primary" disabled>

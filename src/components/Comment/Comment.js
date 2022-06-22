@@ -1,20 +1,35 @@
-import { useContext, useState } from "react";
-import React from "react";
-import { CommentContext } from "./Comments";
-import { DeleteComment } from "./DeleteComment/DeleteComment";
-import { EditComment } from "./EditComment/EditComment";
-import { EditCommentButton } from "./EditComment/EditCommentButton";
-import { LikeComment } from "./LikeComment/LikeComment";
-import { NewComment } from "./NewComment/NewComment";
-import { ReplyButton } from "./ReplyButton";
-import { formatDate, isEditing, isReplying } from "../../utils";
-import Avatar from "../Avatar/Avatar";
-import AuthModal from "../Modal/AuthModal";
+import { useContext, useEffect, useMemo, useState } from 'react'
+import React from 'react'
+import { CommentContext } from './Comments'
+import { DeleteComment } from './DeleteComment/DeleteComment'
+import { EditComment } from './EditComment/EditComment'
+import { EditCommentButton } from './EditComment/EditCommentButton'
+import { LikeComment } from './LikeComment/LikeComment'
+import { NewComment } from './NewComment/NewComment'
+import { ReplyButton } from './ReplyButton'
+import { formatDate, isEditing, isReplying } from '../../utils'
+import Avatar from '../Avatar/Avatar'
+import AuthModal from '../Modal/AuthModal'
+import { useAIModels } from '../../stateManagements'
 
 const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
-  const { activeComment } = useContext(CommentContext);
-  const [showModal, setShowModal] = useState(false);
-  const createdAt = formatDate(comment.date);
+  const { activeComment } = useContext(CommentContext)
+  const [showModal, setShowModal] = useState(false)
+  const createdAt = formatDate(comment.date)
+  const { toxicity } = useAIModels()
+  const classifyComment = async () => {
+    const predictions = await toxicity.classify(comment.body)
+    if (predictions[6].results[0].match) {
+      setToxic(true)
+    }
+  }
+  const [isToxic, setToxic] = useState(false)
+  useEffect(() => {
+    if (toxicity) {
+      classifyComment()
+    }
+  }, [comment.body, toxicity])
+
   return (
     <>
       <div className="container-comment">
@@ -31,7 +46,11 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
             </div>
 
             {!isEditing(activeComment, comment.id) ? (
-              <div className="comment__body">{comment.body}</div>
+              isToxic ? (
+                <div>this comment is toxic</div>
+              ) : (
+                <div className="comment__body">{comment.body}</div>
+              )
             ) : (
               <EditComment
                 commentId={comment.id}
@@ -73,7 +92,7 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
       {isReplying(activeComment, comment.id) && (
         <NewComment replyId={parentId ? parentId : comment.id} />
       )}
-      <div className="replies" style={{ marginLeft: "5rem" }}>
+      <div className="replies" style={{ marginLeft: '5rem' }}>
         {replies.length > 0 &&
           replies.map((reply) => (
             <Comment
@@ -86,7 +105,8 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
           ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Comment;
+export default Comment
+
