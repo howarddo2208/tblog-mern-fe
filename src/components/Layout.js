@@ -1,25 +1,26 @@
-import React from "react";
-import LeftSideBar from "./LeftSideBar/LeftSideBar";
-import MainNavigation from "./MainNavigation/MainNavigation";
-import RightSideBar from "./RightSideBar/RightSideBar";
+import React from 'react'
+import { useAuth } from '../stateManagements'
+import LeftSideBar from './LeftSideBar/LeftSideBar'
+import MainNavigation from './MainNavigation/MainNavigation'
+import RightSideBar from './RightSideBar/RightSideBar'
 
-const Layout = ({ children, isAuth, suggestions }) => {
+const Layout = ({ children }) => {
+  const { isLoggedIn } = useAuth()
   return (
     <>
       <MainNavigation />
-      {!isAuth ? (
-        <div className="container-layout">
-          <div className="container-sidebar">
-            <LeftSideBar />
-          </div>
-          {children}
-          {suggestions && <RightSideBar tags={[]} isLoading={false} />}
+      <div className="container-layout">
+        <div className="container-sidebar">
+          <LeftSideBar />
         </div>
-      ) : (
-        children
-      )}
+        {children}
+        {/* {isLoggedIn && suggestions && (
+          <RightSideBar tags={[]} isLoading={false} />
+        )} */}
+      </div>
     </>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
+

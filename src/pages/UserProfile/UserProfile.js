@@ -39,7 +39,7 @@ const UserProfile = () => {
   }, [sendReq, userId])
 
   return (
-    <Layout>
+    <>
       <ErrorModal error={error} onClose={clearError} />
       <AuthModal onClose={() => setShowModal(false)} show={showModal} />
       <div className="container-layout container-user">
@@ -84,7 +84,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   )
 }
 

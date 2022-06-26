@@ -36,7 +36,7 @@ const Notifications = ({ user, userFollowStats }) => {
   // }, [history, currentUser, userId]);
 
   return (
-    <Layout>
+    <>
       <ErrorModal error={error} onClose={clearError} />
       <div className="container container-notif-page">
         {isLoading ? (
@@ -60,7 +60,7 @@ const Notifications = ({ user, userFollowStats }) => {
           </>
         )}
       </div>
-    </Layout>
+    </>
   )
 }
 

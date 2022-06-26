@@ -15,78 +15,86 @@ import Tag from './pages/Tag/Tag'
 import UserProfile from './pages/UserProfile/UserProfile'
 import { useAuth } from './stateManagements'
 import Auth from './pages/Auth/Auth'
+import Layout from './components/Layout'
 
 const MainRouter = ({ token }) => {
   const { isLoggedIn } = useAuth()
   return (
     <Router>
-      {isLoggedIn ? (
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/users/:userId" exact>
-            <UserProfile />
-          </Route>
-          <Route path="/users/:userId/edit" exact>
-            <EditUserProfile />
-          </Route>
-          <Route path="/users/:userId/readinglist" exact>
-            <ReadingList />
-          </Route>
-          <Route path="/users/:userId/notifications" exact>
-            <Notifications />
-          </Route>
-          <Route path="/tags" exact>
-            <Tags />
-          </Route>
-          <Route path="/tags/:tagName" exact>
-            <Tag />
-          </Route>
-          <Route path="/search/" exact>
-            <SearchResults />
-          </Route>
-          <Route path="/posts/new" exact>
-            <NewPost />
-          </Route>
-          <Route path="/posts/:titleURL/:postId" exact>
-            <Post />
-          </Route>
-          <Route path="/posts/:titleURL/:postId/edit" exact>
-            <EditPost />
-          </Route>
-          <Route path="/chat" exact>
-            <Chat />
-          </Route>
-        </Switch>
-      ) : (
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/auth/new-user" exact>
-            <Auth newUser={true} />
-          </Route>
-          <Route path="/auth" exact>
-            <Auth newUser={false} />
-          </Route>
-          <Route path="/tags" exact>
-            <Tags />
-          </Route>
-          <Route path="/tags/:tagName" exact>
-            <Tag />
-          </Route>
-          <Route path="/search/" exact>
-            <SearchResults />
-          </Route>
-          <Route path="/users/:userId" exact>
-            <UserProfile />
-          </Route>
-          <Route path="/posts/:titleURL/:postId" exact>
-            <Post />
-          </Route>
-        </Switch>
-      )}
+      <Layout>
+        {isLoggedIn ? (
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/users/:userId" exact>
+              <UserProfile />
+            </Route>
+            <Route path="/users/:userId/edit" exact>
+              <EditUserProfile />
+            </Route>
+            <Route path="/users/:userId/readinglist" exact>
+              <ReadingList />
+            </Route>
+            <Route path="/users/:userId/notifications" exact>
+              <Notifications />
+            </Route>
+            <Route path="/tags" exact>
+              <Tags />
+            </Route>
+            <Route path="/tags/:tagName" exact>
+              <Tag />
+            </Route>
+            <Route path="/search/" exact>
+              <SearchResults />
+            </Route>
+            <Route path="/posts/new" exact>
+              <NewPost />
+            </Route>
+            <Route path="/posts/:titleURL/:postId" exact>
+              <Post />
+            </Route>
+            <Route path="/posts/:titleURL/:postId/edit" exact>
+              <EditPost />
+            </Route>
+            <Route path="/chat" exact>
+              <Chat />
+            </Route>
+            <Route path="/auth" exact>
+              <Auth newUser={false} />
+            </Route>
+            <Redirect to="/auth" />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/auth/new-user" exact>
+              <Auth newUser={true} />
+            </Route>
+            <Route path="/auth" exact>
+              <Auth newUser={false} />
+            </Route>
+            <Route path="/tags" exact>
+              <Tags />
+            </Route>
+            <Route path="/tags/:tagName" exact>
+              <Tag />
+            </Route>
+            <Route path="/search/" exact>
+              <SearchResults />
+            </Route>
+            <Route path="/users/:userId" exact>
+              <UserProfile />
+            </Route>
+            <Route path="/posts/:titleURL/:postId" exact>
+              <Post />
+            </Route>
+            <Redirect to="/auth" />
+          </Switch>
+        )}
+      </Layout>
     </Router>
   )
 }

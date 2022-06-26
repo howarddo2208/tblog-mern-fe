@@ -28,7 +28,7 @@ const ReadingList = () => {
     fetchPosts()
   }, [sendReq, userId, currentUser])
   return (
-    <Layout>
+    <>
       <ErrorModal error={error} onClose={clearError} />
       <div className="container-posts reading-list">
         <h2 className="reading-list__heading">
@@ -41,7 +41,7 @@ const ReadingList = () => {
           <p>Your reading list is empty!</p>
         )}
       </div>
-    </Layout>
+    </>
   )
 }
 

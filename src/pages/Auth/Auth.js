@@ -61,7 +61,7 @@ const Auth = ({ newUser }) => {
   }
 
   return (
-    <Layout isAuth>
+    <>
       <ErrorModal error={error} onClose={clearError} />
       <div className="container container-auth">
         <Welcome />
@@ -91,7 +91,7 @@ const Auth = ({ newUser }) => {
           </div>
         </form>
       </div>
-    </Layout>
+    </>
   )
 }
 

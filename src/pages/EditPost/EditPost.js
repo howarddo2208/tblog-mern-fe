@@ -62,7 +62,7 @@ const EditPost = () => {
     <>
       <ErrorModal error={error} onClose={clearError} />
 
-      <Layout>
+      <>
         {isLoading ? (
           <SkeletonForm />
         ) : (
@@ -79,7 +79,7 @@ const EditPost = () => {
             </button>
           </form>
         )}
-      </Layout>
+      </>
     </>
   )
 }

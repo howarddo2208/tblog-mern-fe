@@ -62,7 +62,7 @@ const EditUserProfile = () => {
   }
 
   return (
-    <Layout>
+    <>
       <ErrorModal error={error} onClose={clearError} />
       <div className="container-edit-page">
         {isLoading ? (
@@ -77,7 +77,7 @@ const EditUserProfile = () => {
           </form>
         )}
       </div>
-    </Layout>
+    </>
   )
 }
 
