@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { useAuth } from '../stateManagements'
 
 export const useHttpClient = () => {

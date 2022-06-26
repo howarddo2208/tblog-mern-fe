@@ -22,25 +22,24 @@ module.exports = {
   },
   plugins: [
     'import', // eslint-plugin-import plugin. https://www.npmjs.com/package/eslint-plugin-import
+    'unused-imports',
+    'eslint-plugin-react',
   ],
   root: true, // For configuration cascading.
   rules: {
-    'testing-library/render-result-naming-convention': 'off',
-    'react/no-unescaped-entities': 'off',
-    'react/prop-types': 'off',
-    'no-empty': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'eol-last': 'error',
-    indent: ['error', 2],
-    'no-console': 'warn',
-    'no-duplicate-imports': 'warn',
-    'no-unused-vars': 'warn',
-    'react/jsx-filename-extension': [
-      'error',
+    'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
       {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
       },
     ],
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
   },
   settings: {
     react: {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Layout from '../../components/Layout'
 import AuthModal from '../../components/Modal/AuthModal'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import PostAuthor from '../../components/Post/PostAuthor/PostAuthor'

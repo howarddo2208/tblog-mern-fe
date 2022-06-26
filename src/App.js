@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useAuth, useAIModels, useSocket } from './stateManagements'
 import { useEffect } from 'react'
 import { io } from 'socket.io-client'
-import Layout from './components/Layout'
 
 const App = () => {
   const { socket, setSocket } = useSocket()

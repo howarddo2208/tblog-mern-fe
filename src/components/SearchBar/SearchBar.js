@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useSearch } from '../../stateManagements'
 

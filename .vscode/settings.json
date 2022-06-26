@@ -1,5 +1,5 @@
 {
-	"workbench.colorCustomizations": {
+  "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#217b6f",
     "activityBar.activeBorder": "#5b1b65",
     "activityBar.background": "#217b6f",
@@ -18,6 +18,9 @@
     "titleBar.inactiveBackground": "#16534b99",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-	"peacock.color": "#16534b",
-	"editor.formatOnSave": true,
+  "peacock.color": "#16534b",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

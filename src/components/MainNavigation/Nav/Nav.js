@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaDev } from '@react-icons/all-files/fa/FaDev'
 import NavLinks from '../NavLinks/NavLinks'
 import './Nav.css'

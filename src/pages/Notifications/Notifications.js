@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Notification from '../../components/Notification/Notification'
 import { useHttpClient } from '../../hooks/useHttpClient'
 import './Notifications.css'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import SkeletonPostList from '../../components/Skeleton/SkeletonPostList'
-import Layout from '../../components/Layout'
 import { useAuth } from '../../stateManagements'
 
 const Notifications = ({ user, userFollowStats }) => {

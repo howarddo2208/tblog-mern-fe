@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Layout from '../../components/Layout'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import PostList from '../../components/PostList/PostList'
 import { useHttpClient } from '../../hooks/useHttpClient'

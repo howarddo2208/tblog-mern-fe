@@ -1,5 +1,5 @@
 import { GiUnicorn } from '@react-icons/all-files/gi/GiUnicorn'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useAuth } from '../../../stateManagements'
 
 export const UnicornPost = ({

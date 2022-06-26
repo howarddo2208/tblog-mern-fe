@@ -2,7 +2,6 @@ import React from 'react'
 import { useAuth } from '../stateManagements'
 import LeftSideBar from './LeftSideBar/LeftSideBar'
 import MainNavigation from './MainNavigation/MainNavigation'
-import RightSideBar from './RightSideBar/RightSideBar'
 
 const Layout = ({ children }) => {
   const { isLoggedIn } = useAuth()

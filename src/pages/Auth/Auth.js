@@ -1,7 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import Welcome from '../../components/Auth/Welcome'
-import Layout from '../../components/Layout'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import useForm from '../../hooks/useForm'
 import { useHttpClient } from '../../hooks/useHttpClient'

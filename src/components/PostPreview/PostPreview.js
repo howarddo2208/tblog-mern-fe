@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { AspectRatio } from 'react-aspect-ratio'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../stateManagements'

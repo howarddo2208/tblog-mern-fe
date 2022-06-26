@@ -3,7 +3,6 @@ import TagList from './TagList'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import { useHttpClient } from '../../hooks/useHttpClient'
 import './Tags.css'
-import Layout from '../Layout'
 
 const Tags = () => {
   const [loadedTags, setLoadedTags] = useState([])

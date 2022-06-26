@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Layout from '../../components/Layout'
+import React, { useState } from 'react'
 import Posts from '../../components/Post/Posts'
 import useHttpClient from '../../hooks/useHttpClient'
 

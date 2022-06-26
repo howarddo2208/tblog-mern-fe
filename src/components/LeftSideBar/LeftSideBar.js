@@ -1,7 +1,7 @@
 import { FaTags } from '@react-icons/all-files/fa/FaTags'
 import { FcHome } from '@react-icons/all-files/fc/FcHome'
 import { FcReading } from '@react-icons/all-files/fc/FcReading'
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useAuth } from '../../stateManagements'
 import './LeftSideBar.css'

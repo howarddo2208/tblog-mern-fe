@@ -1,5 +1,5 @@
 import { FiSearch } from '@react-icons/all-files/fi/FiSearch'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useAuth } from '../../../stateManagements'
 import { GuestNavLinks } from './GuestNavLinks'
 import { LoggedInNavLinks } from './LoggedInNavLinks'

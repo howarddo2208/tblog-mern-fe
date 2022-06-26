@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import Layout from '../../components/Layout'
+import React from 'react'
 import PostList from '../../components/PostList/PostList'
 import useHttpClient from '../../hooks/useHttpClient'
 import { useSearch } from '../../stateManagements'

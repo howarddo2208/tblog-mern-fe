@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import Comment from './Comment'
 import { NewComment } from './NewComment/NewComment'
 import { useHttpClient } from '../../hooks/useHttpClient'

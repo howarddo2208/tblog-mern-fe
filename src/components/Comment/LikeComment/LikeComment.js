@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { LikeCommentButton } from './LikeCommentButton'
 import useHttpClient from '../../../hooks/useHttpClient'
 import { checkInArray } from '../../../utils'

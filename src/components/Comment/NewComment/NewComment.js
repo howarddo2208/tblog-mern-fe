@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { toast } from 'react-toastify'
 import CommentForm from './CommentForm'
 import useHttpClient from '../../../hooks/useHttpClient'
 import ErrorModal from '../../Modal/ErrorModal'
