@@ -1,6 +1,6 @@
 import { GiUnicorn } from '@react-icons/all-files/gi/GiUnicorn'
 import React from 'react'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 
 export const UnicornPost = ({
   unicorns,

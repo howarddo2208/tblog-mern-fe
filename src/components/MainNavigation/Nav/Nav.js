@@ -5,7 +5,7 @@ import './Nav.css'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import { useHttpClient } from '../../../hooks/useHttpClient'
 import { NavLink } from 'react-router-dom'
-import { useAuth, useSocket } from '../../../stateManagements'
+import { useAuth, useSocket } from '../../../state'
 
 const Nav = ({ children, onSearchIconClick }) => {
   const { currentUser } = useAuth()

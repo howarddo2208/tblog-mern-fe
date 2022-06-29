@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import useHttpClient from '../../hooks/useHttpClient'
-import { useAuth } from '../../stateManagements'
+import { useAuth } from '../../state'
 import { checkInArray } from '../../utils'
 
 export const FollowTag = ({ followers, tagId, setShowModal }) => {

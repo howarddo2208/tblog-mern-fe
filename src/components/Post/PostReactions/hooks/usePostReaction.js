@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import useHttpClient from '../../../../hooks/useHttpClient'
-import { useAuth, useSocket } from '../../../../stateManagements'
+import { useAuth, useSocket } from '../../../../state'
 import { checkInArray } from '../../../../utils'
 
 const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
@@ -27,7 +27,9 @@ const usePostReaction = (likes, unicorns, bookmarks, id, author) => {
           Authorization: `Bearer ${currentUser.token}`,
         }
       )
-    } catch (err) {}
+    } catch (err) {
+      console.log('err', err)
+    }
   }
 
   const updateReactionArr = (arr, effect) => {

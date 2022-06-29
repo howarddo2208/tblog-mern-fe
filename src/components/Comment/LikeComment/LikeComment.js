@@ -3,7 +3,7 @@ import { LikeCommentButton } from './LikeCommentButton'
 import useHttpClient from '../../../hooks/useHttpClient'
 import { checkInArray } from '../../../utils'
 import ErrorModal from '../../Modal/ErrorModal'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 
 export const LikeComment = ({ likes, commentId, setShowModal }) => {
   const { currentUser } = useAuth()

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AspectRatio } from 'react-aspect-ratio'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../stateManagements'
+import { useAIModels, useAuth } from '../../state'
 import { formatDate } from '../../utils'
 import { AuthorInfo } from '../AuthorInfo/AuthorInfo'
 import Avatar from '../Avatar/Avatar'
@@ -20,7 +20,7 @@ const PostPreview = (props) => {
   return (
     <div className="preview flow-content">
       {cover && (
-        <AspectRatio ratio="16/9" style={{ maxWidth: '400px' }}>
+        <AspectRatio ratio="16/9">
           <PostImage
             link={`/posts/${titleURL}/${id}`}
             src={image}

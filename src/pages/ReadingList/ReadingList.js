@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import PostList from '../../components/PostList/PostList'
 import useHttpClient from '../../hooks/useHttpClient'
-import { useAuth } from '../../stateManagements'
+import { useAuth } from '../../state'
 
 const ReadingList = () => {
   const [loadedPosts, setLoadedPosts] = useState([])

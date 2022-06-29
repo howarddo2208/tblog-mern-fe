@@ -10,7 +10,7 @@ import SkeletonElement from '../../components/Skeleton/SkeletonElement'
 import { UserInfo } from '../../components/User/UserInfo/UserInfo'
 import { UserSideBar } from '../../components/User/UserSideBar/UserSideBar'
 import { useHttpClient } from '../../hooks/useHttpClient'
-import { useAuth } from '../../stateManagements'
+import { useAuth } from '../../state'
 import { renderRepeatedSkeletons } from '../../utils'
 
 const UserProfile = () => {

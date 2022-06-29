@@ -3,7 +3,7 @@ import CommentForm from './CommentForm'
 import useHttpClient from '../../../hooks/useHttpClient'
 import ErrorModal from '../../Modal/ErrorModal'
 import { CommentContext } from '../Comments'
-import { useAuth, useSocket } from '../../../stateManagements'
+import { useAuth, useSocket } from '../../../state'
 
 export const NewComment = ({ replyId }) => {
   const { setActiveComment, setComments, postId, postAuthor } =

@@ -22,15 +22,15 @@
     "react-scripts": "4.0.3",
     "react-simplemde-editor": "^5.0.2",
     "react-syntax-highlighter": "^15.5.0",
-    "react-toastify": "^9.0.3",
+    "react-toastify": "^7.0.4",
     "react-transition-group": "^4.4.2",
     "socket.io-client": "^4.4.1",
     "talkjs": "^0.15.4",
     "zustand": "^4.0.0-rc.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "ESLINT_NO_DEV_ERRORS='true' react-scripts start",
+    "build": "DISABLE_ESLINT_PLUGIN='true' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint -c .eslintrc.js --ext .js,.jsx .",

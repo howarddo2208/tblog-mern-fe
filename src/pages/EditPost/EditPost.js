@@ -4,7 +4,7 @@ import ErrorModal from '../../components/Modal/ErrorModal'
 import SkeletonForm from '../../components/Skeleton/SkeletonForm'
 import useForm from '../../hooks/useForm'
 import { useHttpClient } from '../../hooks/useHttpClient'
-import { useAuth } from '../../stateManagements'
+import { useAuth } from '../../state'
 import { appendData } from '../../utils'
 import { editPostForm, prefillEditPostForm } from '../../utils/formConfig'
 

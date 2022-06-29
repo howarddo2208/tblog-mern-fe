@@ -1,7 +1,7 @@
 import React from 'react'
 import PostList from '../../components/PostList/PostList'
 import useHttpClient from '../../hooks/useHttpClient'
-import { useSearch } from '../../stateManagements'
+import { useSearch } from '../../state'
 
 const SearchResults = (props) => {
   const { searchResults, searchValue } = useSearch()

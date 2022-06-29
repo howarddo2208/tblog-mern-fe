@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import useHttpClient from '../../../hooks/useHttpClient'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 import ErrorModal from '../../Modal/ErrorModal'
 import { CommentContext } from '../Comments'
 import CommentForm from '../NewComment/CommentForm'

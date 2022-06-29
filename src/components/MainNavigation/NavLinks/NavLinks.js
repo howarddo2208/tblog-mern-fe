@@ -1,6 +1,6 @@
 import { FiSearch } from '@react-icons/all-files/fi/FiSearch'
 import React from 'react'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 import { GuestNavLinks } from './GuestNavLinks'
 import { LoggedInNavLinks } from './LoggedInNavLinks'
 

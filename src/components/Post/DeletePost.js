@@ -4,7 +4,7 @@ import {
   useParams,
 } from 'react-router-dom/cjs/react-router-dom.min'
 import useHttpClient from '../../hooks/useHttpClient'
-import { useAuth } from '../../stateManagements'
+import { useAuth } from '../../state'
 import DeletionModal from '../Modal/DeletionModal'
 import ErrorModal from '../Modal/ErrorModal'
 

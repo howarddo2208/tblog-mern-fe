@@ -4,7 +4,7 @@ import { useHttpClient } from '../../hooks/useHttpClient'
 import './Notifications.css'
 import ErrorModal from '../../components/Modal/ErrorModal'
 import SkeletonPostList from '../../components/Skeleton/SkeletonPostList'
-import { useAuth } from '../../stateManagements'
+import { useAuth } from '../../state'
 
 const Notifications = ({ user, userFollowStats }) => {
   const { currentUser } = useAuth()

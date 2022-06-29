@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 import { AuthorInfo } from '../../AuthorInfo/AuthorInfo'
 import Avatar from '../../Avatar/Avatar'
 import { FollowUser } from '../../FollowUser/FollowUser'

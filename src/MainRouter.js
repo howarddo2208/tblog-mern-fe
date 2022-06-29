@@ -13,7 +13,7 @@ import ReadingList from './pages/ReadingList/ReadingList'
 import SearchResults from './pages/SearchResults/SearchResults'
 import Tag from './pages/Tag/Tag'
 import UserProfile from './pages/UserProfile/UserProfile'
-import { useAuth } from './stateManagements'
+import { useAuth } from './state'
 import Auth from './pages/Auth/Auth'
 import Layout from './components/Layout'
 

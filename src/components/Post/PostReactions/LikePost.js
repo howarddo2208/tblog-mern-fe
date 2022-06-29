@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 import { LikeIcon } from '../../Icons/Icons'
 
 export const LikePost = ({ likes, handleReaction, isLiked, setShowModal }) => {

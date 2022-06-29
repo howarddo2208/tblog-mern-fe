@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 import { formatDate } from '../../../utils'
 import Avatar from '../../Avatar/Avatar'
 import Comments from '../../Comment/Comments'

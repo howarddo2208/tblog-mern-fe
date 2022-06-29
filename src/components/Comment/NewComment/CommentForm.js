@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 import Avatar from '../../Avatar/Avatar'
 
 const CommentForm = ({

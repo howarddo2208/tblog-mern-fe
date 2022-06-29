@@ -3,7 +3,7 @@ import { DeleteCommentButton } from './DeleteCommentButton'
 import useHttpClient from '../../../hooks/useHttpClient'
 import ErrorModal from '../../Modal/ErrorModal'
 import { CommentContext } from '../Comments'
-import { useAuth } from '../../../stateManagements'
+import { useAuth } from '../../../state'
 
 export const DeleteComment = ({ commentId, authorId }) => {
   const { currentUser } = useAuth()

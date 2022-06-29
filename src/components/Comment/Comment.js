@@ -10,7 +10,7 @@ import { ReplyButton } from './ReplyButton'
 import { formatDate, isEditing, isReplying } from '../../utils'
 import Avatar from '../Avatar/Avatar'
 import AuthModal from '../Modal/AuthModal'
-import { useAIModels } from '../../stateManagements'
+import { useAIModels } from '../../state'
 
 const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
   const { activeComment } = useContext(CommentContext)

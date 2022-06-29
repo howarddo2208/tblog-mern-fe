@@ -5,7 +5,7 @@ import { useHttpClient } from '../../hooks/useHttpClient'
 import { getReplies } from '../../utils'
 import ErrorModal from '../Modal/ErrorModal'
 import './Comments.css'
-import { useAuth } from '../../stateManagements'
+import { useAuth } from '../../state'
 
 export const CommentContext = createContext()
 

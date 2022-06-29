@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAuth } from '../stateManagements'
+import { useAuth } from '../state'
 import LeftSideBar from './LeftSideBar/LeftSideBar'
 import MainNavigation from './MainNavigation/MainNavigation'
 

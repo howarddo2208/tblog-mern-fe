@@ -1,9 +1,6 @@
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import queryString from 'query-string'
-import '@tensorflow/tfjs'
-import * as nsfwjs from 'nsfwjs'
-import * as toxicity from '@tensorflow-models/toxicity'
 
 export const useAuth = create(
   persist(
@@ -76,13 +73,9 @@ export const useSearch = create(
 )
 
 export const useAIModels = create((set, get) => ({
-  nsfw: null,
-  toxicity: null,
-  loadModel: async () => {
-    const nsfwModel = await nsfwjs.load(`/nsfw/`, { size: 299 })
-    set({ nsfw: nsfwModel })
-    const toxicityModel = await toxicity.load()
-    set({ toxicity: toxicityModel })
-  },
+  nsfwModel: null,
+  toxicityModel: null,
+  setNSFW: (model) => set({ nsfw: model }),
+  setToxicity: (model) => set({ toxicity: model }),
 }))
 

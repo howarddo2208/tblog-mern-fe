@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useSearch } from '../../stateManagements'
+import { useSearch } from '../../state'
 
 const SearchBar = (props) => {
   const search = useSearch((state) => state.search)

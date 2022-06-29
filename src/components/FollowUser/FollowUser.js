@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import useHttpClient from '../../hooks/useHttpClient'
-import { useAuth, useSocket } from '../../stateManagements'
+import { useAuth, useSocket } from '../../state'
 import { checkInArray } from '../../utils'
 import './FollowUser.css'
 
