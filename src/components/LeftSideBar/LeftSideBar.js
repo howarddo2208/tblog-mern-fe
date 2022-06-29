@@ -1,4 +1,5 @@
 import { FaTags } from '@react-icons/all-files/fa/FaTags'
+import { FaFacebookMessenger } from '@react-icons/all-files/fa/FaFacebookMessenger'
 import { FcHome } from '@react-icons/all-files/fc/FcHome'
 import { FcReading } from '@react-icons/all-files/fc/FcReading'
 import React from 'react'
@@ -45,7 +46,7 @@ const LeftSideBar = () => {
             <li className="list__item hvr-bg-lt">
               <NavLink to="/chat" exact>
                 <i>
-                  <FaTags />
+                  <FaFacebookMessenger />
                 </i>
                 Chat
               </NavLink>

@@ -20,6 +20,10 @@ POST PREVIEW
   background: var(--color-white);
 }
 
+.preview__image {
+  position: relative;
+}
+
 .preview__image img {
   width: 100%;
 }

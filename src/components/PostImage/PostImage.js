@@ -2,10 +2,12 @@ import React, { useRef, useEffect, useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { useAIModels } from '../../state'
 import { imageIsExplicit } from '../../utils/detect'
+import ProtectiveImg from '../ProtectiveImg'
 
 export const PostImage = (props) => {
+  console.log('render image')
   const { nsfw } = useAIModels()
-  const imgRef = useRef()
+  const imgRef = useRef(null)
   const [isExplicit, setIsExplicit] = useState(false)
 
   const predict = async () => {
@@ -25,17 +27,33 @@ export const PostImage = (props) => {
     predict()
   }, [nsfw, imgRef])
 
+  const unBlur = () => {
+    if (isExplicit && imgRef.current) {
+      setIsExplicit(false)
+    }
+  }
+
   return (
-    <div className={`preview__image ${props.className}`} style={
-      isExplicit ? { filter: 'blur(20px)', WebkitFilter: 'blur(30px)' } : {}
-    }>
-      {(props.link) ? (
+    <div className={`preview__image ${props.className}`} onClick={unBlur}>
+      {(props.link && !isExplicit) ? (
         <Link to={props.link}>
-          <img crossOrigin='anonymous' src={props.src} alt={props.alt} ref={imgRef} />
+          <img crossOrigin='anonymous' src={props.src} alt={props.alt} ref={imgRef} style={
+            isExplicit ? { filter: 'blur(30px)', WebkitFilter: 'blur(30px)' } : {}
+          } />
         </Link>
       ) : (
-        <img crossOrigin='anonymous' src={props.src} alt={props.alt} ref={imgRef} />
+        <img crossOrigin='anonymous' src={props.src} alt={props.alt} ref={imgRef} style={
+          isExplicit ? { filter: 'blur(30px)', WebkitFilter: 'blur(30px)' } : {}
+        } />
       )}
+
+      {isExplicit && <h1 style={{
+        position: 'absolute', top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}>
+        This content is explicit, click to view
+      </h1>}
     </div>
   )
 }
