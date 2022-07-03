@@ -42,7 +42,7 @@ const Nav = ({ children, onSearchIconClick }) => {
             }
           )
           setUnreadNotifications(responseData.notifications)
-        } catch (err) {}
+        } catch (err) { }
       }
       fetchUnreadNotifications()
     }
@@ -68,7 +68,7 @@ const Nav = ({ children, onSearchIconClick }) => {
       <div className="header__hamburger-menu" onClick={openDrawerHandler}></div>
       <div className="header__logo-search">
         <NavLink to="/" className="header__logo">
-          <FaDev size="4.125rem" />
+          <h2>TBLOG</h2>
         </NavLink>
         {children}
       </div>

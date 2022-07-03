@@ -23,6 +23,10 @@ header {
 
 .header__logo {
   color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  color: rgba(49, 62, 190, 1)
 }
 
 @media (min-width: 300px) {
@@ -146,6 +150,7 @@ NAV
 }
 
 @media (min-width: 768px) {
+
   .list__item--mobile,
   .search-bar {
     display: inline-block;
