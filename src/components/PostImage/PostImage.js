@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAIModels } from '../../state'
-import { sendClassifyRq } from '../../utils/classifyAPI'
+import { sendClassifyPost } from '../../utils/classifyAPI'
 import { imageIsExplicit } from '../../utils/detect'
 
 export const PostImage = (props) => {
@@ -17,7 +17,7 @@ export const PostImage = (props) => {
   const classifyImg = async (nsfw, imgRef) => {
     const predictions = await nsfw.classify(imgRef.current)
     const isExplicit = imageIsExplicit(predictions)
-    sendClassifyRq(isExplicit, 'img')
+    sendClassifyPost(isExplicit, 'img')
     return isExplicit
   }
 

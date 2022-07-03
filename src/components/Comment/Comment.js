@@ -11,6 +11,7 @@ import { formatDate, isEditing, isReplying } from '../../utils'
 import Avatar from '../Avatar/Avatar'
 import AuthModal from '../Modal/AuthModal'
 import { useAIModels, useAuth } from '../../state'
+import { sendClassifyComment, sendClassifyPost } from '../../utils/classifyAPI'
 
 const Comment = ({ comment, replies, parentId = null }) => {
   const { currentUser } = useAuth()
@@ -19,19 +20,21 @@ const Comment = ({ comment, replies, parentId = null }) => {
   const [showModal, setShowModal] = useState(false)
   const createdAt = formatDate(comment.date)
   const { toxicity } = useAIModels()
-  const [isHidden, setIsHidden] = useState(false)
+  const { isClassified, isToxic } = comment
+  const [isHidden, setIsHidden] = useState(isToxic)
 
   const classifyComment = async () => {
     const predictions = await toxicity.classify(comment.body)
-    if (predictions[6].results[0].match) {
-      setIsHidden(true)
-    }
+    const matchToxic = predictions[6].results[0].match
+    setIsHidden(matchToxic)
+    sendClassifyComment(comment.id, matchToxic)
   }
+
   useEffect(() => {
-    if (toxicity) {
+    if (toxicity && !isClassified) {
       classifyComment()
     }
-  }, [comment.body, toxicity])
+  }, [comment.body, toxicity, isClassified])
 
   const unHide = () => {
     setIsHidden(false)

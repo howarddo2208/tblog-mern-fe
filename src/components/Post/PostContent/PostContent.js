@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import useHttpClient from '../../../hooks/useHttpClient'
 import { useAIModels, useAuth } from '../../../state'
 import { formatDate } from '../../../utils'
-import { classifyImg, sendClassifyRq } from '../../../utils/classifyAPI'
+import { classifyImg, sendClassifyPost } from '../../../utils/classifyAPI'
 import Avatar from '../../Avatar/Avatar'
 import Comments from '../../Comment/Comments'
 import { PostImage } from '../../PostImage/PostImage'
@@ -22,7 +22,7 @@ const PostContent = ({ post, handleDelete }) => {
   const classifyBody = async () => {
     const predictions = await toxicity.classify(body)
     const isToxic = predictions[6].results[0].match
-    sendClassifyRq(isToxic, 'body').then(() => {
+    sendClassifyPost(isToxic, 'body').then(() => {
       setBodyHidden(!isToxic)
     })
   }
