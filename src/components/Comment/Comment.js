@@ -10,25 +10,32 @@ import { ReplyButton } from './ReplyButton'
 import { formatDate, isEditing, isReplying } from '../../utils'
 import Avatar from '../Avatar/Avatar'
 import AuthModal from '../Modal/AuthModal'
-import { useAIModels } from '../../state'
+import { useAIModels, useAuth } from '../../state'
 
-const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
+const Comment = ({ comment, replies, parentId = null }) => {
+  const { currentUser } = useAuth()
+  const currentUserId = currentUser.id
   const { activeComment } = useContext(CommentContext)
   const [showModal, setShowModal] = useState(false)
   const createdAt = formatDate(comment.date)
   const { toxicity } = useAIModels()
+  const [isHidden, setIsHidden] = useState(false)
+
   const classifyComment = async () => {
     const predictions = await toxicity.classify(comment.body)
     if (predictions[6].results[0].match) {
-      setToxic(true)
+      setIsHidden(true)
     }
   }
-  const [isToxic, setToxic] = useState(false)
   useEffect(() => {
     if (toxicity) {
       classifyComment()
     }
   }, [comment.body, toxicity])
+
+  const unHide = () => {
+    setIsHidden(false)
+  }
 
   return (
     <>
@@ -46,8 +53,13 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
             </div>
 
             {!isEditing(activeComment, comment.id) ? (
-              isToxic ? (
-                <div>this comment is toxic</div>
+              isHidden ? (
+                <div style={{
+                  color: 'gray',
+                  fontWeight: 'bold',
+                  cursor: 'pointer'
+                }}
+                  onClick={unHide}>this comment is toxic, click to view</div>
               ) : (
                 <div className="comment__body">{comment.body}</div>
               )
@@ -108,5 +120,5 @@ const Comment = ({ comment, replies, parentId = null, currentUserId }) => {
   )
 }
 
-export default Comment
+export default React.memo(Comment)
 

@@ -27,6 +27,8 @@ const PostList = (props) => {
                   unicorns={post.unicorns}
                   bookmarks={post.bookmarks}
                   comments={post.comments}
+                  imgToxic={post.imgToxic}
+                  imgClassified={post.imgClassified}
                 />
               );
             })}

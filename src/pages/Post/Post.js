@@ -23,7 +23,7 @@ const Post = (props) => {
           `${process.env.REACT_APP_BASE_URL}/posts/${titleURL}/${postId}`
         )
         setPost(responseData.post)
-      } catch (err) {}
+      } catch (err) { }
     }
     fetchPost()
   }, [sendReq, postId, titleURL])

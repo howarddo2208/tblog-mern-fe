@@ -1,56 +1,54 @@
-import React, { useRef, useEffect, useState, useMemo } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useAIModels } from '../../state'
+import { sendClassifyRq } from '../../utils/classifyAPI'
 import { imageIsExplicit } from '../../utils/detect'
-import ProtectiveImg from '../ProtectiveImg'
 
 export const PostImage = (props) => {
-  console.log('render image')
-  const { nsfw } = useAIModels()
+  const { imgClassified, imgToxic } = props
+  const [isHidden, setIsHidden] = useState(imgToxic)
   const imgRef = useRef(null)
-  const [isExplicit, setIsExplicit] = useState(false)
+  const { nsfw } = useAIModels()
 
-  const predict = async () => {
-    if (nsfw && imgRef.current) {
-      try {
-        const predictions = await nsfw.classify(imgRef.current)
-        if (imageIsExplicit(predictions)) {
-          setIsExplicit(true)
-        }
-      } catch (err) {
-        console.log('err', err)
-      }
-    }
+  const unBlur = () => {
+    setIsHidden(false)
+  }
+
+  const classifyImg = async (nsfw, imgRef) => {
+    const predictions = await nsfw.classify(imgRef.current)
+    const isExplicit = imageIsExplicit(predictions)
+    sendClassifyRq(isExplicit, 'img')
+    return isExplicit
   }
 
   useEffect(() => {
-    predict()
-  }, [nsfw, imgRef])
-
-  const unBlur = () => {
-    if (isExplicit && imgRef.current) {
-      setIsExplicit(false)
+    if (nsfw && imgRef.current && !imgClassified) {
+      classifyImg(nsfw, imgRef).then((isExplicit) => {
+        setIsHidden(!isExplicit)
+      })
     }
-  }
+  }, [nsfw, imgRef, imgClassified])
 
   return (
     <div className={`preview__image ${props.className}`} onClick={unBlur}>
-      {(props.link && !isExplicit) ? (
+      {(props.link && !isHidden) ? (
         <Link to={props.link}>
           <img crossOrigin='anonymous' src={props.src} alt={props.alt} ref={imgRef} style={
-            isExplicit ? { filter: 'blur(30px)', WebkitFilter: 'blur(30px)' } : {}
+            isHidden ? { filter: 'blur(30px)', WebkitFilter: 'blur(30px)' } : {}
           } />
         </Link>
       ) : (
         <img crossOrigin='anonymous' src={props.src} alt={props.alt} ref={imgRef} style={
-          isExplicit ? { filter: 'blur(30px)', WebkitFilter: 'blur(30px)' } : {}
+          isHidden ? { filter: 'blur(30px)', WebkitFilter: 'blur(30px)', cursor: 'pointer' } : {}
         } />
       )}
 
-      {isExplicit && <h1 style={{
+      {isHidden && <h1 style={{
         position: 'absolute', top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
+        userSelect: 'none',
+        cursor: 'pointer'
       }}>
         This content is explicit, click to view
       </h1>}

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../../state'
+import useHttpClient from '../../../hooks/useHttpClient'
+import { useAIModels, useAuth } from '../../../state'
 import { formatDate } from '../../../utils'
+import { classifyImg, sendClassifyRq } from '../../../utils/classifyAPI'
 import Avatar from '../../Avatar/Avatar'
 import Comments from '../../Comment/Comments'
 import { PostImage } from '../../PostImage/PostImage'
@@ -12,14 +14,36 @@ import { DeletePost } from '../DeletePost'
 import './PostContent.css'
 
 const PostContent = ({ post, handleDelete }) => {
-  const { image, author, titleURL, date, title, tags, body, id } = post
+  const { image, author, date, title, tags, body, id, bodyClassified, bodyToxic, imgToxic, imgClassified } = post
   const createdAt = formatDate(date)
-  const { currentUser } = useAuth()
-  const currentUserId = currentUser && currentUser.userId
+  const { toxicity } = useAIModels()
+  const [bodyIsHidden, setBodyHidden] = useState(bodyToxic)
+
+  const classifyBody = async () => {
+    const predictions = await toxicity.classify(body)
+    const isToxic = predictions[6].results[0].match
+    sendClassifyRq(isToxic, 'body').then(() => {
+      setBodyHidden(!isToxic)
+    })
+  }
+
+  useEffect(() => {
+    if (toxicity && !bodyClassified) {
+      classifyBody()
+    }
+  }, [post, toxicity])
+
+
+
+  const unHide = () => {
+    setBodyHidden(false)
+  }
 
   return (
     <div className="post">
-      <PostImage src={image} alt={`Cover image for ${title}`} />
+      <PostImage src={image} alt={`Cover image for ${title}`} imgToxic={imgToxic}
+        imgClassified={imgClassified}
+      />
       <div className="post__body">
         <div className="post__author">
           <Avatar link={`/users/${author.id}`} src={author.avatar} />
@@ -33,16 +57,21 @@ const PostContent = ({ post, handleDelete }) => {
         <h1 className="post__heading">{title}</h1>
         <PostTags tags={tags} />
         <div className="post__text">
-          <ReactMarkdown components={SyntaxHighlight}>{body}</ReactMarkdown>
+          {
+            (bodyIsHidden) ? (
+              <div style={{
+                color: 'gray',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}
+                onClick={unHide}>This content is toxic, click if you want to see it</div>
+            ) : (
+              <ReactMarkdown components={SyntaxHighlight}>{body}</ReactMarkdown>
+            )
+          }
         </div>
 
         <div className="post__auth">
-          {currentUserId === author.id && (
-            <Link className="auth__edit" to={`/posts/${titleURL}/${id}/edit`}>
-              Edit Post
-            </Link>
-          )}
-
           <DeletePost authorId={author.id} />
         </div>
       </div>
@@ -52,4 +81,3 @@ const PostContent = ({ post, handleDelete }) => {
 }
 
 export default PostContent
-

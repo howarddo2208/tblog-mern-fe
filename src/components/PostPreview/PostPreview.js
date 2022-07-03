@@ -14,7 +14,7 @@ const PostPreview = (props) => {
   const { currentUser } = useAuth()
   const userId = currentUser && currentUser.userId
 
-  const { title, id, image, author, date, titleURL, tags, cover } = props
+  const { title, id, image, author, date, titleURL, tags, cover, imgToxic, imgClassified } = props
   const createdAt = formatDate(date)
 
   return (
@@ -25,6 +25,8 @@ const PostPreview = (props) => {
             link={`/posts/${titleURL}/${id}`}
             src={image}
             alt={`Cover image for ${title}`}
+            imgToxic={imgToxic}
+            imgClassified={imgClassified}
           />
         </AspectRatio>
       )}
@@ -48,5 +50,5 @@ const PostPreview = (props) => {
   )
 }
 
-export default PostPreview
+export default React.memo(PostPreview)
 

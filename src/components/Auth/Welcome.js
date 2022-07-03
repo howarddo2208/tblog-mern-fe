@@ -6,8 +6,7 @@ const Welcome = () => {
     <div className="welcome">
       <h2 className="welcome__title">Welcome to DEV Community</h2>
       <p className="welcome__slogan">
-        <Link to="/">DEV Community</Link> is a community of 748,239 amazing
-        developers
+        <Link to="/">TechBlog</Link> is a community of developers who share
       </p>
     </div>
   );
