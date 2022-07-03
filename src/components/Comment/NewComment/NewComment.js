@@ -2,12 +2,10 @@ import React, { useContext } from 'react'
 import CommentForm from './CommentForm'
 import useHttpClient from '../../../hooks/useHttpClient'
 import ErrorModal from '../../Modal/ErrorModal'
-import { CommentContext } from '../Comments'
-import { useAuth, useSocket } from '../../../state'
+import { useAuth, useComment, useSocket } from '../../../state'
 
 export const NewComment = ({ replyId }) => {
-  const { setActiveComment, setComments, postId, postAuthor } =
-    useContext(CommentContext)
+  const { setActiveComment, setComments, postId, postAuthor } = useComment()
   const { currentUser } = useAuth()
   const { socket } = useSocket()
   const { sendReq, error, clearError } = useHttpClient()
@@ -26,7 +24,7 @@ export const NewComment = ({ replyId }) => {
         'POST',
         JSON.stringify(reqData),
         {
-          Authorization: `Bearer ${currentUser.token}`,
+          Authorization: `Bearer ${currentUser?.token}`,
           'Content-Type': 'application/json',
         }
       )
@@ -39,7 +37,9 @@ export const NewComment = ({ replyId }) => {
           receiver: postAuthor,
         })
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log('err', err)
+    }
     setActiveComment(null)
   }
   return (

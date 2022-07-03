@@ -6,10 +6,10 @@ export const useAuth = create(
   persist(
     (set, get) => ({
       isLoggedIn: false,
-      token: null,
-      user: null,
-      currentUser: null,
-      userId: null,
+      token: '',
+      user: {},
+      currentUser: {},
+      userId: undefined,
       login: (user) => {
         set({
           isLoggedIn: true,
@@ -22,10 +22,10 @@ export const useAuth = create(
       logout: () =>
         set({
           isLoggedIn: false,
-          token: null,
-          user: null,
-          userId: null,
-          currentUser: null,
+          token: '',
+          user: {},
+          userId: undefined,
+          currentUser: {},
         }),
       setUser: (user) => set(user, true),
     }),
@@ -77,5 +77,14 @@ export const useAIModels = create((set, get) => ({
   toxicityModel: null,
   setNSFW: (model) => set({ nsfw: model }),
   setToxicity: (model) => set({ toxicity: model }),
+}))
+
+export const useComment = create((set, get) => ({
+  comments: [],
+  setComments: (comments) => set({ comments }),
+  postId: null,
+  postAuthor: null,
+  activeComment: null,
+  setActiveComment: (comment) => set({ activeComment: comment }),
 }))
 

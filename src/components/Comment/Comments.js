@@ -1,19 +1,16 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Comment from './Comment'
 import { NewComment } from './NewComment/NewComment'
 import { useHttpClient } from '../../hooks/useHttpClient'
 import { getReplies } from '../../utils'
 import ErrorModal from '../Modal/ErrorModal'
 import './Comments.css'
-import { useAuth } from '../../state'
-
-export const CommentContext = createContext()
+import { useAuth, useComment } from '../../state'
 
 const Comments = ({ postAuthor, postId }) => {
   const { currentUser } = useAuth()
   const currentUserId = currentUser && currentUser.userId
-  const [activeComment, setActiveComment] = useState(null)
-  const [comments, setComments] = useState([])
+  const { comments, setComments } = useComment()
   const rootComments =
     comments && comments.filter((comment) => comment && !comment.parentId)
   const { sendReq, error, clearError } = useHttpClient()
@@ -24,27 +21,18 @@ const Comments = ({ postAuthor, postId }) => {
           `${process.env.REACT_APP_BASE_URL}/comments/${postId}`
         )
         setComments(responseData.comments)
-      } catch (err) {}
+      } catch (err) { }
     }
+    setComments([])
     fetchComments()
   }, [sendReq, postId])
 
   return (
-    <CommentContext.Provider
-      value={{
-        comments,
-        setComments,
-        postId,
-        postAuthor,
-        activeComment,
-        setActiveComment,
-      }}
-    >
+    <>
       <ErrorModal error={error} onClose={clearError} />
       <div className="comments">
-        <h2>{`Discussion (${
-          comments ? `${comments.length} comments` : 0
-        })`}</h2>
+        <h2>{`Discussion (${comments ? `${comments.length} comments` : 0
+          })`}</h2>
         <NewComment />
         {rootComments &&
           rootComments.map((comment) => (
@@ -57,7 +45,7 @@ const Comments = ({ postAuthor, postId }) => {
             />
           ))}
       </div>
-    </CommentContext.Provider>
+    </>
   )
 }
 

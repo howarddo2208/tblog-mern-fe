@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 import useHttpClient from '../../../hooks/useHttpClient'
-import { useAuth } from '../../../state'
+import { useAuth, useComment } from '../../../state'
 import ErrorModal from '../../Modal/ErrorModal'
-import { CommentContext } from '../Comments'
 import CommentForm from '../NewComment/CommentForm'
 
 export const EditComment = ({ commentId, commentBody, setShowModal }) => {
-  const { setActiveComment, comments, setComments } = useContext(CommentContext)
+  const { setActiveComment, comments, setComments } = useComment()
   const { currentUser } = useAuth()
   const { sendReq, error, clearError } = useHttpClient()
 
@@ -24,7 +23,7 @@ export const EditComment = ({ commentId, commentBody, setShowModal }) => {
           Authorization: `Bearer ${currentUser.token}`,
         }
       )
-    } catch (err) {}
+    } catch (err) { }
     setComments(updatedComments)
     setActiveComment(null)
   }

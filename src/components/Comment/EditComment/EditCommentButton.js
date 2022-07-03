@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useComment } from "../../../state";
 import { canModifyComment } from "../../../utils";
-import { CommentContext } from "../Comments";
 
 export const EditCommentButton = ({ currentUserId, commentId, authorId }) => {
-  const { setActiveComment } = useContext(CommentContext);
+  const { setActiveComment } = useComment()
   return (
     <>
       {canModifyComment(currentUserId, authorId) && (

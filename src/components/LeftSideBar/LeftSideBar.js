@@ -14,7 +14,7 @@ const LeftSideBar = () => {
 
   return (
     <>
-      <div style={{ backgroundColor: 'white', borderRadius: 10 }}>
+      <div>
         <React.Fragment>
           <ul className="sidebar__list">
             <li className="list__item hvr-bg-lt">

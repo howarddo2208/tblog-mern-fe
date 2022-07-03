@@ -2,12 +2,11 @@ import React, { useContext } from 'react'
 import { DeleteCommentButton } from './DeleteCommentButton'
 import useHttpClient from '../../../hooks/useHttpClient'
 import ErrorModal from '../../Modal/ErrorModal'
-import { CommentContext } from '../Comments'
-import { useAuth } from '../../../state'
+import { useAuth, useComment } from '../../../state'
 
 export const DeleteComment = ({ commentId, authorId }) => {
   const { currentUser } = useAuth()
-  const { setActiveComment, comments, setComments } = useContext(CommentContext)
+  const { setActiveComment, comments, setComments } = useComment()
   const currentUserId = currentUser && currentUser.userId
   const { sendReq, error, clearError } = useHttpClient()
 
@@ -26,7 +25,7 @@ export const DeleteComment = ({ commentId, authorId }) => {
           Authorization: `Bearer ${currentUser.token}`,
         }
       )
-    } catch (err) {}
+    } catch (err) { }
     setComments(updatedComments)
     setActiveComment(null)
   }

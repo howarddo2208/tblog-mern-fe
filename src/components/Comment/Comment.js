@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react'
-import { CommentContext } from './Comments'
 import { DeleteComment } from './DeleteComment/DeleteComment'
 import { EditComment } from './EditComment/EditComment'
 import { EditCommentButton } from './EditComment/EditCommentButton'
@@ -10,13 +9,13 @@ import { ReplyButton } from './ReplyButton'
 import { formatDate, isEditing, isReplying } from '../../utils'
 import Avatar from '../Avatar/Avatar'
 import AuthModal from '../Modal/AuthModal'
-import { useAIModels, useAuth } from '../../state'
+import { useAIModels, useAuth, useComment } from '../../state'
 import { sendClassifyComment, sendClassifyPost } from '../../utils/classifyAPI'
 
 const Comment = ({ comment, replies, parentId = null }) => {
   const { currentUser } = useAuth()
-  const currentUserId = currentUser.id
-  const { activeComment } = useContext(CommentContext)
+  const currentUserId = currentUser?.id
+  const { activeComment } = useComment()
   const [showModal, setShowModal] = useState(false)
   const createdAt = formatDate(comment.date)
   const { toxicity } = useAIModels()
