@@ -27,6 +27,7 @@ module.exports = {
   ],
   root: true, // For configuration cascading.
   rules: {
+    'react/react-in-jsx-scope': 'off',
     'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': [

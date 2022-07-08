@@ -16,7 +16,7 @@ const App = () => {
   const { nsfwModel, toxicityModel, setNSFW, setToxicity } = useAIModels()
 
   const loadModels = async () => {
-    const nsfwModel = await nsfwjs.load(`/nsfw/`, { size: 299 })
+    const nsfwModel = await nsfwjs.load()
     setNSFW(nsfwModel)
     const toxicityModel = await toxicity.load()
     setToxicity(toxicityModel)

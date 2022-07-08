@@ -1,0 +1,15 @@
+{
+  "appId": "com.techblog.app",
+  "appName": "Techblog",
+  "webDir": "build",
+  "bundledWebRuntime": false,
+  "server": {
+    "allowNavigation": [
+      "*"
+    ],
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

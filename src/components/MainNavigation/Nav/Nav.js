@@ -79,7 +79,7 @@ const Nav = ({ children, onSearchIconClick }) => {
           onSearchIconClick={onSearchIconClick}
         />
       </nav>
-    </div>
+    </div >
   )
 }
 

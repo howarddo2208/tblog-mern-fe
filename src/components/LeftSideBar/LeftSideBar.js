@@ -43,14 +43,6 @@ const LeftSideBar = () => {
                 Tags
               </NavLink>
             </li>
-            <li className="list__item hvr-bg-lt">
-              <NavLink to="/chat" exact>
-                <i>
-                  <FaFacebookMessenger />
-                </i>
-                Chat
-              </NavLink>
-            </li>
           </ul>
           <div className="sidebar-tags">
             {currentUser && currentUser.tags && currentUser.tags.length > 0 && (
