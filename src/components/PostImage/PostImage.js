@@ -5,7 +5,7 @@ import { sendClassifyPost } from '../../utils/classifyAPI'
 import { imageIsExplicit } from '../../utils/detect'
 
 export const PostImage = (props) => {
-  const { imgClassified, imgToxic } = props
+  const { imgClassified, imgToxic, postId } = props
   const [isHidden, setIsHidden] = useState(imgToxic)
   const imgRef = useRef(null)
   const { nsfw } = useAIModels()
@@ -17,7 +17,7 @@ export const PostImage = (props) => {
   const classifyImg = async (nsfw, imgRef) => {
     const predictions = await nsfw.classify(imgRef.current)
     const isExplicit = imageIsExplicit(predictions)
-    sendClassifyPost(isExplicit, 'img')
+    sendClassifyPost(postId, isExplicit, 'img')
     return isExplicit
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import Comment from './Comment'
 import { NewComment } from './NewComment/NewComment'
 import { useHttpClient } from '../../hooks/useHttpClient'
@@ -10,9 +10,7 @@ import { useAuth, useComment } from '../../state'
 const Comments = ({ postAuthor, postId }) => {
   const { currentUser } = useAuth()
   const currentUserId = currentUser && currentUser.userId
-  const { comments, setComments } = useComment()
-  const rootComments =
-    comments && comments.filter((comment) => comment && !comment.parentId)
+  const { comments, setComments, setActivePostId, rootComments } = useComment()
   const { sendReq, error, clearError } = useHttpClient()
   useEffect(() => {
     const fetchComments = async () => {
@@ -26,6 +24,10 @@ const Comments = ({ postAuthor, postId }) => {
     setComments([])
     fetchComments()
   }, [sendReq, postId])
+
+  useEffect(() => {
+    setActivePostId(postId)
+  }, [])
 
   return (
     <>

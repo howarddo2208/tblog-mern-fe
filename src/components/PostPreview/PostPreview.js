@@ -27,6 +27,7 @@ const PostPreview = (props) => {
             alt={`Cover image for ${title}`}
             imgToxic={imgToxic}
             imgClassified={imgClassified}
+            postId={id}
           />
         </AspectRatio>
       )}
