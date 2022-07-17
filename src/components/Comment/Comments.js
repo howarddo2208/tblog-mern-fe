@@ -10,8 +10,12 @@ import { useAuth, useComment } from '../../state'
 const Comments = ({ postAuthor, postId }) => {
   const { currentUser } = useAuth()
   const currentUserId = currentUser && currentUser.userId
-  const { comments, setComments, setActivePostId, rootComments } = useComment()
+  const { comments, setComments, setActivePostId } = useComment()
   const { sendReq, error, clearError } = useHttpClient()
+  const rootComments = useMemo(() => {
+    return Array.isArray(comments) && comments.filter(comment => !comment.parentId)
+  }, [comments])
+
   useEffect(() => {
     const fetchComments = async () => {
       try {

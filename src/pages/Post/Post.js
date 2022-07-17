@@ -7,10 +7,12 @@ import PostContent from '../../components/Post/PostContent/PostContent'
 import PostReactions from '../../components/Post/PostReactions/PostReactions'
 import { SkeletonPage } from '../../components/Skeleton/SkeletonPage'
 import { useHttpClient } from '../../hooks/useHttpClient'
+import { useComment } from '../../state'
 
 const Post = (props) => {
   const [post, setPost] = useState({})
   const { isLoading, sendReq, error, clearError } = useHttpClient()
+  const { setPostAuthor } = useComment()
   const { postId, titleURL } = useParams()
   const [showModal, setShowModal] = useState(false)
 
@@ -27,6 +29,12 @@ const Post = (props) => {
     }
     fetchPost()
   }, [sendReq, postId, titleURL])
+
+  useEffect(() => {
+    if (author && setPostAuthor) {
+      setPostAuthor(author)
+    }
+  }, [author, setPostAuthor])
 
   return (
     <>

@@ -23,7 +23,7 @@ const PostContent = ({ post, handleDelete }) => {
     const predictions = await toxicity.classify(body)
     const isToxic = predictions[6].results[0].match
     sendClassifyPost(id, isToxic, 'body').then(() => {
-      setBodyHidden(!isToxic)
+      setBodyHidden(isToxic)
     })
   }
 

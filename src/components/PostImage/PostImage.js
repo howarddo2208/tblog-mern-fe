@@ -24,7 +24,7 @@ export const PostImage = (props) => {
   useEffect(() => {
     if (nsfw && imgRef.current && !imgClassified) {
       classifyImg(nsfw, imgRef).then((isExplicit) => {
-        setIsHidden(!isExplicit)
+        setIsHidden(isExplicit)
       })
     }
   }, [nsfw, imgRef, imgClassified])

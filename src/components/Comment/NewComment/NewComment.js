@@ -5,7 +5,7 @@ import ErrorModal from '../../Modal/ErrorModal'
 import { useAuth, useComment, useSocket } from '../../../state'
 
 export const NewComment = ({ replyId }) => {
-  const { setActiveComment, setComments, postId, postAuthor } = useComment()
+  const { setActiveComment, comments, setComments, postId, postAuthor } = useComment()
   const { currentUser } = useAuth()
   const { socket } = useSocket()
   const { sendReq, error, clearError } = useHttpClient()
@@ -28,13 +28,17 @@ export const NewComment = ({ replyId }) => {
           'Content-Type': 'application/json',
         }
       )
-      setComments((comments = []) => [newComment.comment, ...comments])
+      if (comments && comments.length > 0) {
+        setComments([newComment.comment, ...comments])
+      } else {
+        setComments([newComment.comment])
+      }
 
-      if (socket) {
+      if (socket && postAuthor) {
         socket.emit('comment', {
           sender: currentUser,
           postId,
-          receiver: postAuthor,
+          receiver: { id: postAuthor.id },
         })
       }
     } catch (err) {

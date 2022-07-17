@@ -82,13 +82,13 @@ export const useAIModels = create((set, get) => ({
 export const useComment = create((set, get) => ({
   comments: [],
   setComments: (comments) => {
-    set({ rootComments: comments && comments.filter(comment => !comment.parentId, comments), comments })
+    set({ comments })
   },
   postId: null,
   postAuthor: null,
   activeComment: null,
-  rootComments: [],
   setActiveComment: (comment) => set({ activeComment: comment }),
   setActivePostId: (postId) => set({ postId }),
+  setPostAuthor: (postAuthor) => set({ postAuthor }),
 }))
 
