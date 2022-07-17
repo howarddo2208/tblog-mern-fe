@@ -1,12 +1,13 @@
 import { FaRegComment } from "@react-icons/all-files/fa/FaRegComment";
 import React, { useContext } from "react";
 import { canReply } from "../../utils";
-import { useComment } from "../../state";
+import { useAuth, useComment } from "../../state";
 
-export const ReplyButton = ({ currentUserId, comment, setShowModal }) => {
+export const ReplyButton = ({ comment, setShowModal }) => {
+  const { currentUser } = useAuth()
   const { setActiveComment } = useComment()
   const handleClick = () => {
-    canReply(currentUserId)
+    canReply(currentUser.userId)
       ? setActiveComment({ id: comment.id, type: "replying" })
       : setShowModal(true);
   };
