@@ -15,6 +15,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   overflow-x: hidden;
+  overflow-y: auto;
   box-sizing: border-box;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }

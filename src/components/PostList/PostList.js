@@ -6,8 +6,7 @@ import "./PostList.css";
 const PostList = (props) => {
   return (
     <div className="container container-posts">
-      {props.isLoading && <SkeletonPostList type={!props.cover && "mini"} />}
-      {!props.isLoading && (
+      {(
         <ul>
           {props.items &&
             props.items.map((post, i) => {
