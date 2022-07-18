@@ -54,6 +54,9 @@ const MainRouter = ({ token }) => {
             <Route path="/posts/:titleURL/:postId" exact>
               <Post />
             </Route>
+            <Route path="/posts/:postId" exact>
+              <Post />
+            </Route>
             <Route path="/posts/:titleURL/:postId/edit" exact>
               <EditPost />
             </Route>
@@ -89,6 +92,9 @@ const MainRouter = ({ token }) => {
               <UserProfile />
             </Route>
             <Route path="/posts/:titleURL/:postId" exact>
+              <Post />
+            </Route>
+            <Route path="/posts/:postId" exact>
               <Post />
             </Route>
             <Redirect to="/auth" />

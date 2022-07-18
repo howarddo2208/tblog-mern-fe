@@ -5,7 +5,7 @@ import { checkInArray } from '../../utils'
 
 export const FollowTag = ({ followers, tagId, setShowModal }) => {
   const auth = useAuth()
-  const { currentUser } = auth
+  const { currentUser } = useAuth()
   const currentUserId = currentUser && currentUser.userId
   const { sendReq } = useHttpClient()
 
@@ -34,9 +34,9 @@ export const FollowTag = ({ followers, tagId, setShowModal }) => {
         }
       )
       const { followedTags } = responseData.user
-      const { setUser: setAppUser } = auth
+      const { setUser: setAppUser } = useAuth()
       setAppUser({ ...currentUser, tags: followedTags })
-    } catch (err) {}
+    } catch (err) { }
   }
   return (
     <button

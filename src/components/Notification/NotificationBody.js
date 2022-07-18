@@ -25,7 +25,15 @@ const NotificationBody = ({ type, notification }) => {
         <p>"{comment && comment.body}"</p>
       </>
     );
-  } else {
+  } else if (type === "newPost") {
+    return (
+      <div className="notif__meta">
+        <span className="meta__title">{name} just released a new post</span>
+        <span className="meta__time">{createdAt}</span>
+      </div>
+    )
+  }
+  else {
     return (
       <div className="notif__meta">
         <span className="meta__title">{name} followed you</span>

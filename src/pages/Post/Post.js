@@ -22,13 +22,13 @@ const Post = (props) => {
     const fetchPost = async () => {
       try {
         const responseData = await sendReq(
-          `${process.env.REACT_APP_BASE_URL}/posts/${titleURL}/${postId}`
+          `${process.env.REACT_APP_BASE_URL}/posts/${postId}`
         )
         setPost(responseData.post)
       } catch (err) { }
     }
     fetchPost()
-  }, [sendReq, postId, titleURL])
+  }, [sendReq, postId])
 
   useEffect(() => {
     if (author && setPostAuthor) {

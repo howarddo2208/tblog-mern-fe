@@ -16,6 +16,7 @@ const TagList = (props) => {
           id={tag.id}
           key={tag.id}
           followers={tag.followers}
+          posts={tag.posts}
         />
       ))}
     </div>

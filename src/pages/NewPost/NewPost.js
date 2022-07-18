@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import { useHttpClient } from '../../hooks/useHttpClient';
 import useForm from '../../hooks/useForm';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
@@ -6,24 +6,31 @@ import { newPostForm } from '../../utils/formConfig';
 import { appendData, renderRepeatedSkeletons } from '../../utils';
 import ErrorModal from '../../components/Modal/ErrorModal';
 import SkeletonElement from '../../components/Skeleton/SkeletonElement';
-import { useAuth } from '../../state';
+import { useAuth, useSocket } from '../../state';
 
 const NewPost = () => {
   const auth = useAuth()
   const history = useHistory();
+  const { socket } = useSocket()
   const { currentUser } = auth;
   const { isLoading, sendReq, error, clearError } = useHttpClient();
   const { viewFormInputs, viewFormValues, isFormValid } =
     useForm(newPostForm);
   const formValues = useMemo(() => viewFormValues(), [viewFormValues]);
   const formInputs = useMemo(() => viewFormInputs(), [viewFormInputs]);
+  const fetchCurrentUserFollowers = async () => {
+    const responseData = await sendReq(
+      `${process.env.REACT_APP_BASE_URL}/users/${currentUser.userId}`
+    );
+    return responseData.user.followers;
+  }
 
   const postSubmitHandle = async (evt) => {
     evt.preventDefault(); //otherwise, there will be a reload
     const formData = appendData(formValues);
     formData.append('author', currentUser.userId);
     try {
-      await sendReq(
+      const result = await sendReq(
         `${process.env.REACT_APP_BASE_URL}/posts`,
         'POST',
         formData,
@@ -31,8 +38,17 @@ const NewPost = () => {
           Authorization: `Bearer ${currentUser.token}`,
         }
       );
+      const followers = await fetchCurrentUserFollowers();
+      console.log('followers', followers);
+      if (socket) {
+        socket.emit('newPost', {
+          sender: currentUser,
+          postId: result.id,
+          receivers: followers,
+        })
+      }
       history.push('/');
-    } catch (err) {}
+    } catch (err) { }
   };
 
   return (

@@ -10,6 +10,7 @@ const Posts = ({ cover }) => {
   const [fetchCount, setFetchCount] = useState(0);
   const size = 5
   const [endOfSub, setEndOfSub] = useState(false)
+  const [canLoadMore, setCanLoadMore] = useState(true)
 
   useEffect(() => {
     document.addEventListener("scroll", handleScroll);
@@ -18,7 +19,7 @@ const Posts = ({ cover }) => {
 
   const handleScroll = () => {
     const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
-    if (scrollHeight - scrollTop === clientHeight) {
+    if (scrollHeight - scrollTop === clientHeight && canLoadMore) {
       setFetchCount(fetchCount + 1);
     }
   }
@@ -43,14 +44,14 @@ const Posts = ({ cover }) => {
       if (loadedPosts === []) {
         setLoadedPosts(responseData.posts);
       } else {
-        setLoadedPosts([...loadedPosts, ...responseData.posts]);
+        setLoadedPosts((loaded) => [...loaded, ...responseData.posts]);
       }
 
       if (responseData.posts.length < size && currentUser.userId && endOfSub === false) {
-        setFetchCount(0)
         setEndOfSub(true)
       }
       else if (responseData.posts.length < size) {
+        setCanLoadMore(false)
         document.removeEventListener("scroll", handleScroll);
       }
     } catch (err) { }
@@ -58,7 +59,11 @@ const Posts = ({ cover }) => {
 
   useEffect(() => {
     if (endOfSub) {
-      fetchPosts();
+      if (fetchCount > 0) {
+        setFetchCount(0)
+      } else {
+        fetchPosts()
+      }
     }
   }, [endOfSub]);
 
