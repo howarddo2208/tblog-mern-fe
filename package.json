@@ -37,6 +37,8 @@
     "start": "ESLINT_NO_DEV_ERRORS='true' react-scripts start",
     "start:prod": "ESLINT_NO_DEV_ERRORS='true' env-cmd -f .env.production react-scripts start",
     "build": "DISABLE_ESLINT_PLUGIN='true' env-cmd -f .env.production react-scripts build",
+    "build:dev": "DISABLE_ESLINT_PLUGIN='true' env-cmd -f .env react-scripts build",
+    "build:android": "DISABLE_ESLINT_PLUGIN='true' env-cmd -f .env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint -c .eslintrc.js --ext .js,.jsx .",

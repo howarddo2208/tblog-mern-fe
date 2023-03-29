@@ -4,3 +4,4 @@ build
 
 resources/ios/**/*
 resources/android/**/*
+.DS_Store

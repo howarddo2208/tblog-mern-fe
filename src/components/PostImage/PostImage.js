@@ -16,6 +16,7 @@ export const PostImage = (props) => {
 
   const classifyImg = async (nsfw, imgRef) => {
     const predictions = await nsfw.classify(imgRef.current)
+    console.log('predictions', predictions)
     const isExplicit = imageIsExplicit(predictions)
     sendClassifyPost(postId, isExplicit, 'img')
     return isExplicit
